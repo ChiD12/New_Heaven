@@ -16,8 +16,6 @@ class GameBoard{
         const int* x;
         const int* y;
         vector<vector<Node>> *gb;
-   
-    //Node* new_node = new Node[column_l][row_l];
     
     GameBoard(){}
     GameBoard(const int x,const int y){
@@ -56,7 +54,6 @@ class Node{
     Node(int* x, int* y){
         x_index = x;
         y_index = y;
-        
     }
 
     
