@@ -12,6 +12,6 @@ int main()
    //int* p = v;
    //*p = 7;
    
-   cout << *v;
+   cout << v;
    
 }
