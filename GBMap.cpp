@@ -1,45 +1,40 @@
 #include "GBMap.hpp"
-
+#include <vector>
+#include <iostream>
+using namespace std;
 
 
 
 
 void main(){
-    GameBoard *gb = new GameBoard();
+    GameBoard *gb = new GameBoard(14, 14);
 }
 
 
 class GameBoard{
     public:
-    int* fourPlayerX = new int(7);
-    int* fourPlayerY = new int(7);
-
-    int* threePlayerX = new int(5);
-    int* fourPlayerY = new int(7);
-
-    int* twoPlayerX = new int(5);
-    int* twoPlayerY = new int(5);
-
-    static const int column_l = 15;
-    static const int row_l = 15;
-    
-    *pcolumn_l=&column_l;
-    prow_l;
-
-    
+        const int* x;
+        const int* y;
+        vector<vector<Node>> *gb;
    
     //Node* new_node = new Node[column_l][row_l];
-    Node* NA[column_l][row_l];
     
     GameBoard(){}
-    GameBoard(int x, int y){
-        for (int i = 0; i < gb.count; i++)
+    GameBoard(const int x,const int y){
+        this->x = &x;
+        this->y = &y;
+
+        gb = new vector<vector<Node>>(*this->x, vector<Node>(*this->y));
+
+        int count = 0;
+        for (int i = 0; i < gb->size; i++)
         {
-            /* code */
+            for (int j = 0; j < gb[i].size; j++) {
+                count++;
+            }
         }
 
-        column_l = &x;
-        row_l = &y;
+        cout << count;
         //new_node = array_name;
          
         
