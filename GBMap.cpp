@@ -3,66 +3,38 @@
 #include <iostream>
 using namespace std;
 
-
-
-
-void main(){
-    GameBoard *gb = new GameBoard(14, 14);
+void main() {
+	GameBoard* gb = new GameBoard(14, 14);
 }
 
 
-class GameBoard{
-    public:
-        const int* x;
-        const int* y;
-        vector<vector<Node>> *gb;
-    
-    GameBoard(){}
-    GameBoard(const int x,const int y){
-        this->x = &x;
-        this->y = &y;
+Node::Node() {};
+Node::Node(int* x, int* y) {
+	x_index = x;
+	y_index = y;
+	type = EMPTY;
+	edge_list = new Node[4]; // 0 is north, 1 is east, 2 is south, 3 is west
+}
 
-        gb = new vector<vector<Node>>(*this->x, vector<Node>(*this->y));
+void Node::update_edge()
+{
+}
 
-        int count = 0;
-        for (int i = 0; i < gb->size; i++)
-        {
-            for (int j = 0; j < gb[i].size; j++) {
-                count++;
-            }
-        }
 
-        cout << count;
-        //new_node = array_name;
-         
-        
-    }
-};
+GameBoard::GameBoard() {};
+GameBoard::GameBoard(const int x, const int y) {
+	this->x = &x;
+	this->y = &y;
 
-class Node{
-    public:
-    int* x_index;
-    int* y_index;
-    
-    enum resource_type {WOOD, STONE, SHEEP, GRAIN, EMPTY};
-    
-    resource_type type = EMPTY;
-    resource_type*  p_type = &type;
-    Node* edge_list = new Node[4]; // 0 is north, 1 is east, 2 is south, 3 is west
-    
-    Node(){}
-    Node(int* x, int* y){
-        x_index = x;
-        y_index = y;
-    }
+	gb = vector<vector<Node>>(*this->x, vector<Node>(*this->y));
 
-    
+	int count = 0;
+	for (size_t i = 0; i < gb.size(); i++)
+	{
+		for (size_t j = 0; j < gb[i].size(); j++) {
+			count++;
+		}
+	}
 
-    void update_edge(){
-        
-    }
-};
-
-class Tile{
-    
-};
+	cout << count << endl;
+}

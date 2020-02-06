@@ -1,38 +1,29 @@
-enum resource_type {WOOD, STONE, SHEEP, GRAIN, EMPTY};
+#include <vector>
+using namespace std;
 
-class Node{
-    public: 
-    int* x_index;
-    int* y_index;
+enum resource_type { WOOD, STONE, SHEEP, GRAIN, EMPTY };
 
-    resource_type type;
-    resource_type*  p_type;
+class Node {
+public:
+	int* x_index;
+	int* y_index;
 
-    Node* edge_list;
-    Node();
-    Node(int& x, int& y);
+	resource_type type;
+	resource_type* p_type;
 
-    void update_edge();
+	Node* edge_list;
+	Node();
+	Node(int* x, int* y);
+
+	void update_edge();
 };
 
-class GameBoard{
-    public: 
-    int* fourPlayerX;
-    int* fourPlayerY;
+class GameBoard {
+public:
+	const int* x;
+	const int* y;
+	vector<vector<Node>> gb;
 
-    int * threePlayerX;
-    int* fourPlayerY;
-
-    int* twoPlayerX;
-    int* twoPlayerY;
-
-    const int column_l;
-    const int row_l;
-
-    static int const *pcolumn_l;
-    static int const *prow_l;
-
-    Node* gb;
-
-    GameBoard();
+	GameBoard();
+	GameBoard(const int x, const int y);
 };
