@@ -1,12 +1,8 @@
-#include "GBMap.hpp"
+#include "GBMap.h"
 #include <vector>
 #include <iostream>
+#include <string>
 using namespace std;
-
-void main() {
-	GameBoard* gb = new GameBoard(14, 14);
-}
-
 
 Node::Node() {};
 Node::Node(int* x, int* y) {
@@ -20,20 +16,18 @@ void Node::update_edge()
 {
 }
 
-
 GameBoard::GameBoard() {};
-GameBoard::GameBoard(const int x, const int y) {
-	this->x = &x;
-	this->y = &y;
-
-	gb = vector<vector<Node>>(*this->x, vector<Node>(*this->y));
+GameBoard::GameBoard(vector<vector<Node*>> map) {
+	this->map = map;
 
 	int count = 0;
-	for (size_t i = 0; i < gb.size(); i++)
+	for (size_t i = 0; i < this->map.size(); i++)
 	{
-		for (size_t j = 0; j < gb[i].size(); j++) {
+		for (size_t j = 0; j < this->map[i].size(); j++) {
 			count++;
+			cout << "(" + to_string(*map[i][j]->x_index) + "," + to_string(*map[i][j]->y_index) + ") ";
 		}
+		cout << "" << endl;
 	}
 
 	cout << count << endl;
