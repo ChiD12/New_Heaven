@@ -1,14 +1,18 @@
 #include <string>
-#include "GBMap.cpp"
+#include <vector>
+#include "Node.cpp"
 using namespace std;
 
 class GBMapLoader {
 private:
-	GameBoard* gb;
+	// GameBoard* gb;
+	vector<vector<Node*>> map;
 
 public:
 	GBMapLoader();
 
-	GameBoard* getGameBoard();
+	//GameBoard* getGameBoard();
+	vector<vector<Node*>> getMap();
+
 	void loadMap(string filename);
 };

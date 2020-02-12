@@ -7,7 +7,7 @@ using namespace std;
 GBMapLoader::GBMapLoader() {};
 
 void GBMapLoader::loadMap(string filename) {
-	vector<vector<Node*>> map = vector<vector<Node*>>();
+	this->map = vector<vector<Node*>>();
 	ifstream input(filename);
 	string delim = ",";
 
@@ -29,7 +29,7 @@ void GBMapLoader::loadMap(string filename) {
 			token = line.substr(0, i);
 			// create a new node if token is N
 			if (token == "N")
-				map.back().push_back(new Node(new int(x),new int(y)));
+				map.back().push_back(new Node(x,y));
 			// assign NULL if token is X
 			else if (token == "X")
 				map.back().push_back(NULL);
@@ -40,11 +40,9 @@ void GBMapLoader::loadMap(string filename) {
 
 		y++;
 	}
-
-	this->gb = new GameBoard(map);
 }
 
-GameBoard* GBMapLoader::getGameBoard() {
-	return this->gb;
+vector<vector<Node*>> GBMapLoader::getMap() {
+	return this->map;
 }
 
