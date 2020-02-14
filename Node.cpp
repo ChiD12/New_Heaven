@@ -11,5 +11,4 @@ Node::Node(int x, int y) {
 	//edge_list = arr; // 0 is north, 1 is east, 2 is south, 3 is west
 }
 Node::Node(int c) {
-	count = c;
 };

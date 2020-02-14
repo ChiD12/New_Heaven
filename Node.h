@@ -9,8 +9,6 @@ public:
 	int* x_index;
 	int* y_index;
 
-	int count = 0;
-
 	resource_type type;
 	resource_type* p_type;
 
@@ -18,6 +16,11 @@ public:
 	Node();
 	Node(int x, int y);
 	Node(int c);
+
+
+};
+
+class VillageTile {
 
 
 };
