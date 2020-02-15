@@ -15,7 +15,6 @@ public:
 	vector<Node*> edge_list;
 	Node();
 	Node(int x, int y);
-	Node(int c);
 
 
 };
