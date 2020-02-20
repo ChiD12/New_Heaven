@@ -1,6 +1,5 @@
 #include <string>
-#include <vector>
-#include "Node.cpp"
+#include "Resources.cpp"
 using namespace std;
 
 class GBMapLoader {
