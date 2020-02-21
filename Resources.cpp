@@ -3,9 +3,7 @@
 #include <iostream>
 #include <math.h>
 
-using namespace std;
 
-/*
 HarvestTile::HarvestTile()
 {
 	int resource_selector; //Will hold a random number which will correlate to an enum.
@@ -42,6 +40,15 @@ HarvestTile::HarvestTile()
 
 HarvestTile::~HarvestTile()
 {
+	this->ul_ptr = NULL;
+	this->ur_ptr = NULL;
+	this->bl_ptr = NULL;
+	this->br_ptr = NULL;
+
+	delete ul_ptr;
+	delete ur_ptr;
+	delete bl_ptr;
+	delete br_ptr;
 
 }
 
@@ -72,6 +79,12 @@ HarvestDeck::HarvestDeck()
 	*this->hcc_ptr = 60;
 }
 
+HarvestDeck::~HarvestDeck()
+{
+	this->hcc_ptr = NULL;
+	delete hcc_ptr;
+}
+
 HarvestTile HarvestDeck::DrawHarvestTile()
 {
 	if (this->harvest_card_count < 1) {
@@ -90,6 +103,12 @@ BuildingDeck::BuildingDeck()
 	*this->bcc_ptr = 144;
 }
 
+BuildingDeck::~BuildingDeck()
+{
+	this->bcc_ptr = NULL;
+	delete bcc_ptr;
+}
+
 BuildingTile BuildingDeck::DrawBuildingTile()
 {
 
@@ -102,8 +121,6 @@ BuildingTile BuildingDeck::DrawBuildingTile()
 		return BuildingTile();
 	}
 }
-
-*/
 
 BuildingTile::BuildingTile()
 {
@@ -137,11 +154,48 @@ BuildingTile::BuildingTile(int x, int y, bool valid) {
 	edge_list = vector<BuildingTile*>(4); // 0 is north, 1 is east, 2 is south, 3 is west
 }
 
-Node::Node() {};
-Node::Node(int x, int y, bool valid) {
+BuildingTile::~BuildingTile()
+{
+	this->bv_ptr = NULL;
+	this->bt_ptr = NULL;
+	this->x_index = NULL;
+	this->y_index = NULL;
+	this->flipped = NULL;
+	this->valid = NULL;
+	delete bv_ptr;
+	delete bt_ptr;
+	delete x_index;
+	delete y_index;
+	delete flipped;
+	delete valid;
+
+	for (int i = 0; i < edge_list.size(); i++) {
+		delete edge_list[i];
+	}
+}
+
+Node::Node() {}
+Node::Node(int x, int y, bool valid)
+{
 	x_index = new int(x);
 	y_index = new int(y);
 	this->valid = new bool(valid);
 	type = NO_RESOURCE;
 	edge_list = vector<Node*>(4); // 0 is north, 1 is east, 2 is south, 3 is west
+}
+
+Node::~Node()
+{
+	this->x_index = NULL;
+	this->y_index = NULL;
+	this->p_type = NULL;
+	this->valid = NULL;
+	delete x_index;
+	delete y_index;
+	delete p_type;
+	delete valid;
+
+	for (int i = 0; i < edge_list.size(); i++) {
+		delete edge_list[i];
+	}
 }

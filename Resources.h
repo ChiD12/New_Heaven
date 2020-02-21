@@ -4,20 +4,6 @@ using namespace std;
 enum resource_type { WOOD, GRAIN, SHEEP, STONE, NO_RESOURCE };
 enum building_type { FOREST, WHEATFIELD, MEADOW, QUARRY, NO_BUILDING };
 
-/*
-class HarvestDeck {
-private:
-	int harvest_card_count;
-	int* hcc_ptr = &harvest_card_count;
-
-public:
-	HarvestDeck();
-	~HarvestDeck();
-
-	HarvestTile DrawHarvestTile();
-
-};
-
 class HarvestTile {
 private:
 	resource_type upper_left;
@@ -39,22 +25,18 @@ public:
 
 };
 
-
-
-
-class BuildingDeck {
+class HarvestDeck {
 private:
-	int building_card_count;
-	int* bcc_ptr = &building_card_count;
+	int harvest_card_count;
+	int* hcc_ptr = &harvest_card_count;
 
 public:
-	BuildingDeck();
-	~BuildingDeck();
+	HarvestDeck();
+	~HarvestDeck();
 
-	BuildingTile DrawBuildingTile(); //Do the same here as I did for the DrawHarvestTile() method.
+	HarvestTile DrawHarvestTile();
 
 };
-*/
 
 class BuildingTile {
 
@@ -75,6 +57,18 @@ public:
 	~BuildingTile();
 };
 
+class BuildingDeck {
+private:
+	int building_card_count;
+	int* bcc_ptr = &building_card_count;
+
+public:
+	BuildingDeck();
+	~BuildingDeck();
+
+	BuildingTile DrawBuildingTile(); //Do the same here as I did for the DrawHarvestTile() method.
+
+};
 
 class Node {
 public:
@@ -87,4 +81,5 @@ public:
 
 	Node();
 	Node(int x, int y, bool valid = 1);
+	~Node();
 };
