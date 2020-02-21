@@ -1,0 +1,12 @@
+# Ignore json files
+*.json
+
+#Ignore obj files
+*.obj
+
+#Ignore exe files
+*.exe
+
+#ignore vs folders
+.vs/
+.vs_code/
