@@ -103,6 +103,8 @@ BuildingTile BuildingDeck::DrawBuildingTile()
 	}
 }
 
+*/
+
 BuildingTile::BuildingTile()
 {
 	int type_selector; //Will hold a random number which will correlate to an enum.
@@ -127,13 +129,11 @@ BuildingTile::BuildingTile()
 
 }
 
-*/
-
 BuildingTile::BuildingTile(int x, int y, bool valid) {
 	x_index = new int(x);
 	y_index = new int(y);
 	this->valid = new bool(valid);
-	type = building_type::EMPTY;
+	type = NO_BUILDING;
 	edge_list = vector<BuildingTile*>(4); // 0 is north, 1 is east, 2 is south, 3 is west
 }
 
@@ -142,6 +142,6 @@ Node::Node(int x, int y, bool valid) {
 	x_index = new int(x);
 	y_index = new int(y);
 	this->valid = new bool(valid);
-	type = resource_type::EMPTY;
+	type = NO_RESOURCE;
 	edge_list = vector<Node*>(4); // 0 is north, 1 is east, 2 is south, 3 is west
 }

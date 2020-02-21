@@ -1,12 +1,8 @@
 #include <vector>
 using namespace std;
 
-namespace resource_type {
-	enum resource_type { WOOD, GRAIN, SHEEP, STONE, EMPTY };
-}
-namespace building_type {
-	enum building_type { FOREST, WHEATFIELD, MEADOW, QUARRY, EMPTY };
-}
+enum resource_type { WOOD, GRAIN, SHEEP, STONE, NO_RESOURCE };
+enum building_type { FOREST, WHEATFIELD, MEADOW, QUARRY, NO_BUILDING };
 
 /*
 class HarvestDeck {
@@ -63,8 +59,8 @@ public:
 class BuildingTile {
 
 public:
-	building_type::building_type type;
-	building_type::building_type* bt_ptr = &type;
+	building_type type;
+	building_type* bt_ptr = &type;
 
 	int building_value;
 	int* bv_ptr = &building_value;
@@ -84,8 +80,8 @@ class Node {
 public:
 	int* x_index;
 	int* y_index;
-	resource_type::resource_type type;
-	resource_type::resource_type* p_type = &type;
+	resource_type type;
+	resource_type* p_type = &type;
 	vector<Node*> edge_list;
 	bool* valid;
 
