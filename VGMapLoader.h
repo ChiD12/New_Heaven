@@ -1,6 +1,8 @@
 #include <string>
 #include <vector>
 #include "Resources.h"
+#pragma once
+
 using namespace std;
 
 class VGMapLoader {

@@ -26,12 +26,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GBMapLoader.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="VGMapLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="fourPlayer.txt" />
+    <Text Include="villageBoard.txt" />
     <Text Include="threePlayer.txt" />
     <Text Include="twoPlayer.txt" />
   </ItemGroup>
