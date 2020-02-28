@@ -8,12 +8,13 @@ using namespace std;
 class VGMapLoader {
 private:
 	// VillageBoard* vb;
-	vector<vector<BuildingTile>> *map;
+	vector<vector<BuildingTile*>> *map;
 
 public:
 	VGMapLoader();
+	~VGMapLoader();
 
-	vector<vector<BuildingTile>> getMap();
+	vector<vector<BuildingTile*>> getMap();
 
 	void loadMap(string filename);
 };

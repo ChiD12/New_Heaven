@@ -198,7 +198,7 @@ BuildingTile::BuildingTile(int x, int y, bool valid) {
 	y_index = new int(y);
 	this->valid = new bool(valid);
 	type = NO_BUILDING;
-	edge_list = new vector<BuildingTile>(4); // 0 is north, 1 is east, 2 is south, 3 is west
+	edge_list = new vector<BuildingTile*>(4); // 0 is north, 1 is east, 2 is south, 3 is west
 }
 
 void BuildingTile::PrintBuildingTile()
@@ -208,12 +208,14 @@ void BuildingTile::PrintBuildingTile()
 
 BuildingTile::~BuildingTile()
 {
+	
 	delete bt_ptr;
 	delete x_index;
 	delete y_index;
 	delete flipped;
 	delete valid;
-	delete[] edge_list;
+	edge_list->clear();
+	
 	bv_ptr = NULL;
 	bt_ptr = NULL;
 	x_index = NULL;
@@ -230,15 +232,16 @@ Node::Node(int x, int y, bool valid)
 	y_index = new int(y);
 	this->valid = new bool(valid);
 	type = NO_RESOURCE;
-	edge_list = new vector<Node>(4); // 0 is north, 1 is east, 2 is south, 3 is west
+	edge_list = new vector<Node*>(4); // 0 is north, 1 is east, 2 is south, 3 is west
 }
 Node::~Node()
 {
+	
 	delete x_index;
 	delete y_index;
 	delete p_type;
 	delete valid;
-	delete[] edge_list;
+	edge_list->clear();
 	x_index = NULL;
 	y_index = NULL;
 	p_type = NULL;
