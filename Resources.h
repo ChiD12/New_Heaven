@@ -73,7 +73,7 @@ public:
 	int* y_index;
 	bool* flipped;
 	bool* valid;
-	vector<BuildingTile*> edge_list;
+	vector<BuildingTile> *edge_list;
 
 	BuildingTile();
 	BuildingTile(int x, int y, bool valid = 1);
@@ -105,7 +105,7 @@ public:
 	int* y_index;
 	resource_type type;
 	resource_type* p_type = &type;
-	vector<Node*> edge_list;
+	vector<Node> *edge_list;
 	bool* valid;
 
 	Node();

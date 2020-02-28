@@ -198,7 +198,7 @@ BuildingTile::BuildingTile(int x, int y, bool valid) {
 	y_index = new int(y);
 	this->valid = new bool(valid);
 	type = NO_BUILDING;
-	edge_list = vector<BuildingTile*>(4); // 0 is north, 1 is east, 2 is south, 3 is west
+	edge_list = new vector<BuildingTile>(4); // 0 is north, 1 is east, 2 is south, 3 is west
 }
 
 void BuildingTile::PrintBuildingTile()
@@ -208,22 +208,19 @@ void BuildingTile::PrintBuildingTile()
 
 BuildingTile::~BuildingTile()
 {
-	this->bv_ptr = NULL;
-	this->bt_ptr = NULL;
-	this->x_index = NULL;
-	this->y_index = NULL;
-	this->flipped = NULL;
-	this->valid = NULL;
-	delete bv_ptr;
 	delete bt_ptr;
 	delete x_index;
 	delete y_index;
 	delete flipped;
 	delete valid;
-
-	for (int i = 0; i < edge_list.size(); i++) {
-		delete edge_list[i];
-	}
+	delete[] edge_list;
+	bv_ptr = NULL;
+	bt_ptr = NULL;
+	x_index = NULL;
+	y_index = NULL;
+	flipped = NULL;
+	valid = NULL;
+	edge_list = NULL;
 }
 
 Node::Node() {}
@@ -233,21 +230,18 @@ Node::Node(int x, int y, bool valid)
 	y_index = new int(y);
 	this->valid = new bool(valid);
 	type = NO_RESOURCE;
-	edge_list = vector<Node*>(4); // 0 is north, 1 is east, 2 is south, 3 is west
+	edge_list = new vector<Node>(4); // 0 is north, 1 is east, 2 is south, 3 is west
 }
 Node::~Node()
 {
-	this->x_index = NULL;
-	this->y_index = NULL;
-	this->p_type = NULL;
-	this->valid = NULL;
 	delete x_index;
 	delete y_index;
 	delete p_type;
 	delete valid;
-	/*
-	for (int i = 0; i < edge_list.size(); i++) {
-		delete edge_list[i];
-	}
-	*/
+	delete[] edge_list;
+	x_index = NULL;
+	y_index = NULL;
+	p_type = NULL;
+	valid = NULL;
+	edge_list = NULL;
 };
