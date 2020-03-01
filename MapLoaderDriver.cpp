@@ -3,6 +3,15 @@
 #include "iostream"
 using namespace std;
 
+/**
+	MapLoaderDriver.cpp
+	Purpose: Driver to ensure the GBMapLoader and VGMapLoader are working properly.
+			 The driver will create an instance of both, and print their information
+
+	@author Matt
+	@version 1.0 2020-03-01
+*/
+
 int main() {
 
 	GBMapLoader gbLoader = GBMapLoader();

@@ -25,7 +25,7 @@ void GBMapLoader::loadMap(string filename) {
 		// new row
 		temp_map.push_back(vector<Node*>());
 
-		// split on commas, each token represents either a Node (N) or NULL (X)
+		// split on commas, each token represents either a Node (N) or Invalid Node (X)
 		size_t i = 0;
 		int x = 0;
 		string token;
@@ -80,8 +80,6 @@ void GBMapLoader::loadMap(string filename) {
 				else
 					map->at(x)[y]->edge_list->at(3) = new Node(x - 1, y, false);
 			}
-
-
 }
 
 vector<vector<Node*>> GBMapLoader::getMap() {
