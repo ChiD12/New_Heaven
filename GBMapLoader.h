@@ -13,7 +13,7 @@ using namespace std;
 
 class GBMapLoader {
 private:
-	// GameBoard* gb;
+	
 	vector<vector<Node*>> *map;
 
 public:
@@ -21,10 +21,6 @@ public:
 		Default constructor, not used.
 	*/
 	GBMapLoader();
-
-	/**
-		Destructor to handle memory leaks.
-	*/
 	~GBMapLoader();
 
 	/**
@@ -41,5 +37,5 @@ public:
 		@returns a copy of the generated map
 		@throws an error if map is not defined (null)
 	*/
-	vector<vector<Node*>> getMap();
+	vector<vector<Node*>>* getMap();
 };

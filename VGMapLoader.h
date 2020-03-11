@@ -22,10 +22,6 @@ public:
 		Default constructor, not used.
 	*/
 	VGMapLoader();
-
-	/**
-		Destructor to handle memory leaks.
-	*/
 	~VGMapLoader();
 
 	/**
@@ -40,5 +36,5 @@ public:
 		@returns a copy of the generated map
 		@throws an error if map is not defined (null)
 	*/
-	vector<vector<BuildingTile*>> getMap();
+	vector<vector<BuildingTile*>>* getMap();
 };

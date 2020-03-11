@@ -16,7 +16,7 @@ int main() {
 
 	GBMapLoader gbLoader = GBMapLoader();
 	gbLoader.loadMap("fourPlayer.txt");
-	vector<vector<Node*>> gbMap = gbLoader.getMap();
+	vector<vector<Node*>> gbMap = *gbLoader.getMap();
 	int count = 0;
 
 	cout << "---------------------------------------" << endl;
@@ -62,7 +62,7 @@ int main() {
 
 	VGMapLoader vgLoader = VGMapLoader();
 	vgLoader.loadMap("villageBoard.txt");
-	vector<vector<BuildingTile*>> vgMap = vgLoader.getMap();
+	vector<vector<BuildingTile*>> vgMap = *vgLoader.getMap();
 	count = 0;
 
 	cout << "---------------------------------------" << endl;

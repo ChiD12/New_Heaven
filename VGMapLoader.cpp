@@ -82,7 +82,7 @@ void VGMapLoader::loadMap(string filename) {
 			}
 }
 
-vector<vector<BuildingTile*>> VGMapLoader::getMap() {
-	return *this->map;
+vector<vector<BuildingTile*>>* VGMapLoader::getMap() {
+	return this->map;
 }
 

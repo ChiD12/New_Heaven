@@ -82,7 +82,7 @@ void GBMapLoader::loadMap(string filename) {
 			}
 }
 
-vector<vector<Node*>> GBMapLoader::getMap() {
-	return *this->map;
+vector<vector<Node*>>* GBMapLoader::getMap() {
+	return this->map;
 }
 
