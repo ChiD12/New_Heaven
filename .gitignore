@@ -2,4 +2,4 @@
 *.vcxproj
 *.vcxproj.*
 Debug/
-.vs/
+/.vs/
