@@ -11,8 +11,22 @@ GBMapLoader::~GBMapLoader() {
 	map = NULL;
 }
 
-void GBMapLoader::loadMap(string filename) {
+void GBMapLoader::loadMap(int numPlayers) {
 	vector<vector<Node*>> temp_map = vector<vector<Node*>>();
+	string filename;
+	switch (numPlayers) {
+	case 2:
+		filename = "twoPlayer.txt";
+		break;
+	case 3:
+		filename = "threePlayer.txt";
+		break;
+	case 4:
+		filename = "fourPlayer.txt";
+		break;
+	default:
+		throw "Invalid number of players.";
+	}
 	ifstream input(filename);
 	string delim = ",";
 
@@ -82,7 +96,7 @@ void GBMapLoader::loadMap(string filename) {
 			}
 }
 
-vector<vector<Node*>>* GBMapLoader::getMap() {
-	return this->map;
+vector<vector<Node*>>& GBMapLoader::getMap() {
+	return *this->map;
 }
 

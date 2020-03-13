@@ -234,7 +234,28 @@ BuildingTile::BuildingTile(int x, int y, bool valid) {
 	y_index = new int(y);
 	this->valid = new bool(valid);
 	bt_ptr = new building_type(NO_BUILDING);
-	edge_list = new vector<BuildingTile*>(4); // 0 is north, 1 is east, 2 is south, 3 is west
+	bv_ptr = new int(NO_BUILDING);
+	type_representation = new string(typeToString(NO_BUILDING));
+	flipped = new bool(false);
+	if (*this->valid)
+		edge_list = new vector<BuildingTile*>(4); // 0 is north, 1 is east, 2 is south, 3 is weste
+	else
+		edge_list = new vector<BuildingTile*>(0);
+}
+
+
+BuildingTile::BuildingTile(int x, int y, bool valid, bool am_i_flipped, building_type given_type, int value) { //used for testing the VGMap's placeTile function
+	type_representation = new string(typeToString(given_type));
+	bt_ptr = new building_type(given_type);
+	bv_ptr = new int(value);
+	x_index = new int(x);
+	y_index = new int(y);
+	flipped = new bool(am_i_flipped);
+	this->valid = new bool(valid);
+	if (*this->valid)
+		edge_list = new vector<BuildingTile*>(4); // 0 is north, 1 is east, 2 is south, 3 is weste
+	else
+		edge_list = new vector<BuildingTile*>(0);
 }
 
 
@@ -246,15 +267,32 @@ BuildingTile::BuildingTile(const BuildingTile& tile) {
 	y_index = new int(*tile.y_index);
 	flipped = new bool(*tile.flipped);
 	valid = new bool(*tile.valid);
-	edge_list = new vector<BuildingTile*>(4);
+	/*
+	edge_list = new vector<BuildingTile*>(tile.edge_list->size());
+	
 	for (int i = 0; i < tile.edge_list->size(); i++)
 		edge_list->at(i) = new BuildingTile(*tile.edge_list->at(i));
+		*/
+	edge_list = tile.edge_list;
+}
+
+
+BuildingTile& BuildingTile::operator=(const BuildingTile& tile) {
+	bt_ptr = new building_type(*tile.bt_ptr);
+	type_representation = new string(*tile.type_representation);
+	bv_ptr = new int(*tile.bv_ptr);
+	x_index = new int(*tile.x_index);
+	y_index = new int(*tile.y_index);
+	flipped = new bool(*tile.flipped);
+	valid = new bool(*tile.valid);
+	edge_list = tile.edge_list;
+	return *this;
 }
 
 
 void BuildingTile::PrintBuildingTile()
 {
-	cout << "This is a " << this->type_representation << " tile with a value of " << *bv_ptr << ". " << endl;
+	cout << "This is a " << *this->type_representation << " tile with a value of " << *bv_ptr << ". " << endl;
 }
 
 
@@ -265,8 +303,6 @@ BuildingTile::~BuildingTile()
 	delete y_index;
 	delete flipped;
 	delete valid;
-	edge_list->clear();
-	delete edge_list;
 	
 	bv_ptr = nullptr;
 	bt_ptr = nullptr;
@@ -274,7 +310,6 @@ BuildingTile::~BuildingTile()
 	y_index = nullptr;
 	flipped = nullptr;
 	valid = nullptr;
-	edge_list = nullptr;
 }
 
 
@@ -286,7 +321,10 @@ Node::Node(int x, int y, bool is_valid)
 	valid = new bool(is_valid);
 	rt_ptr = new resource_type(NO_RESOURCE);
 	resource_rep = new string("[EMPTY]");
-	edge_list = new vector<Node*>(4); // 0 is north, 1 is east, 2 is south, 3 is west
+	if (*valid)
+		edge_list = new vector<Node*>(4); // 0 is north, 1 is east, 2 is south, 3 is west
+	else 
+		edge_list = new vector<Node*>(0);
 }
 
 
@@ -296,9 +334,18 @@ Node::Node(const Node& node) {
 	x_index = new int(*node.x_index);
 	y_index = new int(*node.y_index);
 	valid = new bool(*node.valid);
-	edge_list = new vector<Node*>(4);
-	for (int i = 0; i < node.edge_list->size(); i++)
-		edge_list->at(i) = new Node(*node.edge_list->at(i));
+	edge_list = node.edge_list;
+}
+
+
+Node& Node::operator=(const Node& node) {
+	rt_ptr = new resource_type(*node.rt_ptr);
+	resource_rep = new string(*node.resource_rep);
+	x_index = new int(*node.x_index);
+	y_index = new int(*node.y_index);
+	valid = new bool(*node.valid);
+	edge_list = node.edge_list;
+	return *this;
 }
 
 
@@ -340,11 +387,8 @@ Node::~Node()
 	delete y_index;
 	delete rt_ptr;
 	delete valid;
-	edge_list->clear();
-	delete edge_list;
 	x_index = nullptr;
 	y_index = nullptr;
 	rt_ptr = nullptr;
 	valid = nullptr;
-	edge_list = nullptr;
 };

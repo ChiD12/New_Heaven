@@ -12,6 +12,7 @@ using namespace std;
 	@version 1.0 2020-03-01
 */
 
+/*
 int main() {
 
 	GBMapLoader gbLoader = GBMapLoader();
@@ -105,3 +106,4 @@ int main() {
 
 	cout << "Village Board size: " + to_string(count) << endl;
 }
+*/

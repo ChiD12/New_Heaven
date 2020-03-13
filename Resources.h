@@ -75,6 +75,7 @@ public:
 	BuildingTile();
 	~BuildingTile();
 	BuildingTile(const BuildingTile&);
+	BuildingTile& operator=(const BuildingTile& tile);
 
 	/**
 		Secondary constructor which will be used when instantiating the Village Board map
@@ -85,7 +86,7 @@ public:
 	*/
 	BuildingTile(int x, int y, bool valid = 1);
 
-	//BuildingTile(int x, int y, bool valid, bool am_i_flipped, building_type given_type, int value);
+	BuildingTile(int x, int y, bool valid, bool am_i_flipped, building_type given_type, int value);
 
 	void PrintBuildingTile();
 };
@@ -117,6 +118,7 @@ public:
 	Node();
 	~Node();
 	Node(const Node&);
+	Node& operator=(const Node& node);
 
 	/**
 		Main constructor which will be used when instantiating the Game Board map

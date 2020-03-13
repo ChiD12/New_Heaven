@@ -31,11 +31,11 @@ public:
 
 		@throws an error if file is not found
 	*/
-	void loadMap(string filename);
+	void loadMap(int numPlayers);
 
 	/**
 		@returns a copy of the generated map
 		@throws an error if map is not defined (null)
 	*/
-	vector<vector<Node*>>* getMap();
+	vector<vector<Node*>>& getMap();
 };
