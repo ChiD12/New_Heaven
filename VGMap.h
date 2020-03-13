@@ -13,11 +13,11 @@ class VGMap {
     bool* quarry_placed;
 
     std::vector<vector<BuildingTile*>> *map;
-    std::vector<BuildingTile*> *invalid_tiles;
+    //std::vector<BuildingTile*> *invalid_tiles;
 
 public:
     VGMap();
-    VGMap(vector<vector<BuildingTile*>>);//to eventually receive a map from mapLoader
+    //VGMap(vector<vector<BuildingTile*>>);//to eventually receive a map from mapLoader
     ~VGMap();
     bool placeTile(int, int, BuildingTile);
     int calculateScore();

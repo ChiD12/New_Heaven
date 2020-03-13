@@ -5,8 +5,6 @@
 #include <ctime>
 
 
-
-
 HarvestTile::HarvestTile()
 {
 

@@ -140,6 +140,7 @@ GBMap::GBMap(int numPlayers) {
 	update_edge_all();
 }
 
+
 void GBMap::PrintBoard()
 {
 	for (int i = 0; i < 14; i++)

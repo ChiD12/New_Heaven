@@ -14,7 +14,6 @@ using namespace std;
 
 class VGMapLoader {
 private:
-	// VillageBoard* vb;
 	vector<vector<BuildingTile*>> *map;
 
 public:

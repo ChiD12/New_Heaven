@@ -124,11 +124,11 @@ VGMap::VGMap(vector<vector<BuildingTile*>> map) { //constructor working with VGM
 
 VGMap::~VGMap() { //destructor
 	delete(height, width, score, forest_placed, wheatfield__placed, meadow_placed, quarry_placed);
-	for (vector<BuildingTile*> row : *map) {
-		for (BuildingTile* element : row) {
-			delete(element);
-		}
-	}
+	for(size_t i = 0; i < map->size(); i++)
+		map->at(i).clear();
+
+	delete map;
+	map = nullptr;
 	//for (BuildingTile* tile : *invalid_tiles) { //work around for double deletion problem
 	//	delete(tile);
 	//}
