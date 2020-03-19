@@ -2,7 +2,7 @@
 #include "GBMap.h"
 #include "Player.h"
 
-
+/*
 int main() {
 
 	GBMap* game_board = new GBMap(4);
@@ -15,7 +15,7 @@ int main() {
 
 	cout << "harvest deck created with " << harvest_deck.GetCardCount() << " cards." << endl;
 
-	Player richard_ham = Player("Richard", harvest_deck, building_deck);
+	Player richard_ham = Player("Richard", 93500, harvest_deck, building_deck);
 
 	cout << "player created" << endl;
 
@@ -47,7 +47,7 @@ int main() {
 
 	richard_ham.player_board->showMap();
 
-	cout << richard_ham.name << " is placing a building tile onto their village board.." << endl;
+	cout << *richard_ham.name << " is placing a building tile onto their village board.." << endl;
 
 	BuildingTile* temp_tile = new BuildingTile(1, 1, true, false, MEADOW, 2);
 	BuildingTile* temp_tile1 = new BuildingTile(1, 1, true, false, MEADOW, 2);
@@ -69,4 +69,4 @@ int main() {
 	
 	system("pause");
 
-}
+}*/

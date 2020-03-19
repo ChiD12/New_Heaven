@@ -12,6 +12,7 @@ public:
 
 	bool PlaceTile(HarvestTile* given_tile, int tlX, int tlY);
 	vector<int> CalculateResources(int x, int y);
+	void PrintResources(); //TODO Print to the players the current available resources reflected in the resource markers on the game board.
 
 	GBMap();
 	GBMap(int numPlayers);

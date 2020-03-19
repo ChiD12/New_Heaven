@@ -4,12 +4,9 @@
 
 class GBMap;
 
-Player::Player(std::string given_name, HarvestDeck given_hdeck, BuildingDeck given_bdeck) {
-	this->name = given_name;
-
-	name_ptr = &name;
-
-	resource_handler = new ResourceHandler();
+Player::Player(std::string given_name, int given_id,  HarvestDeck given_hdeck, BuildingDeck given_bdeck) {
+	this->name = new string(given_name);
+	this->id = new int(given_id);
 
 	building_hand = new vector<BuildingTile*>();
 	harvest_hand = new vector<HarvestTile*>();
@@ -24,13 +21,23 @@ Player::Player(std::string given_name, HarvestDeck given_hdeck, BuildingDeck giv
 
 	this->DrawBuilding(6, given_bdeck);
 
-	cout << this->name << " drew their starting cards" << endl;
+	cout << *this->name << " drew their starting cards" << endl;
 
 }
 
 Player::~Player()
 {
-	delete (resource_handler, building_hand, harvest_hand, player_board);
+	delete id;
+	delete name;
+	id = nullptr;
+	name = nullptr;
+}
+
+void Player::exchange(GBMap* given_board, int given_x, int given_y)
+{
+	this->CalculateResources(given_board, given_x, given_y);
+	cout << "GameBoard resources updated!" << endl;
+	//given_board.PrintResources();
 }
 
 bool Player::PlaceHarvestTile(GBMap* given_board, HarvestTile* given_tile, int tl_x, int tl_y)
@@ -63,7 +70,7 @@ void Player::DrawHarvestTile(int number_of_cards, HarvestDeck given_deck)
 
 void Player::ResourceTracker()
 {
-	this->resource_handler->PrintResources();
+	
 }
 
 void Player::BuildVillage(int given_x, int given_y, BuildingTile given_tile)
@@ -73,12 +80,12 @@ void Player::BuildVillage(int given_x, int given_y, BuildingTile given_tile)
 
 void Player::CalculateResources(GBMap* given_board, int tl_x, int tl_y)
 {
-	vector<int> acquired_resources = (*given_board).CalculateResources(tl_x, tl_y);
-
-	this->resource_handler->total_wood = acquired_resources[0];
-	this->resource_handler->total_grain = acquired_resources[1];
-	this->resource_handler->total_sheep = acquired_resources[2];
-	this->resource_handler->total_stone = acquired_resources[3];
+	//(*given_board).CalculateResources(tl_x, tl_y); This is what will be called when the resource functionality is added.
+	//Legacy code
+//	this->resource_handler->total_wood = acquired_resources[0]; 
+//	this->resource_handler->total_grain = acquired_resources[1];
+//	this->resource_handler->total_sheep = acquired_resources[2];
+//	this->resource_handler->total_stone = acquired_resources[3];
 }
 
 void Player::PrintHarvestHand()
@@ -99,25 +106,5 @@ void Player::PrintBuildingHand()
 	}
 }
 
-ResourceHandler::ResourceHandler() //We can assume a player starts with no resources.
-{
-	this->total_wood = 0;
-	tw_ptr = &total_wood;
-	this->total_grain = 0;
-	tg_ptr = &total_grain;
-	this->total_sheep = 0;
-	tsh_ptr = &total_sheep;
-	this->total_stone = 0;
-	tst_ptr = &total_stone;
-}
 
-void ResourceHandler::PrintResources()
-{
-	cout << "The resources I am currently holding are as follows: " << "WOOD: " << *tw_ptr << " |GRAIN: " << *tg_ptr << " |SHEEP: " << *tsh_ptr << " |STONE: " << *tst_ptr << endl;
-}
-
-ResourceHandler::~ResourceHandler()
-{
-
-}
 

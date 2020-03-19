@@ -16,25 +16,11 @@
 
 using namespace std;
 
-class ResourceHandler {
-public:
-	int total_wood, total_grain, total_sheep, total_stone;
-
-	int* tw_ptr = &total_wood;
-	int* tg_ptr = &total_grain;
-	int* tsh_ptr = &total_sheep;
-	int* tst_ptr = &total_stone;
-
-	ResourceHandler();
-	void PrintResources();
-	~ResourceHandler();
-};
 
 class Player {
 public:
-	std::string name;
-
-	std::string* name_ptr = &name;
+	
+	std::string* name;
 
 	vector<BuildingTile*>* building_hand; //The player's hand of buildings.
 
@@ -42,13 +28,14 @@ public:
 
 	VGMap* player_board; //The player's village board.
 
-	ResourceHandler* resource_handler;
 
 	int* id = new int(0); //TODO add id to constructors/destructors
 
-	Player(std::string name, HarvestDeck given_hdeck, BuildingDeck given_bdeck);
+	Player(std::string name, int given_id,  HarvestDeck given_hdeck, BuildingDeck given_bdeck);
 
 	~Player();
+
+	void exchange(GBMap* given_board, int given_x, int given_y); //Picks a point on the game board, calculates the resources, and then moves the resource markers on the game board.
 
 	bool PlaceHarvestTile(GBMap* given_board, HarvestTile* given_tile, int tl_x, int tl_y); //Given a game board and tile (pointer), place that tile onto the game board and calculate the resources acquired.
 

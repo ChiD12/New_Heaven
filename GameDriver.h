@@ -7,6 +7,7 @@
 #include <string>
 
 int numOfPlayers;
+int remainingTiles;
 Player* players[4];
 GBMap* gbMap;
 VGMap* vgMap;

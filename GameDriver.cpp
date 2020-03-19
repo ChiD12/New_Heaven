@@ -5,7 +5,7 @@ int main() {
 
 	int turnCounter = 0;
 	bool gameEnd = false;
-
+	remainingTiles = 45; //Use this for testing for now.
 	sortPlayers();
 
 	while (!gameEnd) {
