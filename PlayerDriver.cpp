@@ -33,6 +33,8 @@ int main() {
 	cout << "Attempting to place a tile on the game board.." << endl;
 
 	richard_ham.PlaceHarvestTile(game_board, harvest_tile_ptr, 0, 2);
+	richard_ham.PlaceHarvestTile(game_board, harvest_tile_ptr, 0, 4);
+
 
 	cout << "Printing the game board again.." << endl;
 

@@ -1,5 +1,4 @@
 #include "VGMap.h"
-#include "VGMapLoader.h"
 #include <iostream>
 #include <string>
 

@@ -1,6 +1,4 @@
 #include "GBMap.h"
-#include "Resources.h"
-#include "GBMapLoader.h"
 #include <vector>
 #include <iostream>
 #include <queue>  
@@ -137,7 +135,7 @@ GBMap::GBMap(int numPlayers) {
 
 	cout << "Game Board created for " << numPlayers << " players." << endl;
 
-	update_edge_all();
+	//update_edge_all();
 }
 
 

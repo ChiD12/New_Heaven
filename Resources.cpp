@@ -332,7 +332,7 @@ Node::Node(const Node& node) {
 	x_index = new int(*node.x_index);
 	y_index = new int(*node.y_index);
 	valid = new bool(*node.valid);
-	edge_list = node.edge_list;
+	edge_list = node.edge_list; //this shallow copy is done intentionally as the edgelist should always point to the same connection on the game board
 }
 
 

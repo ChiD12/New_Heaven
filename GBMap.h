@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
 #include "Resources.h"
+#include "Resources.h"
+#include "GBMapLoader.h"
 
 class GBMap {
 public:

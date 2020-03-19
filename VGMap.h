@@ -1,5 +1,6 @@
 #pragma once
 #include "Resources.h"
+#include "VGMapLoader.h"
 #include <vector>
 
 class VGMap {
