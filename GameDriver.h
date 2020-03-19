@@ -7,8 +7,9 @@
 #include <string>
 
 int numOfPlayers;
-Player* Players[4];
+Player* players[4];
 GBMap* gbMap;
 VGMap* vgMap;
 
 void gameStart();
+void sortPlayers();

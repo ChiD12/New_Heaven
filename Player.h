@@ -44,6 +44,8 @@ public:
 
 	ResourceHandler* resource_handler;
 
+	int* id = new int(0); //TODO add id to constructors/destructors
+
 	Player(std::string name, HarvestDeck given_hdeck, BuildingDeck given_bdeck);
 
 	~Player();
