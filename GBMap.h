@@ -6,7 +6,12 @@
 
 class GBMap {
 public:
+
 	vector<vector<Node*>>* pgbA;
+	int* RMWood = 0;
+	int* RMStone = 0;
+	int* RMSheep = 0;
+	int* RMGrain = 0;
 
 	void update_edge_all();
 

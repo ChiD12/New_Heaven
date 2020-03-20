@@ -13,4 +13,6 @@ GBMap* gbMap;
 VGMap* vgMap;
 
 void gameStart();
-void sortPlayers();
+int findFirstPlayer();
+void turnSequence();
+void computeGameScore();

@@ -110,15 +110,19 @@ vector<int> GBMap::CalculateResources(int x, int y) {
 		}
 		if (resourceType == WOOD) {
 			(*resources).at(0) = points;
+			*RMWood = points;
 		}
 		if (resourceType == STONE) {
 			(*resources).at(3) = points;
+			*RMStone = points;
 		}
 		if (resourceType == SHEEP) {
 			(*resources).at(2) = points;
+			*RMSheep = points;
 		}
 		if (resourceType == GRAIN) {
 			(*resources).at(1) = points;
+			*RMGrain = points;
 		}
 	}
 	return *resources;
