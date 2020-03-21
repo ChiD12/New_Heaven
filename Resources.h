@@ -73,6 +73,7 @@ public:
 	vector<BuildingTile*>* edge_list;
 
 	BuildingTile();
+	BuildingTile(building_type given_type, int given_value);
 	~BuildingTile();
 	BuildingTile(const BuildingTile&);
 	BuildingTile& operator=(const BuildingTile& tile);
@@ -94,8 +95,8 @@ public:
 
 class BuildingDeck {
 private:
-	int building_card_count;
-	int* bcc_ptr = &building_card_count;
+	int* building_card_count;
+	vector<BuildingTile>* building_deck;
 
 public:
 	BuildingDeck();

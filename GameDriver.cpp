@@ -1,6 +1,6 @@
 #include "GameDriver.h"
 #include <limits.h>;
-
+/*
 int main() {
 
 	int turnCounter = 0;
@@ -15,7 +15,7 @@ int main() {
 		turnCounter++;
 	}
 
-}
+}*/
 
 void sortPlayers() {
 	
