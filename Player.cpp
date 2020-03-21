@@ -21,6 +21,8 @@ Player::Player(std::string given_name, int given_id,  HarvestDeck given_hdeck, B
 
 	this->DrawBuilding(6, given_bdeck);
 
+	cout << "There are now " << given_bdeck.GetCardCount() << " cards left in the building deck." << endl;
+
 	cout << *this->name << " drew their starting cards" << endl;
 
 }

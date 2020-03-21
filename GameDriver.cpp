@@ -9,7 +9,7 @@ int main() {
 
 	bool gameEnd = false;
 	remainingTiles = 45; //Use this for testing for now.
-	
+
 	int turnCounter = findFirstPlayer();
 
 	while (!gameEnd) {
@@ -17,7 +17,7 @@ int main() {
 		cout << "it is " << players[turn]->name << "'s turn" << endl;
 		cout << "The current Board State is: " << endl;
 		gbMap->PrintBoard();
-		
+
 		bool validInput = true;
 		int x;
 		int y;
@@ -33,13 +33,13 @@ int main() {
 			try {
 				int splitIndex = playerChoice.find(',');
 				x = stoi(playerChoice.substr(0, splitIndex));
-				y = stoi(playerChoice.substr(splitIndex,playerChoice.size()));
+				y = stoi(playerChoice.substr(splitIndex, playerChoice.size()));
 			}
 			catch (invalid_argument const& e) {
 				validInput = false;
 				cout << "invalid input" << endl;
 			}
-		}while(!validInput);
+		} while (!validInput);
 
 
 
@@ -56,13 +56,13 @@ int main() {
 }
 
 int findFirstPlayer() {
-	
+
 	Player* min = players[0];
 	int minIndex = 0;
 	for (int i = 0; i < 4; i++) {
 		if ((players[i]->id) < (min->id)) {
 			min = players[i];
-			minIndex = i;		
+			minIndex = i;
 		}
 	}
 }

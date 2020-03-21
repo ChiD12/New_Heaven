@@ -139,24 +139,79 @@ HarvestTile* HarvestDeck::DrawHarvestTile()
 
 }
 
-BuildingDeck::BuildingDeck()
+BuildingDeck::BuildingDeck() //FOREST, WHEATFIELD, MEADOW, QUARRY
 {
-	building_card_count = 144;
-	bcc_ptr = &building_card_count;
+	building_card_count = new int(144);
+	building_deck = new vector<BuildingTile>(144);
+	int counter = 0;
+	int value_rep = 1;
+	int type_rep = 1;
+
+	while (counter < 144) {
+		if (type_rep == 1) {
+			building_deck->at(counter) = (BuildingTile(FOREST, value_rep));
+			value_rep++;
+			type_rep++;
+			counter++;
+			if (value_rep == 7)
+				value_rep = 1;
+			continue;
+		}
+		if (type_rep == 2) {
+			building_deck->at(counter) = (BuildingTile(WHEATFIELD, value_rep));
+			value_rep++;
+			type_rep++;
+			counter++;
+			if (value_rep == 7)
+				value_rep = 1;
+			continue;
+		}
+		if (type_rep == 3) {
+			building_deck->at(counter) = (BuildingTile(MEADOW, value_rep));
+			value_rep++;
+			type_rep++;
+			counter++;
+			if (value_rep == 7)
+				value_rep = 1;
+			continue;
+		}
+		if (type_rep == 4) {
+			building_deck->at(counter) = (BuildingTile(QUARRY, value_rep));
+			value_rep++;
+			type_rep = 1;
+			counter++;
+			if (value_rep == 7)
+				value_rep = 1;
+			continue;
+		}
+		
+	}
+		
+
+	cout << "A building deck has been created with " << this->building_deck->size() << " cards." << endl;
 }
 
 BuildingDeck::~BuildingDeck(){}
 
-int BuildingDeck::GetCardCount() { return this->building_card_count; }
+int BuildingDeck::GetCardCount() { return *this->building_card_count; }
 
 BuildingTile::BuildingTile()
 {
+	bt_ptr = new building_type(NO_BUILDING);
+	bv_ptr = new int(0); 
+	x_index = new int(-1);//initializing the remaining class variables to avoid trying to delete empty class members
+	y_index = new int(-1);
+	this->valid = new bool(valid);
+	flipped = new bool(false);
+	edge_list = new vector<BuildingTile*>(4);
+
+	/*
 	int type_selector; //Will hold a random number which will correlate to an enum.
 	building_type random_type; //Will hold the building type which will be selected by type_selector and will be assigned to the building tile.
 
-	/*
+	
 	 * This creates a new random seed using the system's clock which ensures that the numbers generated are more varied and random.
-	 */
+	 
 
 	std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
 	auto duration = now.time_since_epoch();
@@ -186,9 +241,12 @@ BuildingTile::BuildingTile()
 	this->valid = new bool(valid);
 	flipped = new bool(false);
 	edge_list = new vector<BuildingTile*>(4);
+	*/
 }
 
-std::string typeToString(building_type type) { //added to make the longer parameterized constructor of BuildingTile more readable
+
+
+ std::string typeToString(building_type type) { //added to make the longer parameterized constructor of BuildingTile more readable
 	switch (type) {
 	case FOREST:
 		return "FOREST";
@@ -209,19 +267,30 @@ std::string typeToString(building_type type) { //added to make the longer parame
 	default:;
 	}
 }
-
+ BuildingTile::BuildingTile(building_type given_type, int given_value)
+ {
+	 bt_ptr = new building_type(given_type); //Set the type
+	 bv_ptr = new int(given_value); //Set the value
+	 type_representation = new string(typeToString(given_type));
+	 x_index = new int(-1);//initializing the remaining class variables to avoid trying to delete empty class members
+	 y_index = new int(-1);
+	 this->valid = new bool(valid);
+	 flipped = new bool(false);
+	 edge_list = new vector<BuildingTile*>(4);
+ }
 
 BuildingTile* BuildingDeck::DrawBuildingTile()
 {
 
-	if (*bcc_ptr < 1) {
+	if (*building_card_count < 1) {
 		cout << "There are no more cards!";
 		return nullptr;
 	}
 
 	else {
-		(*bcc_ptr)--;
-		BuildingTile* return_me = new BuildingTile();
+		(*building_card_count)--;
+		BuildingTile* return_me = new BuildingTile(building_deck->back());
+		building_deck->pop_back();
 		return return_me;
 	}
 }

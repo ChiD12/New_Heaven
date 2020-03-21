@@ -2,7 +2,7 @@
 #include "GBMap.h"
 #include "Player.h"
 
-/*
+
 int main() {
 
 	GBMap* game_board = new GBMap(4);
@@ -33,6 +33,11 @@ int main() {
 	cout << "Attempting to place a tile on the game board.." << endl;
 
 	richard_ham.PlaceHarvestTile(game_board, harvest_tile_ptr, 0, 2);
+
+	cout << "Printing the game board again.." << endl;
+	(*game_board).PrintBoard();
+
+	cout << "Attempting to place a tile on the game board.." << endl;
 	richard_ham.PlaceHarvestTile(game_board, harvest_tile_ptr, 0, 4);
 
 
@@ -69,4 +74,4 @@ int main() {
 	
 	system("pause");
 
-}*/
+}
