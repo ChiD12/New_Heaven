@@ -4,16 +4,17 @@
 #include <string>
 
 using namespace std;
-/*
+
 int main() {
 
+	gameStart();
 	bool gameEnd = false;
 	remainingTiles = 45; //Use this for testing for now.
 
 	int turnCounter = findFirstPlayer();
 
 	while (!gameEnd) {
-		int turn = turnCounter % 5;
+		int turn = turnCounter % numOfPlayers;
 		cout << "it is " << players[turn]->name << "'s turn" << endl;
 		cout << "The current Board State is: " << endl;
 		gbMap->PrintBoard();
@@ -54,7 +55,7 @@ int main() {
 	}
 
 }
-*/
+
 
 void gameStart()
 {
@@ -87,11 +88,6 @@ void gameStart()
 		cin >> player_id;
 		players[counter] = new Player(player_name, player_id, harvest_deck, building_deck);
 	}
-
-
-
-
-
 }
 
 int findFirstPlayer() {

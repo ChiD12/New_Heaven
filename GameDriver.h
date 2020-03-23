@@ -10,9 +10,8 @@ int numOfPlayers;
 int remainingTiles;
 Player* players[4];
 GBMap* gbMap;
-VGMap* vgMap;
 
 void gameStart();
 int findFirstPlayer();
-void turnSequence();
+void turnSequence(int index);
 void computeGameScore();
