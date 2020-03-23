@@ -4,7 +4,7 @@
 #include <string>
 
 using namespace std;
-
+/*
 int main() {
 
 	bool gameEnd = false;
@@ -54,6 +54,45 @@ int main() {
 	}
 
 }
+*/
+
+void gameStart()
+{
+	cout << "Starting game!" << endl;
+
+	cout << "How many people will be playing today?: ";
+
+	cin >> numOfPlayers;
+
+	cout << "Great! You've chosen to play with " << numOfPlayers << " players." << endl;
+
+	GBMap game_board = GBMap(numOfPlayers);
+
+	game_board.PrintBoard();
+
+	game_board.PrintResources();
+
+	HarvestDeck harvest_deck = HarvestDeck();
+	BuildingDeck building_deck = BuildingDeck();
+
+	string player_name;
+	int player_id;
+	int counter = 0;
+
+
+	while (counter <= numOfPlayers) {
+		cout << "Enter the name of Player " << (counter + 1)<< ": ";
+		cin >> player_name;
+		cout << "Enter the id of Player " << (counter + 1) << ": ";
+		cin >> player_id;
+		players[counter] = new Player(player_name, player_id, harvest_deck, building_deck);
+	}
+
+
+
+
+
+}
 
 int findFirstPlayer() {
 
@@ -65,4 +104,5 @@ int findFirstPlayer() {
 			minIndex = i;
 		}
 	}
+	return 0;
 }

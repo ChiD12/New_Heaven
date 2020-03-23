@@ -39,7 +39,7 @@ void Player::exchange(GBMap* given_board, int given_x, int given_y)
 {
 	this->CalculateResources(given_board, given_x, given_y);
 	cout << "GameBoard resources updated!" << endl;
-	//given_board.PrintResources();
+	given_board->PrintResources();
 }
 
 bool Player::PlaceHarvestTile(GBMap* given_board, HarvestTile* given_tile, int tl_x, int tl_y)
@@ -82,12 +82,7 @@ void Player::BuildVillage(int given_x, int given_y, BuildingTile given_tile)
 
 void Player::CalculateResources(GBMap* given_board, int tl_x, int tl_y)
 {
-	//(*given_board).CalculateResources(tl_x, tl_y); This is what will be called when the resource functionality is added.
-	//Legacy code
-//	this->resource_handler->total_wood = acquired_resources[0]; 
-//	this->resource_handler->total_grain = acquired_resources[1];
-//	this->resource_handler->total_sheep = acquired_resources[2];
-//	this->resource_handler->total_stone = acquired_resources[3];
+	(*given_board).CalculateResources(tl_x, tl_y); 
 }
 
 void Player::PrintHarvestHand()

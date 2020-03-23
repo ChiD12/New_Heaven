@@ -128,6 +128,11 @@ vector<int> GBMap::CalculateResources(int x, int y) {
 	return *resources;
 }
 
+void GBMap::PrintResources()
+{
+	cout << "Available Wood: " << *RMWood << "| Available Stone: " << *RMStone << "| Available Sheep: " << *RMSheep << "| Available Grain: " << *RMGrain << endl;
+}
+
 
 GBMap::GBMap() {};
 GBMap::GBMap(int numPlayers) {
@@ -136,7 +141,10 @@ GBMap::GBMap(int numPlayers) {
 	loader.loadMap(numPlayers);
 	pgbA = new vector<vector<Node*>>;
 	*pgbA = loader.getMap();
-
+	RMWood = new int(0);
+	RMStone = new int(0);
+	RMSheep = new int(0);
+	RMGrain = new int(0);
 	cout << "Game Board created for " << numPlayers << " players." << endl;
 
 	//update_edge_all();
