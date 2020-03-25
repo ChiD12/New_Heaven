@@ -1,0 +1,5 @@
+.*/
+*.aps
+*.vcxproj
+*.vcxproj.*
+Debug/
