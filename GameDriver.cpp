@@ -8,7 +8,6 @@ using namespace std;
 
 int main() {
 
-	
 	gameStart();
 	bool gameEnd = false;
 	remainingTiles = 45; //Use this for testing for now.
@@ -47,19 +46,14 @@ int main() {
 			
 		} while (!validInput);
 
-		
-
 		cout << "and " << players[turn]->name << "'s village board is: " << endl;
 		players[turn]->player_board->PrintVillageBoard();
-
 
 		turnCounter++;
 		if (remainingTiles < 1) {
 			gameEnd = true;
 		}
 	}
-	
-
 }
 
 
@@ -73,11 +67,11 @@ void gameStart()
 
 	cout << "Great! You've chosen to play with " << numOfPlayers << " players." << endl;
 
-	gameBoard = new GBMap(numOfPlayers);
+	GBMap game_board = GBMap(numOfPlayers);
 
-	gameBoard->PrintBoard();
+	game_board.PrintBoard();
 
-	gameBoard->PrintResources();
+	game_board.PrintResources();
 
 	HarvestDeck harvest_deck = HarvestDeck();
 	BuildingDeck building_deck = BuildingDeck();
@@ -86,13 +80,13 @@ void gameStart()
 	int player_id;
 	int counter = 0;
 
-
 	while (counter < numOfPlayers) {
 		cout << "Enter the name of Player " << (counter + 1) << ": ";
 		cin >> player_name;
 		cout << "Enter the id of Player " << (counter + 1) << ": ";
 		cin >> player_id;
 		players[counter] = new Player(player_name, player_id, harvest_deck, building_deck);
+
 		counter++;
 	}
 }

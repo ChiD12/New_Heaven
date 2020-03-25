@@ -186,13 +186,11 @@ BuildingDeck::BuildingDeck() //FOREST, WHEATFIELD, MEADOW, QUARRY
 		}
 
 	}
-
-
 	cout << "A building deck has been created with " << this->building_deck->size() << " cards." << endl;
 }
 
-BuildingDeck::~BuildingDeck() {}
 
+BuildingDeck::~BuildingDeck(){}
 int BuildingDeck::GetCardCount() { return *this->building_card_count; }
 
 BuildingTile::BuildingTile()
@@ -208,10 +206,8 @@ BuildingTile::BuildingTile()
 	/*
 	int type_selector; //Will hold a random number which will correlate to an enum.
 	building_type random_type; //Will hold the building type which will be selected by type_selector and will be assigned to the building tile.
-
-
+	
 	 * This creates a new random seed using the system's clock which ensures that the numbers generated are more varied and random.
-
 
 	std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
 	auto duration = now.time_since_epoch();
@@ -244,9 +240,8 @@ BuildingTile::BuildingTile()
 	*/
 }
 
+ std::string typeToString(building_type type) { //added to make the longer parameterized constructor of BuildingTile more readable
 
-
-std::string typeToString(building_type type) { //added to make the longer parameterized constructor of BuildingTile more readable
 	switch (type) {
 	case FOREST:
 		return "FOREST";
@@ -267,6 +262,7 @@ std::string typeToString(building_type type) { //added to make the longer parame
 	default:;
 	}
 }
+
 BuildingTile::BuildingTile(building_type given_type, int given_value)
 {
 	bt_ptr = new building_type(given_type); //Set the type
@@ -310,7 +306,6 @@ BuildingTile::BuildingTile(int x, int y, bool valid) {
 		edge_list = new vector<BuildingTile*>(0);
 }
 
-
 BuildingTile::BuildingTile(int x, int y, bool valid, bool am_i_flipped, building_type given_type, int value) { //used for testing the VGMap's placeTile function
 	type_representation = new string(typeToString(given_type));
 	bt_ptr = new building_type(given_type);
@@ -326,7 +321,7 @@ BuildingTile::BuildingTile(int x, int y, bool valid, bool am_i_flipped, building
 }
 
 
-BuildingTile::BuildingTile(const BuildingTile& tile) {
+BuildingTile::BuildingTile(const BuildingTile& tile) { 
 	bt_ptr = new building_type(*tile.bt_ptr);
 	type_representation = new string(*tile.type_representation);
 	bv_ptr = new int(*tile.bv_ptr);
@@ -336,7 +331,6 @@ BuildingTile::BuildingTile(const BuildingTile& tile) {
 	valid = new bool(*tile.valid);
 	/*
 	edge_list = new vector<BuildingTile*>(tile.edge_list->size());
-
 	for (int i = 0; i < tile.edge_list->size(); i++)
 		edge_list->at(i) = new BuildingTile(*tile.edge_list->at(i));
 		*/
@@ -370,7 +364,6 @@ BuildingTile::~BuildingTile()
 	delete y_index;
 	delete flipped;
 	delete valid;
-
 	bv_ptr = nullptr;
 	bt_ptr = nullptr;
 	x_index = nullptr;
@@ -419,7 +412,7 @@ Node& Node::operator=(const Node& node) {
 void Node::setResourceType(const resource_type& res) {
 	*rt_ptr = res;
 
-	switch (res) {
+	switch (res) { 
 	case WOOD: *resource_rep = "[WOOD]";
 		break;
 	case GRAIN: *resource_rep = "[GRAIN]";

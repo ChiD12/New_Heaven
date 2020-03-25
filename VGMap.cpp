@@ -123,7 +123,8 @@ VGMap::VGMap(vector<vector<BuildingTile*>> map) { //constructor working with VGM
 
 VGMap::~VGMap() { //destructor
 	delete(height, width, score, forest_placed, wheatfield__placed, meadow_placed, quarry_placed);
-	for (size_t i = 0; i < map->size(); i++)
+
+	for(size_t i = 0; i < map->size(); i++)
 		map->at(i).clear();
 
 	delete map;
@@ -201,6 +202,7 @@ bool VGMap::placeTile(int x, int y, bool flipped, BuildingTile new_tile) { //met
 		return false;
 	}
 }
+
 int VGMap::calculateScore() {
 	int score = 0;
 	int i = 0;

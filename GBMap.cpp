@@ -47,6 +47,7 @@ bool GBMap::PlaceTile(HarvestTile* given_tile, int tlX, int tlY) {
 	if (tlX % 2 == 0 && tlY % 2 == 0
 		&& *((*(this->pgbA)).at(tlX).at(tlY))->valid 
 		&& *((*(this->pgbA)).at(tlX).at(tlY))->rt_ptr == resource_type::NO_RESOURCE) { //makes sure placement is not between tiles and is not already occupied
+
 		((*(this->pgbA)).at(tlX).at(tlY))->setResourceType(*given_tile->ul_ptr); //top left
 		((*(this->pgbA)).at(tlX + 1).at(tlY))->setResourceType(*given_tile->ur_ptr); //top right
 		((*(this->pgbA)).at(tlX).at(tlY + 1))->setResourceType(*given_tile->bl_ptr); //bot left
@@ -56,7 +57,7 @@ bool GBMap::PlaceTile(HarvestTile* given_tile, int tlX, int tlY) {
 	else {
 		cout << "Sorry, you can't do that! A tile must be placed in an even X,Y coordinate that is valid and not occupied!";
 		return false;
-	};
+	}
 };
 
 vector<int> GBMap::CalculateResources(int x, int y) {
@@ -139,7 +140,6 @@ void GBMap::PrintResources()
 
 GBMap::GBMap() {};
 GBMap::GBMap(int numPlayers) {
-
 	GBMapLoader loader;
 	loader.loadMap(numPlayers);
 	pgbA = new vector<vector<Node*>>;

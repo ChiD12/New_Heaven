@@ -14,7 +14,7 @@ using namespace std;
 
 class VGMapLoader {
 private:
-	vector<vector<BuildingTile*>>* map;
+	vector<vector<BuildingTile*>> *map;
 
 public:
 	/**

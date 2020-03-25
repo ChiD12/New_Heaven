@@ -13,8 +13,7 @@ using namespace std;
 
 class GBMapLoader {
 private:
-
-	vector<vector<Node*>>* map;
+	vector<vector<Node*>> *map;
 
 public:
 	/**

@@ -17,12 +17,11 @@ public:
 
 	bool PlaceTile(HarvestTile* given_tile, int tlX, int tlY);
 	vector<int> CalculateResources(int x, int y);
-	void PrintResources();
 
 	GBMap();
 	GBMap(int numPlayers);
 	~GBMap();
 
 	void PrintBoard();
-
+	void PrintResources();
 };

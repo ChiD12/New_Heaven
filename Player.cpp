@@ -4,7 +4,8 @@
 
 class GBMap;
 
-Player::Player(std::string given_name, int given_id, HarvestDeck given_hdeck, BuildingDeck given_bdeck) {
+
+Player::Player(std::string given_name, int given_id,  HarvestDeck given_hdeck, BuildingDeck given_bdeck) {
 	this->name = new string(given_name);
 	this->id = new int(given_id);
 
@@ -24,7 +25,6 @@ Player::Player(std::string given_name, int given_id, HarvestDeck given_hdeck, Bu
 	cout << "There are now " << given_bdeck.GetCardCount() << " cards left in the building deck." << endl;
 
 	cout << *this->name << " drew their starting cards" << endl;
-
 }
 
 Player::~Player()
@@ -102,5 +102,3 @@ void Player::PrintBuildingHand()
 		building_tile->PrintBuildingTile();
 	}
 }
-
-

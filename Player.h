@@ -19,20 +19,13 @@ using namespace std;
 
 class Player {
 public:
-
 	std::string* name;
-
 	vector<BuildingTile*>* building_hand; //The player's hand of buildings.
-
 	vector<HarvestTile*>* harvest_hand; //The player's hand of harvest tiles.
-
 	VGMap* player_board; //The player's village board.
-
-
 	int* id = new int(0); //TODO add id to constructors/destructors
 
 	Player(std::string name, int given_id, HarvestDeck given_hdeck, BuildingDeck given_bdeck);
-
 	~Player();
 
 	void exchange(GBMap* given_board, int given_x, int given_y); //Picks a point on the game board, calculates the resources, and then moves the resource markers on the game board.
