@@ -84,14 +84,27 @@ void Player::CalculateResources(GBMap* given_board, int tl_x, int tl_y)
 {
 	(*given_board).CalculateResources(tl_x, tl_y);
 }
-
+ 
 void Player::PrintHarvestHand()
 {
 	cout << "These are the harvest tiles I have: " << endl;
-	for (HarvestTile* harvest_tile : *harvest_hand)
-	{
-		harvest_tile->PrintHarvestTile();
+	int counter = 1;
+	for (HarvestTile* harvest_tile : *harvest_hand) {
+		cout << "   " << counter++ << "   ";
 	}
+	cout << endl;
+	for (HarvestTile* harvest_tile : *harvest_hand){
+		cout << *(harvest_tile->upper_left_str_ptr) << *(harvest_tile->upper_right_str_ptr) << "  ";
+		//harvest_tile->PrintHarvestTile();
+	}
+	cout << endl;
+	for (HarvestTile* harvest_tile : *harvest_hand) {
+		cout << *(harvest_tile->bottom_left_str_ptr) << *(harvest_tile->bottom_right_str_ptr) << "  ";
+		//harvest_tile->PrintHarvestTile();
+	}
+	cout << endl;
+
+
 }
 
 void Player::PrintBuildingHand()

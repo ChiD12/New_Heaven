@@ -16,37 +16,19 @@ int main() {
 
 	while (!gameEnd) {
 		int turn = turnCounter % numOfPlayers;
-		cout << "It is " << players[turn]->name << "'s turn" << endl;
+		cout << "It is " << *(players[turn]->name) << "'s turn" << endl;
 
 		
 		cout << "The current Board State is: " << endl;
 		gameBoard->PrintBoard();
+		cout << "You currently are holding these Harvest Tiles: " << endl;
+		players[turn]->PrintHarvestHand();
 
-		bool validInput = true;
-		int x;
-		int y;
-		do {
-			validInput = true;
-			cout << "please enter the coordinates of the top left of the Tile you wish to select in the form X,Y" << endl;
-			string playerChoice;
-			cin >> playerChoice;
-			if (playerChoice.size() < 3) {
-				validInput = false;
-				cout << "invalid input" << endl;
-			}
-			try {
-				int splitIndex = playerChoice.find(',');
-				x = stoi(playerChoice.substr(0, splitIndex));
-				y = stoi(playerChoice.substr(splitIndex, playerChoice.size()));
-			}
-			catch (invalid_argument const& e) {
-				validInput = false;
-				cout << "invalid input" << endl;
-			}
-			
-		} while (!validInput);
+		promptHarvestTilePlacement(turn);
+		
+		
 
-		cout << "and " << players[turn]->name << "'s village board is: " << endl;
+		cout << "and " << *(players[turn]->name) << "'s village board is: " << endl;
 		players[turn]->player_board->PrintVillageBoard();
 
 		turnCounter++;
@@ -67,14 +49,14 @@ void gameStart()
 
 	cout << "Great! You've chosen to play with " << numOfPlayers << " players." << endl;
 
-	GBMap game_board = GBMap(numOfPlayers);
+	gameBoard = new GBMap(numOfPlayers);
 
-	game_board.PrintBoard();
+	gameBoard->PrintBoard();
 
-	game_board.PrintResources();
+	gameBoard->PrintResources();
 
-	HarvestDeck harvest_deck = HarvestDeck();
-	BuildingDeck building_deck = BuildingDeck();
+	harvest_deck = HarvestDeck();
+	building_deck = BuildingDeck();
 
 	string player_name;
 	int player_id;
@@ -94,18 +76,18 @@ void gameStart()
 int findFirstPlayer() {
 	Player* min = players[0];
 	int minIndex = 0;
-	for (int i = 0; i < 4; i++) {
-		if ((players[i]->id) < (min->id)) {
+	for (int i = 0; i < numOfPlayers; i++) {
+		if (*(players[i]->id) < *(min->id)) {
 			min = players[i];
 			minIndex = i;
 		}
 	}
-	return 0;
+	return minIndex;
 }
 
 void promptHarvestTilePlacement(int index) {
-	players[index]->PrintHarvestHand();
-	gameBoard->PrintBoard();
+	//players[index]->PrintHarvestHand();
+	//gameBoard->PrintBoard();
 
 	string input;
 	bool validInput = false;

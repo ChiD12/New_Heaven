@@ -156,9 +156,9 @@ GBMap::GBMap(int numPlayers) {
 
 void GBMap::PrintBoard()
 {
-	for (int i = 0; i < pgbA[0].size(); i++)
+	for (int j = 0; j < pgbA[0].size(); j++)
 	{
-		for (int j = 0; j < pgbA->size(); j++)
+		for (int i = 0; i < pgbA->size(); i++)
 		{
 			if (*(*this->pgbA)[i][j]->valid) { cout << *(*this->pgbA)[i][j]->resource_rep; }
 			else cout << "[NULL]";

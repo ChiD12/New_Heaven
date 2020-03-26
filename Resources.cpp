@@ -29,16 +29,16 @@ HarvestTile::HarvestTile()
 
 		switch (resource_selector) { //Use our random number to select a resource.
 		case 1: random_resource = WOOD;
-			resource_string = "WOOD";
+			resource_string = "[W]";
 			break;
 		case 2: random_resource = GRAIN;
-			resource_string = "GRAIN";
+			resource_string = "[G]";
 			break;
 		case 3: random_resource = SHEEP;
-			resource_string = "SHEEP";
+			resource_string = "[S]";
 			break;
 		case 4: random_resource = STONE;
-			resource_string = "STONE";
+			resource_string = "[T]";
 			break;
 		}
 
@@ -380,7 +380,7 @@ Node::Node(int x, int y, bool is_valid)
 	y_index = new int(y);
 	valid = new bool(is_valid);
 	rt_ptr = new resource_type(NO_RESOURCE);
-	resource_rep = new string("[EMPTY]");
+	resource_rep = new string("[E]");
 	if (*valid)
 		edge_list = new vector<Node*>(4); // 0 is north, 1 is east, 2 is south, 3 is west
 	else
@@ -413,15 +413,15 @@ void Node::setResourceType(const resource_type& res) {
 	*rt_ptr = res;
 
 	switch (res) { 
-	case WOOD: *resource_rep = "[WOOD]";
+	case WOOD: *resource_rep = "[W]";
 		break;
-	case GRAIN: *resource_rep = "[GRAIN]";
+	case GRAIN: *resource_rep = "[G]";
 		break;
-	case SHEEP: *resource_rep = "[SHEEP]";
+	case SHEEP: *resource_rep = "[S]";
 		break;
-	case STONE: *resource_rep = "[STONE]";
+	case STONE: *resource_rep = "[T]";
 		break;
-	default: *resource_rep = "[EMPTY]";
+	default: *resource_rep = "[E]";
 	}
 }
 
