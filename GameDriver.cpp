@@ -9,6 +9,7 @@ using namespace std;
 int main() {
 
 	gameStart();
+	gameBoard->buildings->at(1)->PrintBuildingTile();
 	bool gameEnd = false;
 	remainingTiles = 45; //Use this for testing for now.
 
@@ -25,17 +26,41 @@ int main() {
 		players[turn]->PrintHarvestHand();
 
 		promptHarvestTilePlacement(turn);
-		
+		remainingTiles--;
 		
 
 		cout << "and " << *(players[turn]->name) << "'s village board is: " << endl;
 		players[turn]->player_board->PrintVillageBoard();
+
+		for (int i = 1; i < numOfPlayers; i++) {
+			int clockwisePlayers = (turn + i) % numOfPlayers;
+			gameBoard->PrintResources();
+			cout << *(players[clockwisePlayers]->name) << " do you wish to place a village tile with remaining resources? (y or n)" << endl;
+			string response;
+			cin >> response;
+			while (response.compare("y") == 0) {
+				//promtVillage building
+				gameBoard->PrintResources();
+				cout << *(players[clockwisePlayers]->name) << " do you wish to place a village tile with remaining resources? (y or n)" << endl;
+				cin >> response;
+			}
+		}
+
+		drawVillage(turn);
+
+		*(gameBoard->RMWood) = 0;
+		*(gameBoard->RMStone) = 0;
+		*(gameBoard->RMSheep) = 0;
+		*(gameBoard->RMGrain) = 0;
+			
+	
 
 		turnCounter++;
 		if (remainingTiles < 1) {
 			gameEnd = true;
 		}
 	}
+	
 }
 
 
@@ -50,13 +75,14 @@ void gameStart()
 	cout << "Great! You've chosen to play with " << numOfPlayers << " players." << endl;
 
 	gameBoard = new GBMap(numOfPlayers);
-
 	gameBoard->PrintBoard();
-
 	gameBoard->PrintResources();
-
 	harvest_deck = HarvestDeck();
 	building_deck = BuildingDeck();
+
+	for (int i = 0; i < gameBoard->buildings->size(); i++) {
+		gameBoard->buildings->at(i) = building_deck.DrawBuildingTile();
+	}
 
 	string player_name;
 	int player_id;
@@ -83,6 +109,69 @@ int findFirstPlayer() {
 		}
 	}
 	return minIndex;
+}
+
+void drawVillage(int turn) {
+	int drawCounter = 0;
+	gameBoard->PrintResources();
+	if (*(gameBoard->RMWood) == 0)
+		drawCounter++;
+	if (*(gameBoard->RMStone) == 0)
+		drawCounter++;
+	if (*(gameBoard->RMSheep) == 0)
+		drawCounter++;
+	if (*(gameBoard->RMGrain) == 0)
+		drawCounter++;
+
+	bool empty[6] = { false, false, false, false, false, false};
+	bool invalidResponse =true;
+	for (int i = 0; i < drawCounter; i++) {
+		do { 
+			cout << "The village tiles present on the board are: " << endl;
+			gameBoard->printVillageTiles();
+			cout << endl;
+			cout << "enter the number of which building you wish to draw or d to draw from the deck (1-6 or d)" << endl;
+			string response;
+			cin >> response;
+
+			if (response.length() == 1) {
+				if (std::all_of(response.begin(), response.end(), ::isdigit)) {
+					int x = stoi(response);
+					if (x > 0 && x < 7) {
+						if (!empty[x-1]) { //if that spot on the board is not empty
+							players[turn]->building_hand->push_back(gameBoard->buildings->at(x - 1));
+							gameBoard->buildings->at(x - 1) = NULL;
+							empty[x-1] = true;
+							invalidResponse = false;
+						}
+						else {
+							cout << "that building spot is empty" << endl;
+						}
+					}
+					else {
+						cout << "invalid index" << endl;
+					}
+				}
+				else if (response.compare("d") == 0 && i != 0) { //if player chooses to draw from deck if not on first draw
+					players[turn]->DrawBuilding(1, building_deck);
+					invalidResponse = false;
+				}
+				else {
+					cout << "the first village drawn must be from the board" << endl;
+				}
+			}
+			else {
+				cout << "invalid entry" << endl;
+			}
+		} while (invalidResponse);
+	}
+	
+	for (int i = 0; i < 6; i++) { //refill any empty building spots on map
+		if (empty[i] == true) {
+			gameBoard->buildings->at(i) = building_deck.DrawBuildingTile();;
+		}
+	}
+
 }
 
 void promptHarvestTilePlacement(int index) {
@@ -124,7 +213,7 @@ void promptHarvestTilePlacement(int index) {
 								// 7) validate the y coordinate chosen fits in range
 								if (y < gameBoard->pgbA->size()) {
 									// DONE!
-									validInput = players[index]->PlaceHarvestTile(gameBoard, players[index]->harvest_hand->at(harvestTileIndex-1), x, y);
+									validInput = players[index]->PlaceHarvestTile(gameBoard, players[index]->harvest_hand->at(harvestTileIndex-1), x, y, (harvestTileIndex - 1));
 								}
 							}
 						}

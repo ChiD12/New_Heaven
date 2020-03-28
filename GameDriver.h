@@ -15,6 +15,7 @@ BuildingDeck building_deck;
 
 void gameStart();
 int findFirstPlayer();
+void drawVillage(int turn);
 void promptHarvestTilePlacement(int index);
 void promptBuildingTilePlacement(int index);
 void computeGameScore();

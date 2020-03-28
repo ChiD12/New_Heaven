@@ -42,9 +42,10 @@ void Player::exchange(GBMap* given_board, int given_x, int given_y)
 	given_board->PrintResources();
 }
 
-bool Player::PlaceHarvestTile(GBMap* given_board, HarvestTile* given_tile, int tl_x, int tl_y)
+bool Player::PlaceHarvestTile(GBMap* given_board, HarvestTile* given_tile, int tl_x, int tl_y, int handIndex)
 {
 	if ((*given_board).PlaceTile(given_tile, tl_x, tl_y)) { //If the tile has been placed successfully.
+		(*harvest_hand).erase((*harvest_hand).begin() + handIndex);
 		this->CalculateResources(given_board, tl_x, tl_y); //Calculate the resources we just got.
 		return true;
 	}

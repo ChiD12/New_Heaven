@@ -353,7 +353,7 @@ BuildingTile& BuildingTile::operator=(const BuildingTile& tile) {
 
 void BuildingTile::PrintBuildingTile()
 {
-	cout << "This is a " << *this->type_representation << " tile with a value of " << *bv_ptr << ". " << endl;
+	cout << "[" << *this->type_representation << "][" << *bv_ptr << "]";
 }
 
 

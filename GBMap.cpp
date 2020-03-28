@@ -132,8 +132,7 @@ vector<int> GBMap::CalculateResources(int x, int y) {
 	return *resources;
 }
 
-void GBMap::PrintResources()
-{
+void GBMap::PrintResources(){
 	cout << "Available Wood: " << *RMWood << "| Available Stone: " << *RMStone << "| Available Sheep: " << *RMSheep << "| Available Grain: " << *RMGrain << endl;
 }
 
@@ -149,23 +148,33 @@ GBMap::GBMap(int numPlayers) {
 	RMSheep = new int(0);
 	RMGrain = new int(0);
 	cout << "Game Board created for " << numPlayers << " players." << endl;
+	buildings = new vector<BuildingTile*>(6);
 
+	
 	//update_edge_all();
 }
 
 
-void GBMap::PrintBoard()
-{
-	for (int j = 0; j < pgbA[0].size(); j++)
-	{
-		for (int i = 0; i < pgbA->size(); i++)
-		{
+void GBMap::PrintBoard(){
+	for (int j = 0; j < pgbA[0].size(); j++){
+		for (int i = 0; i < pgbA->size(); i++){
 			if (*(*this->pgbA)[i][j]->valid) { cout << *(*this->pgbA)[i][j]->resource_rep; }
-			else cout << "[NULL]";
-
+			else cout << "[N]";
 		}
 		cout << endl;
 	}
+}
+
+void GBMap::printVillageTiles() {
+	for (int i = 0; i < buildings->size(); i++) {
+		cout << (i + 1) << ":"; 
+		if(buildings->at(i) != NULL)
+			buildings->at(i)->PrintBuildingTile();
+		else 
+			cout << "[EMPTY]";
+		cout << " ";
+	}
+	cout << endl;
 }
 
 GBMap::~GBMap() {

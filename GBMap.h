@@ -8,10 +8,12 @@ class GBMap {
 public:
 
 	vector<vector<Node*>>* pgbA;
+
 	int* RMWood;
 	int* RMStone;
 	int* RMSheep;
 	int* RMGrain;
+	vector<BuildingTile*> *buildings;
 
 	void update_edge_all();
 
@@ -24,4 +26,5 @@ public:
 
 	void PrintBoard();
 	void PrintResources();
+	void printVillageTiles();
 };
