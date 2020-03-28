@@ -93,7 +93,9 @@ void gameStart()
 
 	gameBoard = new GBMap(numOfPlayers);
 	harvest_deck = HarvestDeck();
+	cout << "A harvest deck has been created with " << harvest_deck.GetCardCount() << " cards." << endl;
 	building_deck = BuildingDeck();
+	cout << "A building deck has been created with " << building_deck.GetCardCount() << " cards." << endl;
 
 	for (int i = 0; i < gameBoard->buildings->size(); i++) {
 		gameBoard->buildings->at(i) = building_deck.DrawBuildingTile();

@@ -33,20 +33,25 @@ public:
 	string* bottom_right_str_ptr;
 
 	HarvestTile();
+	HarvestTile(bool given_bool);
+	HarvestTile(int ul, int ur, int bl, int br);
+	HarvestTile(const HarvestTile&);
+	HarvestTile& operator=(const HarvestTile& given_tile);
 	~HarvestTile();
 
 	void RotateTileRight();
 	void RotateTileLeft();
 
 	void PrintHarvestTile();
+	
 
 };
 
 
 class HarvestDeck {
 private:
-	int harvest_card_count;
-	int* hcc_ptr = &harvest_card_count;
+	int* harvest_card_count;
+	vector<HarvestTile>* harvest_deck;
 
 public:
 	HarvestDeck();
