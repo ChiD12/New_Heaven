@@ -22,7 +22,7 @@ int main() {
 		cout << "*************************************************************"<< endl;
 		cout << "It is **" << *(players[turn]->name) << "'s** turn" << endl;
 
-		
+		//print outs to place harvest tile
 		cout << "The current Board State is: " << endl;
 		gameBoard->PrintBoard();
 		cout << endl;
@@ -38,9 +38,12 @@ int main() {
 		cout << endl;
 		
 
-		//allow other players to use up rest of resources
+		//begin the loop for players to place their village tiles, frst the current turn player gets to place as many tiles as they want
+		//then the rest of the players gets a turn to try to use the remaining resources to play as many village tiles as they wish
 		for (int i = 0; i < numOfPlayers; i++) {
 			int clockwisePlayers = (turn + i) % numOfPlayers;
+			
+			//Printouts for information about current game state
 			cout << "**************************************************************" << endl;
 			cout << "and **" << *(players[clockwisePlayers]->name) << "'s** village board is: " << endl;
 			players[clockwisePlayers]->player_board->PrintVillageBoard();
@@ -50,13 +53,15 @@ int main() {
 			cout << "**"<< *(players[clockwisePlayers]->name) << "** do you wish to place a village tile with remaining resources? (y or n)";
 			string response;
 			cin >> response;
+
+			//if current player wishes to build, then promt them for where, and thenreprint the board and ask if they wish to build again
+			//if not then next player gets a turn to build
 			while (response.compare("y") == 0) {
 				promptBuildingTilePlacement(clockwisePlayers);
 				
 				players[clockwisePlayers]->player_board->PrintVillageBoard();
 				gameBoard->PrintResources();
 				players[clockwisePlayers]->PrintBuildingHand();
-
 				cout <<  "**" <<*(players[clockwisePlayers]->name) << "** do you wish to place a village tile with remaining resources? (y or n)" << endl;
 				cin >> response;
 			}
@@ -70,25 +75,19 @@ int main() {
 		*(gameBoard->RMSheep) = 0;
 		*(gameBoard->RMGrain) = 0;
 			
-	
-
 		turnCounter++;
 		if (remainingTiles < 1) {
 			gameEnd = true;
 		}
 	}
-	
 }
 
 
-void gameStart()
-{
+void gameStart(){
+
 	cout << "Starting game!" << endl;
-
 	cout << "How many people will be playing today?: ";
-
 	cin >> numOfPlayers;
-
 	cout << "Great! You've chosen to play with " << numOfPlayers << " players." << endl;
 
 	gameBoard = new GBMap(numOfPlayers);
@@ -135,6 +134,8 @@ void drawVillage(int turn) {
 	cout << "**" << *(players[turn]->name) << "**" << endl;
 	int drawCounter = 0;
 	gameBoard->PrintResources();
+
+	//checks how many resources are at 0 to see how many new village tiles may be drawn
 	if (*(gameBoard->RMWood) == 0)
 		drawCounter++;
 	if (*(gameBoard->RMStone) == 0)
@@ -149,6 +150,7 @@ void drawVillage(int turn) {
 	for (int i = 0; i < drawCounter; i++) {
 		do { 
 			invalidResponse = true;
+
 			cout << endl;
 			cout << "The village tiles present on the board are: " << endl;
 			gameBoard->printVillageTiles();
