@@ -111,8 +111,10 @@ void Player::PrintHarvestHand()
 void Player::PrintBuildingHand()
 {
 	cout << "These are the building tiles I have: " << endl;
-	for (BuildingTile* building_tile : *building_hand)
-	{
-		building_tile->PrintBuildingTile();
+	for (int i = 0; i < building_hand->size(); i++) {
+		cout << (i + 1) << ":";
+		building_hand->at(i)->PrintBuildingTile();
+		cout << "  ";
 	}
+	cout << endl;
 }

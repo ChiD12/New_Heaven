@@ -163,9 +163,12 @@ void GBMap::PrintBoard(){
 		}
 		cout << endl;
 	}
+	PrintResources();
+	printVillageTiles();
 }
 
 void GBMap::printVillageTiles() {
+	cout << "Tiles On Board: ";
 	for (int i = 0; i < buildings->size(); i++) {
 		cout << (i + 1) << ":"; 
 		if(buildings->at(i) != NULL)
