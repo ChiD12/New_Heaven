@@ -14,17 +14,19 @@ Player::Player(std::string given_name, int given_id,  HarvestDeck given_hdeck, B
 
 	player_board = new VGMap();
 
-	cout << "I'm going to draw my cards" << endl;
+	cout << *this->name << " is going to draw their starting tiles!" << endl;
 
 	this->DrawHarvestTile(2, given_hdeck);
 
-	cout << "I've drawn my harvest tiles and will now draw my building tiles.." << endl;
+
+
+	cout << *this->name << " has drawn their harvest tiles and will now draw their building tiles.." << endl;
 
 	this->DrawBuilding(6, given_bdeck);
 
-	cout << "There are now " << given_bdeck.GetCardCount() << " cards left in the building deck." << endl;
 
-	cout << *this->name << " drew their starting cards" << endl;
+
+	cout << *this->name << " drew their starting tiles" << endl;
 }
 
 Player::~Player()
@@ -55,20 +57,21 @@ bool Player::PlaceHarvestTile(GBMap* given_board, HarvestTile* given_tile, int t
 void Player::DrawBuilding(int number_of_cards, BuildingDeck given_deck)
 {
 	for (int i = 0; i < number_of_cards; i++) {
+		cout << *this->name << " is drawing a building tile!" << endl;
 		this->building_hand->push_back(given_deck.DrawBuildingTile()); //Draw a building tile from the "deck" and add it to the hand vector. Do this for as many cards are requested.
-		cout << "I've drawn building card " << i << "." << endl;
+		
 	}
-	cout << "I've finished drawing my building tiles" << endl;
 }
 
 void Player::DrawHarvestTile(int number_of_cards, HarvestDeck given_deck)
 {
 
 	for (int i = 0; i < number_of_cards; i++) {
+		cout << *this->name << " is drawing a harvest tile!" << endl;
 		this->harvest_hand->push_back(given_deck.DrawHarvestTile()); //Draw a building tile from the "deck" and add it to the hand vector. Do this for as many cards are requested.
-		cout << "I've drawn harvest card " << i << "." << endl;
+		
 	}
-	cout << "I've finished drawing my harvest tiles" << endl;
+	
 }
 
 void Player::ResourceTracker()
