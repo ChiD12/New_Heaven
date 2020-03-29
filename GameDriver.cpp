@@ -80,6 +80,7 @@ int main() {
 			gameEnd = true;
 		}
 	}
+	computeGameScore();
 }
 
 
