@@ -30,7 +30,7 @@ public:
 
 	void exchange(GBMap* given_board, int given_x, int given_y); //Picks a point on the game board, calculates the resources, and then moves the resource markers on the game board.
 
-	bool PlaceHarvestTile(GBMap* given_board, HarvestTile* given_tile, int tl_x, int tl_y); //Given a game board and tile (pointer), place that tile onto the game board and calculate the resources acquired.
+	bool PlaceHarvestTile(GBMap* given_board, HarvestTile* given_tile, int tl_x, int tl_y, int handIndex); //Given a game board and tile (pointer), place that tile onto the game board and calculate the resources acquired.
 
 	void DrawBuilding(int number_of_cards, BuildingDeck given_deck); //Draw a building tile from the deck and add it to the hand vector.
 

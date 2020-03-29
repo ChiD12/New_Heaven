@@ -3,9 +3,40 @@
 #include <iostream>
 #include <chrono>
 #include <ctime>
+HarvestTile::HarvestTile() {
+	ul_ptr = new resource_type(NO_RESOURCE);
+	ur_ptr = new resource_type(NO_RESOURCE);
+	bl_ptr = new resource_type(NO_RESOURCE);
+	br_ptr = new resource_type(NO_RESOURCE);
 
+	upper_left_str_ptr = new string("[E]");
+	upper_right_str_ptr = new string("[E]");
+	bottom_left_str_ptr = new string("[E]");
+	bottom_right_str_ptr = new string("[E]");
+}
 
-HarvestTile::HarvestTile()
+string typeToString(resource_type given_type) {
+	switch (given_type) {
+	case WOOD:
+		return "[W]";
+		break;
+	case GRAIN:
+		return "[G]";
+		break;
+	case SHEEP:
+		return "[S]";
+		break;
+	case STONE:
+		return "[T]";
+		break;
+	default:
+		return "[E]";
+		break;
+	}
+	
+}
+
+HarvestTile::HarvestTile(bool given_bool)
 {
 
 	int resource_selector; //Will hold a random number which will correlate to an enum.
@@ -64,6 +95,52 @@ HarvestTile::HarvestTile()
 
 }
 
+HarvestTile::HarvestTile(int ul, int ur, int bl, int br)
+{
+	resource_type first = static_cast<resource_type>(ul);
+	resource_type second = static_cast<resource_type>(ur);
+	resource_type third = static_cast<resource_type>(bl);
+	resource_type fourth = static_cast<resource_type>(br);
+
+	ul_ptr = new resource_type(first);
+	ur_ptr = new resource_type(second);
+	bl_ptr = new resource_type(third);
+	br_ptr = new resource_type(fourth);
+
+	upper_left_str_ptr = new string(typeToString(first));
+	upper_right_str_ptr = new string(typeToString(second));
+	bottom_left_str_ptr = new string(typeToString(third));
+	bottom_right_str_ptr = new string(typeToString(fourth));
+}
+
+HarvestTile::HarvestTile(const HarvestTile &given_tile)
+{
+	ul_ptr = new resource_type(*given_tile.ul_ptr);
+	ur_ptr = new resource_type(*given_tile.ur_ptr);
+	bl_ptr = new resource_type(*given_tile.bl_ptr);
+	br_ptr = new resource_type(*given_tile.br_ptr);
+
+	upper_left_str_ptr = new string(*given_tile.upper_left_str_ptr);
+	upper_right_str_ptr = new string(*given_tile.upper_right_str_ptr);
+	bottom_left_str_ptr = new string(*given_tile.bottom_left_str_ptr);
+	bottom_right_str_ptr = new string(*given_tile.bottom_right_str_ptr);
+}
+
+HarvestTile & HarvestTile::operator=(const HarvestTile & given_tile)
+{
+	ul_ptr = new resource_type(*given_tile.ul_ptr);
+	ur_ptr = new resource_type(*given_tile.ur_ptr);
+	bl_ptr = new resource_type(*given_tile.bl_ptr);
+	br_ptr = new resource_type(*given_tile.br_ptr);
+
+	upper_left_str_ptr = new string(*given_tile.upper_left_str_ptr);
+	upper_right_str_ptr = new string(*given_tile.upper_right_str_ptr);
+	bottom_left_str_ptr = new string(*given_tile.bottom_left_str_ptr);
+	bottom_right_str_ptr = new string(*given_tile.bottom_right_str_ptr);
+
+	return *this;
+}
+
 HarvestTile::~HarvestTile()
 {
 	delete ul_ptr;
@@ -110,30 +187,96 @@ void HarvestTile::PrintHarvestTile()
 	cout << "The resources in this tile are as follows: " << *this->upper_left_str_ptr << ", " << *this->upper_right_str_ptr << ", " << *this->bottom_left_str_ptr << ", " << *this->bottom_right_str_ptr << endl;
 }
 
+
+
 HarvestDeck::HarvestDeck()
 {
-	harvest_card_count = 60;
-	hcc_ptr = &harvest_card_count;
+	harvest_card_count = new int(60);
+	harvest_deck = new vector<HarvestTile>(60);
+	harvest_deck->at(0) = HarvestTile(3, 1, 0, 0);
+	harvest_deck->at(1) = HarvestTile(1, 3, 1, 1);
+	harvest_deck->at(2) = HarvestTile(2, 0, 0, 2);
+	harvest_deck->at(3) = HarvestTile(3, 0, 0, 3);
+	harvest_deck->at(4) = HarvestTile(0, 2, 3, 0);
+	harvest_deck->at(5) = HarvestTile(3, 0, 1, 2);
+	harvest_deck->at(6) = HarvestTile(2, 2, 1, 0);
+	harvest_deck->at(7) = HarvestTile(3, 2, 0, 1);
+	harvest_deck->at(8) = HarvestTile(3, 2, 0, 3);
+	harvest_deck->at(9) = HarvestTile(0, 2, 1, 3);
+	harvest_deck->at(10) = HarvestTile(0, 0, 0, 0);
+	harvest_deck->at(11) = HarvestTile(2, 1, 3, 3);
+	harvest_deck->at(12) = HarvestTile(1, 3, 2, 3);
+	harvest_deck->at(13) = HarvestTile(0, 2, 1, 2);
+	harvest_deck->at(14) = HarvestTile(3, 1, 0, 1);
+	harvest_deck->at(15) = HarvestTile(0, 0, 2, 0);
+	harvest_deck->at(16) = HarvestTile(1, 1, 3, 0);
+	harvest_deck->at(17) = HarvestTile(3, 2, 1, 2);
+	harvest_deck->at(18) = HarvestTile(3, 1, 3, 3);
+	harvest_deck->at(19) = HarvestTile(0, 3, 1, 2);
+	harvest_deck->at(20) = HarvestTile(2, 0, 2, 1);
+	harvest_deck->at(21) = HarvestTile(2, 3, 2, 3);
+	harvest_deck->at(22) = HarvestTile(0, 0, 2, 0);
+	harvest_deck->at(23) = HarvestTile(2, 1, 3, 1);
+	harvest_deck->at(24) = HarvestTile(3, 3, 2, 2);
+	harvest_deck->at(25) = HarvestTile(3, 3, 0, 0);
+	harvest_deck->at(26) = HarvestTile(1, 2, 2, 3);
+	harvest_deck->at(27) = HarvestTile(3, 1, 2, 1);
+	harvest_deck->at(28) = HarvestTile(0, 1, 1, 1);
+	harvest_deck->at(29) = HarvestTile(2, 3, 0, 0);
+	harvest_deck->at(30) = HarvestTile(1, 2, 2, 2);
+	harvest_deck->at(31) = HarvestTile(2, 1, 0, 1);
+	harvest_deck->at(32) = HarvestTile(0, 2, 3, 3);
+	harvest_deck->at(33) = HarvestTile(2, 1, 1, 0);
+	harvest_deck->at(34) = HarvestTile(1, 1, 1, 2);
+	harvest_deck->at(35) = HarvestTile(2, 2, 1, 0);
+	harvest_deck->at(36) = HarvestTile(3, 0, 2, 0);
+	harvest_deck->at(37) = HarvestTile(3, 1, 1, 0);
+	harvest_deck->at(38) = HarvestTile(1, 0, 2, 2);
+	harvest_deck->at(39) = HarvestTile(2, 1, 3, 2);
+	harvest_deck->at(40) = HarvestTile(1, 1, 1, 0);
+	harvest_deck->at(41) = HarvestTile(1, 0, 3, 0);
+	harvest_deck->at(42) = HarvestTile(1, 0, 0, 2);
+	harvest_deck->at(43) = HarvestTile(3, 2, 2, 3);
+	harvest_deck->at(44) = HarvestTile(2, 3, 0, 3);
+	harvest_deck->at(45) = HarvestTile(3, 3, 2, 3);
+	harvest_deck->at(46) = HarvestTile(3, 3, 1, 1);
+	harvest_deck->at(47) = HarvestTile(2, 1, 1, 0);
+	harvest_deck->at(48) = HarvestTile(2, 2, 1, 3);
+	harvest_deck->at(49) = HarvestTile(3, 0, 0, 3);
+	harvest_deck->at(50) = HarvestTile(1, 2, 1, 3);
+	harvest_deck->at(51) = HarvestTile(1, 2, 3, 3);
+	harvest_deck->at(52) = HarvestTile(0, 2, 3, 2);
+	harvest_deck->at(53) = HarvestTile(0, 1, 0, 0);
+	harvest_deck->at(54) = HarvestTile(1, 2, 1, 3);
+	harvest_deck->at(55) = HarvestTile(3, 2, 3, 2);
+	harvest_deck->at(56) = HarvestTile(0, 2, 0, 1);
+	harvest_deck->at(57) = HarvestTile(3, 3, 1, 0);
+	harvest_deck->at(58) = HarvestTile(2, 1, 1, 2);
+	harvest_deck->at(59) = HarvestTile(1, 0, 2, 3);
+	
+	
 }
 
 HarvestDeck::~HarvestDeck() {}
 
 int HarvestDeck::GetCardCount()
 {
-	return *this->hcc_ptr;
+	return *this->harvest_card_count;
 }
 
 HarvestTile* HarvestDeck::DrawHarvestTile()
 {
 
-	if (*hcc_ptr < 1) {
-		cout << "There are no more cards!";
+	if (*harvest_card_count < 1) {
+		cout << "There are no more tiles!";
 	}
 
 	else {
 
-		(*hcc_ptr)--;
-		HarvestTile* to_return = new HarvestTile();
+		(*harvest_card_count)--;
+		HarvestTile* to_return = new HarvestTile(harvest_deck->back());
+		harvest_deck->pop_back();
+		cout << "There are now " << this->GetCardCount() << " tiles left in the harvest deck." << endl;
 		return to_return;
 	}
 
@@ -186,7 +329,7 @@ BuildingDeck::BuildingDeck() //FOREST, WHEATFIELD, MEADOW, QUARRY
 		}
 
 	}
-	cout << "A building deck has been created with " << this->building_deck->size() << " cards." << endl;
+	
 }
 
 
@@ -279,7 +422,7 @@ BuildingTile* BuildingDeck::DrawBuildingTile()
 {
 
 	if (*building_card_count < 1) {
-		cout << "There are no more cards!";
+		cout << "There are no more tiles!";
 		return nullptr;
 	}
 
@@ -287,6 +430,7 @@ BuildingTile* BuildingDeck::DrawBuildingTile()
 		(*building_card_count)--;
 		BuildingTile* return_me = new BuildingTile(building_deck->back());
 		building_deck->pop_back();
+		cout << "There are now " << this->GetCardCount() << " tiles left in the building deck." << endl;
 		return return_me;
 	}
 }
@@ -353,7 +497,7 @@ BuildingTile& BuildingTile::operator=(const BuildingTile& tile) {
 
 void BuildingTile::PrintBuildingTile()
 {
-	cout << "This is a " << *this->type_representation << " tile with a value of " << *bv_ptr << ". " << endl;
+	cout << "[" << *this->type_representation << "][" << *bv_ptr << "]";
 }
 
 

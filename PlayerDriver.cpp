@@ -9,15 +9,12 @@ int main() {
 
 	BuildingDeck building_deck = BuildingDeck();
 
-	cout << "building deck created with " << building_deck.GetCardCount() << " cards." << endl;
 
 	HarvestDeck harvest_deck = HarvestDeck();
 
-	cout << "harvest deck created with " << harvest_deck.GetCardCount() << " cards." << endl;
 
 	Player richard_ham = Player("Richard", 93500, harvest_deck, building_deck);
 
-	cout << "player created" << endl;
 
 	richard_ham.PrintHarvestHand();
 	richard_ham.PrintBuildingHand();
