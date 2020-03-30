@@ -134,7 +134,8 @@ VGMap::~VGMap() { //destructor
 	//}
 }
 
-bool VGMap::placeTile(int x, int y, bool flipped, BuildingTile new_tile) { //method to place building, check for coordinate validity, score requirement and presence of adjacent same-typed building tile (if necessary)
+bool VGMap::placeTile(int x, int y1, bool flipped, BuildingTile new_tile) { //method to place building, check for coordinate validity, score requirement and presence of adjacent same-typed building tile (if necessary)
+	int y = 6 - y1;
 	if (x < *width && x >= 0 && y < *height && y >= 0
 		&& *(*map)[x][y]->bt_ptr == NO_BUILDING
 		&& (*new_tile.bv_ptr == *height - y || flipped == true)) {

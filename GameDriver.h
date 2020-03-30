@@ -31,3 +31,5 @@ void promptHarvestTilePlacement(int index);
 void promptBuildingTilePlacement(int index);
 
 void computeGameScore();
+
+void displayWinner(vector<Player*>);

@@ -80,6 +80,7 @@ int main() {
 			gameEnd = true;
 		}
 	}
+	computeGameScore();
 }
 
 
@@ -388,3 +389,95 @@ void promptBuildingTilePlacement(int index) {
 	} while (!validInput);
 
 };
+
+void computeGameScore() {
+	vector<Player*> player_list;
+	for (size_t i = 0; i < numOfPlayers; i++) {
+		player_list.push_back(players[i]);
+	}
+
+	int hiscore = 0; //find player with highest score and store any player with same score in a vector, can probably have this as a method tha return a vector of *Players and accept a vector of *Players to avoid redundancy
+	vector<int> player_scores;
+
+	for (size_t i = 0; i < player_list.size(); i++) {
+		int score = (*(player_list)[i]->player_board).calculateScore();
+		player_scores.push_back(score);
+		if (score > hiscore) {
+			hiscore = score;
+		}
+	}
+
+	vector<Player*> hiscore_player_list;
+	for (size_t i = 0; i < player_scores.size(); i++) {
+		if (hiscore == player_scores[i]) {
+			hiscore_player_list.push_back(player_list[i]);
+		}
+	}
+
+	if (hiscore_player_list.size()>1) {
+
+		int most_filled = 0; //find player with the most filled village and store any player with same placed buildingTile number in a vector
+		vector<int> player_VGtiles;
+
+		for (size_t i = 0; i < hiscore_player_list.size(); i++) {
+			int filled_tiles = 0;
+			VGMap& temp_village_board = *(players[i]->player_board);
+			for (size_t j = 0; j < temp_village_board.map->size(); j++) {
+				for (size_t k = 0; k < (*temp_village_board.map)[0].size(); k++) {
+					if (*((*temp_village_board.map)[j][k]->bt_ptr) != NO_BUILDING) {
+						filled_tiles++;
+					}
+				}
+			}
+			player_VGtiles.push_back(filled_tiles);
+			if (filled_tiles > most_filled) {
+				most_filled = filled_tiles;
+			}
+		}
+
+		vector<Player*> most_village_players;
+		for (size_t i = 0; i < player_VGtiles.size(); i++) {
+			if (player_VGtiles[i] == most_filled) {
+				most_village_players.push_back(hiscore_player_list[i]);
+			}
+		}
+
+		if (most_village_players.size() > 1 ) {
+			
+			int least_VGhand = most_village_players[0]->building_hand->size(); // find player with least buildingTiles on hand, store any player with equal number of buildingTiles in a vector
+
+			vector<int> player_VGhand;
+			for (size_t i = 0; i < most_village_players.size(); i++) {
+				int VGhand_size = most_village_players[i]->building_hand->size();
+				player_VGhand.push_back(VGhand_size);
+				if (VGhand_size < least_VGhand) {
+					least_VGhand = VGhand_size;
+				}
+			}
+
+			vector<Player*> least_VGhand_players;
+			for (size_t i = 0; i < player_VGhand.size(); i++) {
+				if (player_VGhand[i] == least_VGhand) {
+					least_VGhand_players.push_back(most_village_players[i]);
+				}
+			}
+			
+			displayWinner(least_VGhand_players);//print winner with least village on hands
+			return;
+		}
+
+		displayWinner(most_village_players);//print winner with most filled village
+		return;
+	}
+
+	displayWinner(hiscore_player_list);	//prrint winner with highest score
+	return;
+}
+
+void displayWinner(vector<Player*> winners) {
+	cout << "\nGame finished:\n";
+	for (Player* winner: winners) {
+		cout << "Winner: "<<*(winner->name) << " Score: " << (*winner->player_board).calculateScore() << endl;
+	}
+	return;
+}
