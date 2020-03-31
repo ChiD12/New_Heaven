@@ -181,14 +181,19 @@ void GBMap::printVillageTiles() {
 }
 
 GBMap::~GBMap() {
-	//delete(xSize, ySize);
+	for (int i = 0; i < pgbA->size(); i++) {
+		pgbA->at(i).clear();
+	}
 
-	// for (size_t i = 0; i < (*pgbA).size(); i++){
-	//     for (size_t j = 0; j < (*pgbA)[i].size(); j++){
-	//         delete (*pgbA).at(i).at(j);
-	//         (*pgbA).at(i).at(j) = NULL;   
-	//     }
-	// }
-	pgbA->clear();
+	buildings->clear();
+	
+	delete RMWood;
+	delete RMStone;
+	delete RMSheep;
+	delete RMGrain;
 
+	RMWood = NULL;
+	RMStone = NULL;
+	RMSheep = NULL;
+	RMGrain = NULL;
 }

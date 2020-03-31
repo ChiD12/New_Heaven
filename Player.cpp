@@ -33,8 +33,13 @@ Player::~Player()
 {
 	delete id;
 	delete name;
+	delete player_board;
 	id = nullptr;
 	name = nullptr;
+	player_board = nullptr;
+
+	building_hand->clear();
+	harvest_hand->clear();
 }
 
 void Player::exchange(GBMap* given_board, int given_x, int given_y)

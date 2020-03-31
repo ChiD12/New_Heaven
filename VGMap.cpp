@@ -129,9 +129,14 @@ VGMap::~VGMap() { //destructor
 
 	delete map;
 	map = nullptr;
-	//for (BuildingTile* tile : *invalid_tiles) { //work around for double deletion problem
-	//	delete(tile);
-	//}
+	
+	width = NULL;
+	height = NULL;
+	score = NULL;
+	forest_placed = NULL;
+	wheatfield__placed = NULL;
+	meadow_placed = NULL;
+	quarry_placed = NULL;
 }
 
 bool VGMap::placeTile(int x, int y1, bool flipped, BuildingTile new_tile) { //method to place building, check for coordinate validity, score requirement and presence of adjacent same-typed building tile (if necessary)

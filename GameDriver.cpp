@@ -68,6 +68,7 @@ int main() {
 		}
 
 		drawVillage(turn);
+		players[turn]->DrawHarvestTile(1, harvest_deck);
 
 		//reset resources on the board
 		*(gameBoard->RMWood) = 0;
