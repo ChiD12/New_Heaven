@@ -140,10 +140,10 @@ VGMap::~VGMap() { //destructor
 }
 
 bool VGMap::placeTile(int x, int y1, bool flipped, BuildingTile new_tile) { //method to place building, check for coordinate validity, score requirement and presence of adjacent same-typed building tile (if necessary)
-	int y = 6 - y1;
+	int y = 5 - y1;
 	if (x < *width && x >= 0 && y < *height && y >= 0
 		&& *(*map)[x][y]->bt_ptr == NO_BUILDING
-		&& (*new_tile.bv_ptr == *height - y || flipped == true)) {
+		&& (*new_tile.bv_ptr == y+1 || flipped == true)) {
 
 		bool type_already_placed = false;
 		building_type type = *new_tile.bt_ptr;
@@ -308,35 +308,39 @@ void VGMap::PrintVillageBoard() {
 	int row = 0;
 	int column = 0;
 
-	std::cout << "\n";
+	std::cout << " Index\t| MAPNAMEHERE" << endl;
+	std::cout << "-------------------------------------" << endl;
 	for (row = *height - 1; row >= 0; row--) {
+		std::cout << " " << *height-1-row << "\t| ";
 		std::cout << row + 1 << " ";
 		for (column = 0; column < *width; column++) {
 
 			switch (*(*map)[column][row]->bt_ptr) {
 			case FOREST:;
-				std::cout << "F, ";
+				std::cout << "[F]";
 				break;
 			case WHEATFIELD:;
-				std::cout << "W, ";
+				std::cout << "[W]";
 				break;
 			case MEADOW:
-				std::cout << "M, ";
+				std::cout << "[M]";
 				break;
 			case QUARRY:
-				std::cout << "Q, ";
+				std::cout << "[Q]";
 				break;
 			case NO_BUILDING:
-				std::cout << *(*map)[column][row]->bv_ptr << ", ";
+				std::cout << "[x]";
 				break;
 			default:
-				std::cout << "E, ";
+				std::cout << "[E]";
 				break;
 			}
 		}
 		std::cout << "\n";
 	}
-	std::cout << "  5, 4, 3, 4, 5, " << endl;
+	std::cout << " \t|    5  4  3  4  5 " << endl;
+	std::cout << "-------------------------------------" << endl;
+	std::cout << " Index\t|    0  1  2  3  4 " << endl;
 
 	//show each tile's neighbors
 	/*int i =  0;

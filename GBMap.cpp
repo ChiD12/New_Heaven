@@ -156,13 +156,24 @@ GBMap::GBMap(int numPlayers) {
 
 
 void GBMap::PrintBoard(){
-	for (int j = 0; j < pgbA[0].size(); j++){
+	std::cout << " Index\t| GAME BOARD" << endl;
+	std::cout << "-------------------------------------" << endl;
+	for (int j = 0; j < pgbA->at(0).size(); j++){
+		std::cout << " " << j << "\t| ";
 		for (int i = 0; i < pgbA->size(); i++){
 			if (*(*this->pgbA)[i][j]->valid) { cout << *(*this->pgbA)[i][j]->resource_rep; }
-			else cout << "[N]";
+			else cout << "[x]";
 		}
 		cout << endl;
 	}
+	std::cout << "-------------------------------------" << endl;
+	std::cout << " Index\t| ";
+	for (int i = 0; i < this->pgbA->size(); i++)
+		if (i < 10)
+			std::cout << " " << i << " ";
+		else
+			std::cout << " " << i;
+	std::cout << "" << endl;
 	PrintResources();
 	printVillageTiles();
 }
