@@ -8,6 +8,8 @@ class VGMap {
     int* height;
     int* score;
 
+	string* village_name; //Added by Nathan
+
     bool* forest_placed;
     bool* wheatfield__placed;
     bool* meadow_placed;
@@ -15,9 +17,9 @@ class VGMap {
 
 public:
     VGMap();
-    //VGMap(vector<vector<BuildingTile*>>);//to eventually receive a map from mapLoader
     ~VGMap();
     bool placeTile(int, int, bool, BuildingTile);
+	void setName(string given_name);
     int calculateScore();
     void PrintVillageBoard();
     std::vector<vector<BuildingTile*>> *map;

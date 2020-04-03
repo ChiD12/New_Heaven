@@ -32,6 +32,8 @@ VGMap::VGMap() { //independent constructor
 	meadow_placed = new bool(false);
 	quarry_placed = new bool(false);
 
+	this->village_name = new string("");
+
 	/*
 	//map vector allocation
 	BuildingTile* sample_element = new BuildingTile(0, 0, false);
@@ -122,7 +124,7 @@ VGMap::VGMap(vector<vector<BuildingTile*>> map) { //constructor working with VGM
 */
 
 VGMap::~VGMap() { //destructor
-	delete(height, width, score, forest_placed, wheatfield__placed, meadow_placed, quarry_placed);
+	delete(height, width, score, forest_placed, wheatfield__placed, meadow_placed, quarry_placed, village_name);
 
 	for(size_t i = 0; i < map->size(); i++)
 		map->at(i).clear();
@@ -137,6 +139,7 @@ VGMap::~VGMap() { //destructor
 	wheatfield__placed = NULL;
 	meadow_placed = NULL;
 	quarry_placed = NULL;
+	village_name = NULL; //Added by Nathan
 }
 
 bool VGMap::placeTile(int x, int y1, bool flipped, BuildingTile new_tile) { //method to place building, check for coordinate validity, score requirement and presence of adjacent same-typed building tile (if necessary)
@@ -207,6 +210,11 @@ bool VGMap::placeTile(int x, int y1, bool flipped, BuildingTile new_tile) { //me
 		std::cout << "invalid coordinate or point requirement";
 		return false;
 	}
+}
+
+void VGMap::setName(string given_name)
+{
+	village_name = new string(given_name);
 }
 
 int VGMap::calculateScore() {
@@ -308,7 +316,7 @@ void VGMap::PrintVillageBoard() {
 	int row = 0;
 	int column = 0;
 
-	std::cout << " Index\t| MAPNAMEHERE" << endl;
+	std::cout << " Index\t| "<< *this->village_name << " " << endl;
 	std::cout << "-------------------------------------" << endl;
 	for (row = *height - 1; row >= 0; row--) {
 		std::cout << " " << *height-1-row << "\t| ";

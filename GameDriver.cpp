@@ -10,8 +10,7 @@ int main() {
 
 	gameStart();
 	
-	bool gameEnd = false;
-	remainingTiles = 45; //Use this for testing for now.
+	bool gameEnd = false; 
 
 	int turnCounter = findFirstPlayer();
 
@@ -93,6 +92,30 @@ void gameStart(){
 	cout << "Great! You've chosen to play with " << numOfPlayers << " players." << endl;
 
 	gameBoard = new GBMap(numOfPlayers);
+
+	HarvestTile* starter_tile_1 = new HarvestTile(3, 2, 0, 0);
+	HarvestTile* starter_tile_2 = new HarvestTile(1, 2, 1, 0);
+	HarvestTile* starter_tile_3 = new HarvestTile(3, 3, 0, 1);
+	HarvestTile* starter_tile_4 = new HarvestTile(2, 3, 2, 1);
+
+	gameBoard->PlaceTile(starter_tile_1, 2, 2);
+	gameBoard->PlaceTile(starter_tile_2, 10, 2);
+	gameBoard->PlaceTile(starter_tile_3, 2, 10);
+	gameBoard->PlaceTile(starter_tile_4, 10, 10);
+
+
+	//Generate the remaining number of tiles before we start.
+	if (numOfPlayers == 4)
+		remainingTiles = 41;
+	if (numOfPlayers == 3)
+		remainingTiles = 31;
+	if (numOfPlayers == 2)
+		remainingTiles = 21;
+	
+	if (numOfPlayers < 2 || numOfPlayers > 4)
+		remainingTiles = 1;
+
+
 	harvest_deck = HarvestDeck();
 	cout << "A harvest deck has been created with " << harvest_deck.GetCardCount() << " cards." << endl;
 	building_deck = BuildingDeck();
@@ -113,6 +136,19 @@ void gameStart(){
 		cout << "Enter the id of Player " << (counter + 1) << ": ";
 		cin >> player_id;
 		players[counter] = new Player(player_name, player_id, harvest_deck, building_deck);
+		//Stratford, Guilford, Fairfield, Milford.
+		if (counter == 0) {
+			players[counter]->player_board->setName("Stratford");
+		}
+		if (counter == 1) {
+			players[counter]->player_board->setName("Guilford");
+		}
+		if (counter == 2) {
+			players[counter]->player_board->setName("Fairfield");
+		}
+		if (counter == 3) {
+			players[counter]->player_board->setName("Milford");
+		}
 
 		counter++;
 	}
