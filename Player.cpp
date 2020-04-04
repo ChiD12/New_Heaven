@@ -22,7 +22,7 @@ Player::Player(std::string given_name, int given_id,  HarvestDeck given_hdeck, B
 
 	this->shipment_tile = given_hdeck.DrawHarvestTile();
 
-	this->has_shipment = true;
+	this->has_shipment = new bool(true);
 
 	cout << *this->name << " has drawn their harvest tiles and will now draw their building tiles.." << endl;
 
@@ -65,6 +65,17 @@ bool Player::PlaceHarvestTile(GBMap* given_board, int hand_index, int tl_x, int 
 		return true;
 	}
 	else return false;
+}
+
+bool Player::PlaceShipmentTile(GBMap * given_board, int resource_index, int given_x, int given_y)
+{
+	HarvestTile* place_me = new HarvestTile(resource_index, resource_index, resource_index, resource_index);
+
+	if (given_board->PlaceTile(place_me, given_x, given_y) == true) {
+		this->has_shipment = new bool(false);
+		return true;
+	}
+	else {return false;}
 }
 
 void Player::DrawBuilding(int number_of_cards, BuildingDeck given_deck)
@@ -117,7 +128,7 @@ void Player::PrintHarvestHand()
 		cout << endl;
 	}
 
-	if (this->has_shipment == true) {
+	if (*this->has_shipment == true) {
 		cout << "   " << "3" << "   " << endl;
 		cout << "[?]" << "[?]" << endl;
 		cout << "[?]" << "[?]" << endl;

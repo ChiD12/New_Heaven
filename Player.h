@@ -24,7 +24,7 @@ public:
 	vector<HarvestTile*>* harvest_hand; //The player's hand of harvest tiles.
 	VGMap* player_board; //The player's village board.
 	int* id = new int(0); 
-	bool has_shipment;
+	bool* has_shipment;
 	HarvestTile* shipment_tile;
 
 	Player(std::string name, int given_id, HarvestDeck given_hdeck, BuildingDeck given_bdeck);
@@ -33,6 +33,8 @@ public:
 	void exchange(GBMap* given_board, int given_x, int given_y); //Picks a point on the game board, calculates the resources, and then moves the resource markers on the game board.
 
 	bool PlaceHarvestTile(GBMap* given_board, int hand_index, int tl_x, int tl_y); //Given a game board and tile (pointer), place that tile onto the game board and calculate the resources acquired.
+
+	bool PlaceShipmentTile(GBMap* given_board, int resource_type, int given_x, int given_y);
 
 	void DrawBuilding(int number_of_cards, BuildingDeck given_deck); //Draw a building tile from the deck and add it to the hand vector.
 
