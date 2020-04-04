@@ -9,24 +9,14 @@ void GBMap::update_edge_all() {
 	//cout << (*pgbA)[0].size() << endl;
 	for (size_t i = 0; i < (*pgbA).size(); i++) {
 		for (size_t j = 0; j < (*pgbA)[i].size(); j++) {
-
-
 			if (*(*pgbA)[i][j]->valid) {  //if current node is not null 
 				for (size_t k = 0; k < 4; k++) {
-
-
 					if (k == 0 && j != 0 && *(*pgbA).at(i).at(j - 1)->valid) {//north
-
 						(*((*pgbA).at(i).at(j))->edge_list).at(k) = (*pgbA).at(i).at(j - 1);
-
 					}
-
 					if (k == 1 && i != 13 && *(*pgbA).at(i + 1).at(j)->valid) { //east
-
 						(*((*pgbA).at(i).at(j))->edge_list).at(k) = (*pgbA).at(i + 1).at(j);
-
 					}
-
 					if (k == 2 && j != 13 && *(*pgbA).at(i).at(j + 1)->valid) { //south
 						(*((*pgbA).at(i).at(j))->edge_list).at(k) = (*pgbA).at(i).at(j + 1);
 					}
@@ -35,7 +25,6 @@ void GBMap::update_edge_all() {
 					}
 				}
 			}
-
 		}
 	}
 }
@@ -70,8 +59,53 @@ vector<int> GBMap::CalculateResources(int x, int y) {
 	Node nodeArray[4] = { TLNode, TRNode, BLNode, BRNode };
 	resource_type rtArray[4] = { *(TLNode.rt_ptr),*(TRNode.rt_ptr), *(BLNode.rt_ptr), *(BRNode.rt_ptr) };
 
-	vector<int>* resources = new vector<int>(4);
+	int numWood = 0;
+	int numStone = 0;
+	int numSheep = 0;
+	int numGrain = 0;
 	//0 = WOOD, 1 = GRAIN, 2= SHEEP, 3 = STONE
+	
+	int numberofResources[4] = {0,0,0,0};
+
+
+
+	for (int i = 0; i < 4; i++) {
+		int adjacentCounter = 0;
+		resource_type current = rtArray[i];
+		
+		int one;
+		int two = 2;
+
+		if (i % 2 == 0) {
+			one = 1;
+		}else{
+			one = -1;
+		}
+
+		if (rtArray[i] == rtArray[i + one]) {
+			//one adjacent
+			if (rtArray[i] == rtArray[i + two]) {
+				//two adjacent
+			}
+		}
+		else if (rtArray[i] == rtArray[i + two]) {
+			//one Not adjacent
+		}
+		
+
+		
+		if (rtArray[i] == WOOD)
+			numberofResources[0]++;
+		if (rtArray[i] == GRAIN)
+			numberofResources[1]++;
+		if (rtArray[i] == SHEEP)
+			numberofResources[2]++;
+		if (rtArray[i] == STONE)
+			numberofResources[3]++;
+	}
+
+	vector<int>* resources = new vector<int>(4);
+	
 
 	resource_type resourceType;
 	Node firstNode;
@@ -113,20 +147,20 @@ vector<int> GBMap::CalculateResources(int x, int y) {
 			}
 		}
 		if (resourceType == WOOD) {
-			(*resources).at(0) = points;
-			*RMWood = points;
+			(*resources).at(0) += points;
+			//*RMWood = points;
 		}
 		if (resourceType == STONE) {
-			(*resources).at(3) = points;
-			*RMStone = points;
+			(*resources).at(3) += points;
+			//*RMStone = points;
 		}
 		if (resourceType == SHEEP) {
-			(*resources).at(2) = points;
-			*RMSheep = points;
+			(*resources).at(2) += points;
+			//*RMSheep = points;
 		}
 		if (resourceType == GRAIN) {
-			(*resources).at(1) = points;
-			*RMGrain = points;
+			(*resources).at(1) += points;
+			//*RMGrain = points;
 		}
 	}
 	return *resources;

@@ -44,16 +44,20 @@ Player::~Player()
 
 void Player::exchange(GBMap* given_board, int given_x, int given_y)
 {
-	this->CalculateResources(given_board, given_x, given_y);
+	vector<int> res = given_board->CalculateResources(given_x, given_y);
+	*(given_board->RMWood) = res.at(0);
+	*(given_board->RMGrain) = res.at(1);
+	*(given_board->RMSheep) = res.at(2);
+	*(given_board->RMStone) = res.at(3);
 	cout << "GameBoard resources updated!" << endl;
-	given_board->PrintResources();
+	//given_board->PrintResources();
 }
 
 bool Player::PlaceHarvestTile(GBMap* given_board, int hand_index, int tl_x, int tl_y)
 {
 	if ((*given_board).PlaceTile(harvest_hand->at(hand_index), tl_x, tl_y)) { //If the tile has been placed successfully.
 		harvest_hand->erase(harvest_hand->begin() + hand_index);
-		this->CalculateResources(given_board, tl_x, tl_y); //Calculate the resources we just got.
+		this->exchange(given_board, tl_x, tl_y); //Calculate the resources we just got.
 		return true;
 	}
 	else return false;
@@ -88,7 +92,7 @@ bool Player::BuildVillage(int given_x, int given_y, int hand_index, bool flipped
 {
 	if (player_board->placeTile(given_x, given_y, flipped, *building_hand->at(hand_index))) {
 		// remove tile that was played from hand	
-		building_hand->erase(building_hand->begin()) + (hand_index);
+		building_hand->erase(building_hand->begin() + (hand_index));
 		return true;
 	}
 	else return false;
