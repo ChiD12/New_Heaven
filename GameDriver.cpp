@@ -9,16 +9,16 @@ using namespace std;
 int main() {
 
 	gameStart();
-	
-	bool gameEnd = false; 
+
+	bool gameEnd = false;
 
 	int turnCounter = findFirstPlayer();
 
 	while (!gameEnd) {
 		int turn = turnCounter % numOfPlayers;
-		
+
 		cout << endl;
-		cout << "*************************************************************"<< endl;
+		cout << "*************************************************************" << endl;
 		cout << "It is **" << *(players[turn]->name) << "'s** turn" << endl;
 
 		//print outs to place harvest tile
@@ -32,16 +32,16 @@ int main() {
 		cout << endl;
 		cout << "***************************************************************" << endl;
 		gameBoard->PrintBoard();
-		
+
 		remainingTiles--;
 		cout << endl;
-		
+
 
 		//begin the loop for players to place their village tiles, frst the current turn player gets to place as many tiles as they want
 		//then the rest of the players gets a turn to try to use the remaining resources to play as many village tiles as they wish
 		for (int i = 0; i < numOfPlayers; i++) {
 			int clockwisePlayers = (turn + i) % numOfPlayers;
-			
+
 			//Printouts for information about current game state
 			cout << "**************************************************************" << endl;
 			cout << "and **" << *(players[clockwisePlayers]->name) << "'s** village board is: " << endl;
@@ -49,7 +49,7 @@ int main() {
 			gameBoard->PrintResources();
 			players[clockwisePlayers]->PrintBuildingHand();
 			cout << endl;
-			cout << "**"<< *(players[clockwisePlayers]->name) << "** do you wish to place a village tile with remaining resources? (y or n)";
+			cout << "**" << *(players[clockwisePlayers]->name) << "** do you wish to place a village tile with remaining resources? (y or n)";
 			string response;
 			cin >> response;
 
@@ -57,11 +57,11 @@ int main() {
 			//if not then next player gets a turn to build
 			while (response.compare("y") == 0) {
 				promptBuildingTilePlacement(clockwisePlayers);
-				
+
 				players[clockwisePlayers]->player_board->PrintVillageBoard();
 				gameBoard->PrintResources();
 				players[clockwisePlayers]->PrintBuildingHand();
-				cout <<  "**" <<*(players[clockwisePlayers]->name) << "** do you wish to place a village tile with remaining resources? (y or n)" << endl;
+				cout << "**" << *(players[clockwisePlayers]->name) << "** do you wish to place a village tile with remaining resources? (y or n)" << endl;
 				cin >> response;
 			}
 		}
@@ -74,9 +74,9 @@ int main() {
 		*(gameBoard->RMStone) = 0;
 		*(gameBoard->RMSheep) = 0;
 		*(gameBoard->RMGrain) = 0;
-			
+
 		turnCounter++;
-		if (remainingTiles <= 1) {
+		if (remainingTiles < 1) {
 			gameEnd = true;
 		}
 	}
@@ -84,7 +84,7 @@ int main() {
 }
 
 
-void gameStart(){
+void gameStart() {
 
 	cout << "Starting game!" << endl;
 	cout << "How many people will be playing today?: ";
@@ -111,6 +111,7 @@ void gameStart(){
 		remainingTiles = 31;
 	if (numOfPlayers == 2)
 		remainingTiles = 21;
+
 	if (numOfPlayers < 2 || numOfPlayers > 4)
 		remainingTiles = 1;
 
@@ -182,10 +183,10 @@ void drawVillage(int turn) {
 	if (*(gameBoard->RMGrain) == 0)
 		drawCounter++;
 
-	bool empty[6] = { false, false, false, false, false, false};
-	bool invalidResponse =true;
+	bool empty[6] = { false, false, false, false, false, false };
+	bool invalidResponse = true;
 	for (int i = 0; i < drawCounter; i++) {
-		do { 
+		do {
 			invalidResponse = true;
 
 			cout << endl;
@@ -204,10 +205,10 @@ void drawVillage(int turn) {
 				if (std::all_of(response.begin(), response.end(), ::isdigit)) {
 					int x = stoi(response);
 					if (x > 0 && x < 7) {
-						if (!empty[x-1]) { //if that spot on the board is not empty
+						if (!empty[x - 1]) { //if that spot on the board is not empty
 							players[turn]->building_hand->push_back(gameBoard->buildings->at(x - 1));
 							gameBoard->buildings->at(x - 1) = NULL;
-							empty[x-1] = true;
+							empty[x - 1] = true;
 							invalidResponse = false;
 						}
 						else {
@@ -231,18 +232,18 @@ void drawVillage(int turn) {
 			}
 		} while (invalidResponse);
 	}
-	
+
 	for (int i = 0; i < 6; i++) { //refill any empty building spots on map
 		if (empty[i] == true) {
 			gameBoard->buildings->at(i) = building_deck.DrawBuildingTile();;
 		}
 	}
 	cout << endl;
-	cout << "**" <<  *(players[turn]->name) << "** your village hand currently looks like:" << endl;
+	cout << "**" << *(players[turn]->name) << "** your village hand currently looks like:" << endl;
 	players[turn]->PrintBuildingHand();
 }
 
-void promptHarvestTilePlacement(int index) {;
+void promptHarvestTilePlacement(int turnIndex) {
 	string input;
 	bool validInput = false;
 	int harvestTileIndex;
@@ -252,9 +253,25 @@ void promptHarvestTilePlacement(int index) {;
 	do {
 		// player will answer in format HARVEST_TILE_NUM X,Y
 		// e.g. 2 0 0 to place the 2nd tile in the player's hand onto (0,0).
-		cout << "Which harvest tile would **" << *players[index]->name << "** like to place and where?: ";
+		cout << "Which harvest tile would **" << *players[turnIndex]->name << "** like to place and where?: ";
 		std::getline(std::cin >> std::ws, input);
 		cout << "You inputted " << input << endl;
+
+		// ---------------------------------------------------
+		// HELP (PLAYER REQUIRES EXAMPLES OF VALID INPUTS)
+		// ---------------------------------------------------
+		if (input == "H" || input == "h") {
+			cout << "A valid input would look like \"1 0 5\", where 1 = the first tile in your hand, 0 = x-axis and 5 = y-axis. "
+				"The first resource will be placed on the specified x,y axis, while the remaining 3 resources will be placed on the right, bottom-right, and bottom respectively "
+				"(i.e. the x,y coordinate inputted will be the top-left corner of the tile)." << endl;
+			cout << "Please ensure that the input is exact (make sure there is one space between each digit, with no commas, tabs, etc) "
+				"and that the coordinates you have selected on the Game Board are valid, i.e. is currently empty and (x&y)modulo(2) = 0." << endl;
+			continue;
+		}
+
+		// ---------------------------------------------------
+		// BEGIN INPUT VALIDATION (PLAYER ATTEMPTS TO BUILD)
+		// ---------------------------------------------------
 
 		// 1) validate 3 separate inputs (indicated by 2 spaces)
 		if (std::count(input.begin(), input.end(), ' ') == 2) {
@@ -266,7 +283,8 @@ void promptHarvestTilePlacement(int index) {;
 			if (std::all_of(harvestTileIndexStr.begin(), harvestTileIndexStr.end(), ::isdigit)) {
 				harvestTileIndex = std::stoi(harvestTileIndexStr);
 				// 3) validate the number chosen fits in range
-				if (harvestTileIndex <= players[index]->harvest_hand->size()) {
+				if (harvestTileIndex > 0 && harvestTileIndex <= players[turnIndex]->harvest_hand->size()) {
+					harvestTileIndex--;
 					// 4) validate the 2nd input (x coordinate) is a digit
 					if (std::all_of(xStr.begin(), xStr.end(), ::isdigit)) {
 						x = std::stoi(xStr);
@@ -277,8 +295,30 @@ void promptHarvestTilePlacement(int index) {;
 								y = std::stoi(yStr);
 								// 7) validate the y coordinate chosen fits in range
 								if (y < gameBoard->pgbA->at(0).size()) {
-									// DONE!
-									validInput = players[index]->PlaceHarvestTile(gameBoard, players[index]->harvest_hand->at(harvestTileIndex-1), x, y, (harvestTileIndex - 1));
+									// ---------------------------------------------------
+									// DONE INPUT CHECK
+									// ---------------------------------------------------
+
+									// 8) prompt player if they wish to rotate the Harvest Tile before placing
+									bool done = false;
+									string doneInput;
+									do {
+										players[turnIndex]->harvest_hand->at(harvestTileIndex)->PrintHarvestTile();
+										std::cout << "Type L to rotate this tile Left, or R to rotate Right (or D if done)" << endl;
+										std::cin >> doneInput;
+										if (doneInput == "L" || doneInput == "l")
+											players[turnIndex]->harvest_hand->at(harvestTileIndex)->RotateTileLeft();
+										else if (doneInput == "R" || doneInput == "r")
+											players[turnIndex]->harvest_hand->at(harvestTileIndex)->RotateTileRight();
+										else if (doneInput == "D" || doneInput == "d")
+											done = true;
+										else
+											cout << "Sorry, I didn't quite get that!" << endl;
+
+									} while (!done);
+
+									// 9) place the tile
+									validInput = players[turnIndex]->PlaceHarvestTile(gameBoard, harvestTileIndex, x, y);
 								}
 							}
 						}
@@ -293,13 +333,7 @@ void promptHarvestTilePlacement(int index) {;
 	} while (!validInput);
 };
 
-void promptBuildingTilePlacement(int index) {
-	/*cout << endl;
-	players[index]->player_board->PrintVillageBoard();
-	gameBoard->PrintResources();
-	players[index]->PrintBuildingHand();
-	cout << endl;*/
-
+void promptBuildingTilePlacement(int turnIndex) {
 	string input;
 	string flippedInput;
 	bool validInput = false;
@@ -310,107 +344,104 @@ void promptBuildingTilePlacement(int index) {
 	bool flipped;
 
 	do {
-		// player will answer in format HARVEST_TILE_NUM X,Y
+		// player will answer in format {HARVEST_TILE_NUM X Y}
 		// e.g. 2 0 0 to place the 2nd tile in the player's hand onto (0,0).
 		cout << endl;
-		cout << "Which building tile would " << *players[index]->name << " like to place and where? (or type Q to Quit): ";
+		cout << "Which building tile would " << *players[turnIndex]->name << " like to place and where? (or type Q to Quit or H for Help): ";
 		std::getline(std::cin >> std::ws, input);
 		cout << "You inputted " << input << endl;
 
+		// ---------------------------------------------------
+		// QUIT (PLAYER CANNOT BUILD OR CHANGES THEIR MIND)
+		// ---------------------------------------------------
 		if (input == "Q" || input == "q")
 			break;
 
-		do {
-			cout << "Do you want to place the tile facedown? [Y/N]: ";
-			std::getline(std::cin >> std::ws, flippedInput);
+		// ---------------------------------------------------
+		// HELP (PLAYER REQUIRES EXAMPLES OF VALID INPUTS)
+		// ---------------------------------------------------
+		if (input == "H" || input == "h") {
+			cout << "A valid input would look like \"1 0 2\", where 1 = the first tile in your hand, 0 = x-axis and 2 = y-axis." << endl;
+			cout << "Please ensure that the input is exact (make sure there is one space between each digit, with no commas, tabs, etc) "
+				"and that the coordinates you have selected on your board are valid, i.e. is currently an empty tile, "
+				"is in an appropriate row for the tile being placed and would not cost more resources than available. "
+				"You will later be prompted if you'd like the tile to be facedown or not, so do not worry about that yet." << endl;
+			continue;
+		}
 
-			// 1) validate flipped input is a simple yes/no
-			if (flippedInput == "Y" || flippedInput == "y") {
-				flipped = true;
-				validFlippedInput = true;
-			}
-			else if (flippedInput == "N" || flippedInput == "n") {
-				flipped = false;
-				validFlippedInput = true;
-			}
-			else {
-				cout << "Sorry! I didn't quite get that." << endl;
-			}
+		// ---------------------------------------------------
+		// BEGIN INPUT VALIDATION (PLAYER ATTEMPTS TO BUILD)
+		// ---------------------------------------------------
 
-		} while (!validFlippedInput);
-			
-
-		// 2) validate 3 separate inputs (indicated by 2 spaces)
+		// 1) validate 3 separate inputs (indicated by 2 spaces)
 		if (std::count(input.begin(), input.end(), ' ') == 2) {
 			string buildingTileIndexStr = input.substr(0, input.find(" "));
 			string xStr = input.substr(buildingTileIndexStr.size() + 1, input.find(" "));
 			string yStr = input.substr(buildingTileIndexStr.size() + xStr.size() + 2);
 
-			// 3) validate first input (harvest tile index) is a digit
+			// 2) validate first input (harvest tile index) is a digit
 			if (std::all_of(buildingTileIndexStr.begin(), buildingTileIndexStr.end(), ::isdigit)) {
 				buildingTileIndex = std::stoi(buildingTileIndexStr);
-				// 4) validate the number chosen fits in range
-				if (buildingTileIndex <= players[index]->building_hand->size()) {
-					// 5) validate the 2nd input (x coordinate) is a digit
+
+				// 3) validate the number chosen fits in range
+				if (buildingTileIndex > 0 && buildingTileIndex <= players[turnIndex]->building_hand->size()) {
+					buildingTileIndex--;
+
+					// 4) validate the 2nd input (x coordinate) is a digit
 					if (std::all_of(xStr.begin(), xStr.end(), ::isdigit)) {
 						x = std::stoi(xStr);
-						// 6) validate the x coordinate chosen fits in range
-						if (x < players[index]->player_board->map->size()) {
-							// 7) validate the 3rd input (y coordinate) is a digit
+
+						// 5) validate the x coordinate chosen fits in range
+						if (x < players[turnIndex]->player_board->map->size()) {
+
+							// 6) validate the 3rd input (y coordinate) is a digit
 							if (std::all_of(yStr.begin(), yStr.end(), ::isdigit)) {
 								y = std::stoi(yStr);
-								// 8) validate the y coordinate chosen fits in range
-								if (y < players[index]->player_board->map->at(0).size()) {
+
+								// 7) validate the y coordinate chosen fits in range
+								if (y < players[turnIndex]->player_board->map->at(0).size()) {
+									// ---------------------------------------------------
+									// DONE INPUT CHECK
+									// ---------------------------------------------------
+
+									// 8) prompt player if they want the tile to be flipped
+									do {
+										cout << "Do you want to place the tile facedown? [Y/N]: ";
+										std::getline(std::cin >> std::ws, flippedInput);
+
+										// validate flipped input is a simple yes/no
+										if (flippedInput == "Y" || flippedInput == "y") {
+											flipped = true;
+											validFlippedInput = true;
+										}
+										else if (flippedInput == "N" || flippedInput == "n") {
+											flipped = false;
+											validFlippedInput = true;
+										}
+										else {
+											cout << "Sorry! I didn't quite get that." << endl;
+										}
+
+									} while (!validFlippedInput);
+
 									// 9) validate sufficient resources
-									switch (*players[index]->building_hand->at(buildingTileIndex - 1)->bt_ptr) {
-									case GRAIN:
-										if (*gameBoard->RMGrain >= *players[index]->building_hand->at(buildingTileIndex - 1)->bv_ptr) {
-											validInput = players[index]->BuildVillage(x, y, flipped, *players[index]->building_hand->at(buildingTileIndex - 1));
-											// deduct resources spent
-											if (validInput){
-												*gameBoard->RMGrain = *gameBoard->RMGrain - *players[index]->building_hand->at(buildingTileIndex - 1)->bv_ptr;
-												players[index]->building_hand->erase((players[index]->building_hand->begin()) + (buildingTileIndex - 1)); //remove tile that was played from hand	
-											}
-										}
+									if (validateSufficentResources(x, y, turnIndex, buildingTileIndex, flipped)) {
+										// 10) determine num of resources to be deducted, which will be passed to deductResources() if the tile placement is successful.
+										//     this must be remembered here, because the tile in hand is erased immediately after placed onto the board.
+										int numResourcesToDeduct;
+										building_type resourceToDeduct = *players[turnIndex]->building_hand->at(buildingTileIndex)->bt_ptr;
+										if (flipped)
+											numResourcesToDeduct = *players[turnIndex]->building_hand->at(buildingTileIndex)->bv_ptr;
 										else
-											cout << "Sorry, you don't have enough grain to build that!" << endl;
-										break;
-									case WOOD:
-										if (*gameBoard->RMWood >= *players[index]->building_hand->at(buildingTileIndex - 1)->bv_ptr) {
-											validInput = players[index]->BuildVillage(x, y, flipped, *players[index]->building_hand->at(buildingTileIndex - 1));										// deduct resources spent
-											// deduct resources spent
-											if (validInput) {
-												*gameBoard->RMWood = *gameBoard->RMWood - *players[index]->building_hand->at(buildingTileIndex - 1)->bv_ptr;
-												players[index]->building_hand->erase((players[index]->building_hand->begin()) + (buildingTileIndex - 1)); //remove tile that was played from hand	
-											}
+											numResourcesToDeduct = (*players[turnIndex]->player_board->height - y);
+
+										// 11) build the village
+										validInput = players[turnIndex]->BuildVillage(x, y, buildingTileIndex, flipped);
+
+										// 12) if successful, deduct reasources spent
+										if (validInput) {
+											deductResources(resourceToDeduct, numResourcesToDeduct);
 										}
-										else
-											cout << "Sorry, you don't have enough wood to build that!" << endl;
-										break;
-									case SHEEP:
-										if (*gameBoard->RMSheep >= *players[index]->building_hand->at(buildingTileIndex - 1)->bv_ptr) {
-											validInput = players[index]->BuildVillage(x, y, flipped, *players[index]->building_hand->at(buildingTileIndex - 1));
-											// deduct resources spent
-											if (validInput){
-												*gameBoard->RMSheep = *gameBoard->RMSheep - *players[index]->building_hand->at(buildingTileIndex - 1)->bv_ptr;
-												players[index]->building_hand->erase((players[index]->building_hand->begin()) + (buildingTileIndex - 1)); //remove tile that was played from hand	
-											}
-										}
-										else
-											cout << "Sorry, you don't have enough sheep to build that!" << endl;
-										break;
-									case STONE:
-										if (*gameBoard->RMStone >= *players[index]->building_hand->at(buildingTileIndex - 1)->bv_ptr) {
-											validInput = players[index]->BuildVillage(x, y, flipped, *players[index]->building_hand->at(buildingTileIndex - 1));
-											// deduct resources spent
-											if (validInput){
-												*gameBoard->RMStone = *gameBoard->RMStone - *players[index]->building_hand->at(buildingTileIndex - 1)->bv_ptr;
-												players[index]->building_hand->erase((players[index]->building_hand->begin()) + (buildingTileIndex - 1)); //remove tile that was played from hand	
-											}
-										}
-										else
-											cout << "Sorry, you don't have enough stone to build that!" << endl;
-										break;
 									}
 								}
 							}
@@ -421,10 +452,77 @@ void promptBuildingTilePlacement(int index) {
 		}
 
 		if (!validInput)
-			cout << "Please enter a valid input." << endl;
+			cout << "Please enter a valid input, or enter H (Help) for examples of a valid input." << endl;
 	} while (!validInput);
 
 };
+
+bool validateSufficentResources(int x, int y, int turnIndex, int buildingTileIndex, bool flipped) {
+	// check if remaining resources on board are greather than or equal to the value of the Building Tile (or, if flipped, the value of the row)
+	switch (*players[turnIndex]->building_hand->at(buildingTileIndex)->bt_ptr) {
+	case GRAIN:
+		if ((!flipped && *gameBoard->RMGrain >= *players[turnIndex]->building_hand->at(buildingTileIndex)->bv_ptr)
+			|| (flipped && *gameBoard->RMGrain >= *players[turnIndex]->player_board->height - y)) {
+			return true;
+		}
+		else {
+			cout << "Sorry, you don't have enough grain to build that!" << endl;
+			return false;
+		}
+		break;
+	case WOOD:
+		if ((!flipped && *gameBoard->RMWood >= *players[turnIndex]->building_hand->at(buildingTileIndex)->bv_ptr)
+			|| (flipped && *gameBoard->RMWood >= *players[turnIndex]->player_board->height - y)) {
+			return true;
+		}
+		else {
+			cout << "Sorry, you don't have enough wood to build that!" << endl;
+			return false;
+		}
+		break;
+	case SHEEP:
+		if ((!flipped && *gameBoard->RMSheep >= *players[turnIndex]->building_hand->at(buildingTileIndex)->bv_ptr)
+			|| (flipped && *gameBoard->RMSheep >= *players[turnIndex]->player_board->height - y)) {
+			return true;
+		}
+		else {
+			cout << "Sorry, you don't have enough sheep to build that!" << endl;
+			return false;
+		}
+		break;
+	case STONE:
+		if ((!flipped && *gameBoard->RMStone >= *players[turnIndex]->building_hand->at(buildingTileIndex)->bv_ptr)
+			|| (flipped && *gameBoard->RMStone >= *players[turnIndex]->player_board->height - y)) {
+			return true;
+		}
+		else {
+			cout << "Sorry, you don't have enough stone to build that!" << endl;
+			return false;
+		}
+		break;
+	default:
+		return false;
+		break;
+	}
+}
+
+void deductResources(building_type bt_ptr, int numResourcesToDeduct) {
+	// deducts resources of board by the value on Building Tile (or, if flipped, by the value of the row) 
+	switch (bt_ptr) {
+	case WHEATFIELD:
+		*gameBoard->RMGrain = *gameBoard->RMGrain - numResourcesToDeduct;
+		break;
+	case FOREST:
+		*gameBoard->RMWood = *gameBoard->RMWood - numResourcesToDeduct;
+		break;
+	case MEADOW:
+		*gameBoard->RMSheep = *gameBoard->RMSheep - numResourcesToDeduct;
+		break;
+	case QUARRY:
+		*gameBoard->RMStone = *gameBoard->RMStone - numResourcesToDeduct;
+		break;
+	}
+}
 
 void computeGameScore() {
 	vector<Player*> player_list;
@@ -450,7 +548,7 @@ void computeGameScore() {
 		}
 	}
 
-	if (hiscore_player_list.size()>1) {
+	if (hiscore_player_list.size() > 1) {
 
 		int most_filled = 0; //find player with the most filled village and store any player with same placed buildingTile number in a vector
 		vector<int> player_VGtiles;
@@ -478,8 +576,8 @@ void computeGameScore() {
 			}
 		}
 
-		if (most_village_players.size() > 1 ) {
-			
+		if (most_village_players.size() > 1) {
+
 			int least_VGhand = most_village_players[0]->building_hand->size(); // find player with least buildingTiles on hand, store any player with equal number of buildingTiles in a vector
 
 			vector<int> player_VGhand;
@@ -497,7 +595,7 @@ void computeGameScore() {
 					least_VGhand_players.push_back(most_village_players[i]);
 				}
 			}
-			
+
 			displayWinner(least_VGhand_players);//print winner with least village on hands
 			return;
 		}
@@ -512,8 +610,8 @@ void computeGameScore() {
 
 void displayWinner(vector<Player*> winners) {
 	cout << "\nGame finished:\n";
-	for (Player* winner: winners) {
-		cout << "Winner: "<<*(winner->name) << " Score: " << (*winner->player_board).calculateScore() << endl;
+	for (Player* winner : winners) {
+		cout << "Winner: " << *(winner->name) << " Score: " << (*winner->player_board).calculateScore() << endl;
 	}
 	return;
 }

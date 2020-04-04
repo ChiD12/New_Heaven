@@ -4,8 +4,6 @@
 #include <vector>
 
 class VGMap {
-    int* width;
-    int* height;
     int* score;
 
 	string* village_name; //Added by Nathan
@@ -18,6 +16,8 @@ class VGMap {
 public:
     VGMap();
     ~VGMap();
+    const int* width;
+    const int* height;
     bool placeTile(int, int, bool, BuildingTile);
 	void setName(string given_name);
     int calculateScore();

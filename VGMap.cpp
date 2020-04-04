@@ -316,7 +316,7 @@ void VGMap::PrintVillageBoard() {
 	int row = 0;
 	int column = 0;
 
-	std::cout << " Index\t| "<< *this->village_name << " " << endl;
+	std::cout << " Y\t| "<< *this->village_name << " " << endl;
 	std::cout << "-------------------------------------" << endl;
 	for (row = *height - 1; row >= 0; row--) {
 		std::cout << " " << *height-1-row << "\t| ";
@@ -348,7 +348,7 @@ void VGMap::PrintVillageBoard() {
 	}
 	std::cout << " \t|    5  4  3  4  5 " << endl;
 	std::cout << "-------------------------------------" << endl;
-	std::cout << " Index\t|    0  1  2  3  4 " << endl;
+	std::cout << " X\t|    0  1  2  3  4 " << endl;
 
 	//show each tile's neighbors
 	/*int i =  0;

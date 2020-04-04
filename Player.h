@@ -30,7 +30,7 @@ public:
 
 	void exchange(GBMap* given_board, int given_x, int given_y); //Picks a point on the game board, calculates the resources, and then moves the resource markers on the game board.
 
-	bool PlaceHarvestTile(GBMap* given_board, HarvestTile* given_tile, int tl_x, int tl_y, int handIndex); //Given a game board and tile (pointer), place that tile onto the game board and calculate the resources acquired.
+	bool PlaceHarvestTile(GBMap* given_board, int hand_index, int tl_x, int tl_y); //Given a game board and tile (pointer), place that tile onto the game board and calculate the resources acquired.
 
 	void DrawBuilding(int number_of_cards, BuildingDeck given_deck); //Draw a building tile from the deck and add it to the hand vector.
 
@@ -38,7 +38,7 @@ public:
 
 	void ResourceTracker(); //Can be called at any time to show which resources the player currently has in their possession.
 
-	bool BuildVillage(int given_x, int given_y, bool flipped, BuildingTile given_tile); //Given a building tile, place that building tile at this index on the player's village board.
+	bool BuildVillage(int given_x, int given_y, int hand_index, bool flipped); //Given a building tile, place that building tile at this index on the player's village board.
 
 	void CalculateResources(GBMap* given_board, int tl_x, int tl_y); //Used in conjunction with PlaceHarvestTile(). Will calculate the resources starting from the index given.
 

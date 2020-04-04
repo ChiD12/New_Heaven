@@ -164,6 +164,7 @@ HarvestTile::~HarvestTile()
 
 void HarvestTile::RotateTileRight()
 {
+	std::cout << "Rotating Right..." << endl;
 	resource_type temp = *ul_ptr;
 
 	this->ul_ptr = this->bl_ptr;
@@ -174,6 +175,7 @@ void HarvestTile::RotateTileRight()
 
 void HarvestTile::RotateTileLeft()
 {
+	std::cout << "Rotating Left..." << endl;
 	resource_type temp = *ul_ptr;
 
 	this->ul_ptr = this->ur_ptr;
@@ -184,9 +186,9 @@ void HarvestTile::RotateTileLeft()
 
 void HarvestTile::PrintHarvestTile()
 {
-	cout << "The resources in this tile are as follows: " << *this->upper_left_str_ptr << ", " << *this->upper_right_str_ptr << ", " << *this->bottom_left_str_ptr << ", " << *this->bottom_right_str_ptr << endl;
+	cout << *this->upper_left_str_ptr << *this->upper_right_str_ptr << endl;
+	cout << *this->bottom_left_str_ptr << *this->bottom_right_str_ptr << endl;
 }
-
 
 
 HarvestDeck::HarvestDeck()
