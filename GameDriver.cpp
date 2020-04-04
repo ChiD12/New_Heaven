@@ -253,7 +253,7 @@ void promptHarvestTilePlacement(int turnIndex) {
 	do {
 		// player will answer in format HARVEST_TILE_NUM X,Y
 		// e.g. 2 0 0 to place the 2nd tile in the player's hand onto (0,0).
-		cout << "Which harvest tile would **" << *players[turnIndex]->name << "** like to place and where?: ";
+		cout << "Which harvest tile would **" << *players[turnIndex]->name << "** like to place and where? (or type H for Help): ";
 		std::getline(std::cin >> std::ws, input);
 		cout << "You inputted " << input << endl;
 
@@ -276,7 +276,7 @@ void promptHarvestTilePlacement(int turnIndex) {
 		// 1) validate 3 separate inputs (indicated by 2 spaces)
 		if (std::count(input.begin(), input.end(), ' ') == 2) {
 			string harvestTileIndexStr = input.substr(0, input.find(" "));
-			string xStr = input.substr(harvestTileIndexStr.size() + 1, input.find(" "));
+			string xStr = input.substr(harvestTileIndexStr.size() + 1, input.substr(harvestTileIndexStr.size()+1).find(" "));
 			string yStr = input.substr(harvestTileIndexStr.size() + xStr.size() + 2);
 
 			// 2) validate first input (harvest tile index) is a digit
@@ -304,8 +304,9 @@ void promptHarvestTilePlacement(int turnIndex) {
 									string doneInput;
 									do {
 										players[turnIndex]->harvest_hand->at(harvestTileIndex)->PrintHarvestTile();
-										std::cout << "Type L to rotate this tile Left, or R to rotate Right (or D if done)" << endl;
+										std::cout << "Type L to rotate this tile Left, or R to rotate Right (or D if done rotating): ";
 										std::cin >> doneInput;
+										std::cout << endl;
 										if (doneInput == "L" || doneInput == "l")
 											players[turnIndex]->harvest_hand->at(harvestTileIndex)->RotateTileLeft();
 										else if (doneInput == "R" || doneInput == "r")
@@ -376,7 +377,7 @@ void promptBuildingTilePlacement(int turnIndex) {
 		// 1) validate 3 separate inputs (indicated by 2 spaces)
 		if (std::count(input.begin(), input.end(), ' ') == 2) {
 			string buildingTileIndexStr = input.substr(0, input.find(" "));
-			string xStr = input.substr(buildingTileIndexStr.size() + 1, input.find(" "));
+			string xStr = input.substr(buildingTileIndexStr.size() + 1, input.substr(buildingsTileIndexStr.size() + 1).find(" "));
 			string yStr = input.substr(buildingTileIndexStr.size() + xStr.size() + 2);
 
 			// 2) validate first input (harvest tile index) is a digit
