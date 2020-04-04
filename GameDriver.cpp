@@ -377,7 +377,7 @@ void promptBuildingTilePlacement(int turnIndex) {
 		// 1) validate 3 separate inputs (indicated by 2 spaces)
 		if (std::count(input.begin(), input.end(), ' ') == 2) {
 			string buildingTileIndexStr = input.substr(0, input.find(" "));
-			string xStr = input.substr(buildingTileIndexStr.size() + 1, input.substr(buildingsTileIndexStr.size() + 1).find(" "));
+			string xStr = input.substr(buildingTileIndexStr.size() + 1, input.substr(buildingTileIndexStr.size() + 1).find(" "));
 			string yStr = input.substr(buildingTileIndexStr.size() + xStr.size() + 2);
 
 			// 2) validate first input (harvest tile index) is a digit
