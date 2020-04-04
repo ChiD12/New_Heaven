@@ -76,7 +76,7 @@ int main() {
 		*(gameBoard->RMGrain) = 0;
 			
 		turnCounter++;
-		if (remainingTiles < 1) {
+		if (remainingTiles <= 1) {
 			gameEnd = true;
 		}
 	}
@@ -111,7 +111,6 @@ void gameStart(){
 		remainingTiles = 31;
 	if (numOfPlayers == 2)
 		remainingTiles = 21;
-	
 	if (numOfPlayers < 2 || numOfPlayers > 4)
 		remainingTiles = 1;
 
