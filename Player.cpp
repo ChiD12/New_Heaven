@@ -18,7 +18,11 @@ Player::Player(std::string given_name, int given_id,  HarvestDeck given_hdeck, B
 
 	this->DrawHarvestTile(2, given_hdeck);
 
+	cout << *this->name << " is taking their shipment tile, how mysterious!" << endl;
 
+	this->shipment_tile = given_hdeck.DrawHarvestTile();
+
+	this->has_shipment = true;
 
 	cout << *this->name << " has drawn their harvest tiles and will now draw their building tiles.." << endl;
 
@@ -111,6 +115,12 @@ void Player::PrintHarvestHand()
 		cout << "   " << counter++ << "   " << endl;
 		harvest_tile->PrintHarvestTile();
 		cout << endl;
+	}
+
+	if (this->has_shipment == true) {
+		cout << "   " << "3" << "   " << endl;
+		cout << "[?]" << "[?]" << endl;
+		cout << "[?]" << "[?]" << endl;
 	}
 }
 
