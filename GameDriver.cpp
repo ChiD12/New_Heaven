@@ -98,10 +98,22 @@ void gameStart() {
 	HarvestTile* starter_tile_3 = new HarvestTile(3, 3, 0, 1);
 	HarvestTile* starter_tile_4 = new HarvestTile(2, 3, 2, 1);
 
-	gameBoard->PlaceTile(starter_tile_1, 2, 2);
-	gameBoard->PlaceTile(starter_tile_2, 10, 2);
-	gameBoard->PlaceTile(starter_tile_3, 2, 10);
-	gameBoard->PlaceTile(starter_tile_4, 10, 10);
+	int x_offset = 0;
+	int y_offset = 0;
+
+	if (numOfPlayers < 4) {
+		x_offset = 2;
+	}
+
+	if (numOfPlayers < 3) {
+		x_offset = 2;
+		y_offset = 2;
+	}
+
+	gameBoard->PlaceTile(starter_tile_1, (2 - x_offset), (2 - y_offset));
+	gameBoard->PlaceTile(starter_tile_2, (10 - x_offset), (2 - y_offset));
+	gameBoard->PlaceTile(starter_tile_3, (2 - x_offset), (10 - y_offset));
+	gameBoard->PlaceTile(starter_tile_4, (10 - x_offset), (10 - y_offset));
 
 
 	//Generate the remaining number of tiles before we start.
