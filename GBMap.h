@@ -18,6 +18,7 @@ public:
 	void update_edge_all();
 
 	bool PlaceTile(HarvestTile* given_tile, int tlX, int tlY);
+	bool PlaceTile(HarvestTile* given_tile, int tlX, int tlY, bool force);
 	vector<int> CalculateResources(int x, int y);
 
 	GBMap();

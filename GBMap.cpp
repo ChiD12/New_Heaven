@@ -49,6 +49,25 @@ bool GBMap::PlaceTile(HarvestTile* given_tile, int tlX, int tlY) {
 	}
 };
 
+//forces replacement of tiles, even if it already exists
+bool GBMap::PlaceTile(HarvestTile* given_tile, int tlX, int tlY, bool force) {
+
+	if (tlX % 2 == 0 && tlY % 2 == 0
+		&& *((*(this->pgbA)).at(tlX).at(tlY))->valid
+		&& force == true) { //makes sure placement is not between tiles and is not already occupied
+
+		((*(this->pgbA)).at(tlX).at(tlY))->setResourceType(*given_tile->ul_ptr); //top left
+		((*(this->pgbA)).at(tlX + 1).at(tlY))->setResourceType(*given_tile->ur_ptr); //top right
+		((*(this->pgbA)).at(tlX).at(tlY + 1))->setResourceType(*given_tile->bl_ptr); //bot left
+		((*(this->pgbA)).at(tlX + 1).at(tlY + 1))->setResourceType(*given_tile->br_ptr); //bot right
+		return true;
+	}
+	else {
+		cout << "Sorry, you can't do that! A tile must be placed in an even X,Y coordinate that is valid and not occupied!" << endl;
+		return false;
+	}
+};
+
 vector<int> GBMap::CalculateResources(int x, int y) {
 	//assume index is of top left point a Tile
 	Node TLNode = *(*this->pgbA)[x][y];
@@ -65,54 +84,65 @@ vector<int> GBMap::CalculateResources(int x, int y) {
 	int numGrain = 0;
 	//0 = WOOD, 1 = GRAIN, 2= SHEEP, 3 = STONE
 	
-	int numberofResources[4] = {0,0,0,0};
+	int numberofResources[4] = {1,1,1,1};
+	bool adj[4] = {false,false,false,false};
+	bool resourceAlreadyCalculated[4] = { false,false,false,false };
 
 
 
 	for (int i = 0; i < 4; i++) {
-		int adjacentCounter = 0;
-		resource_type current = rtArray[i];
-		
-		int one;
-		int two = 2;
+		if (numberofResources[rtArray[i]] < 2) {
+			int counter = 0;
 
-		if (i % 2 == 0) {
-			one = 1;
-		}else{
-			one = -1;
-		}
+			int one = 1;
+			int two = 2;
+			int three = 3;
 
-		if (rtArray[i] == rtArray[i + one]) {
-			//one adjacent
-			if (rtArray[i] == rtArray[i + two]) {
-				//two adjacent
+			if (i % 2 != 0) {
+				one = -1;
+				two = -2;
+				three = -3;
 			}
-		}
-		else if (rtArray[i] == rtArray[i + two]) {
-			//one Not adjacent
-		}
-		
+			
 
-		
-		if (rtArray[i] == WOOD)
-			numberofResources[0]++;
-		if (rtArray[i] == GRAIN)
-			numberofResources[1]++;
-		if (rtArray[i] == SHEEP)
-			numberofResources[2]++;
-		if (rtArray[i] == STONE)
-			numberofResources[3]++;
+			if (rtArray[i] == rtArray[(i + one)%4]) {
+				//adjacent
+				adj[rtArray[i]] = true;
+				counter++;	
+			}
+			if (rtArray[i] == rtArray[(i + two) % 4]) {
+				//adjacent
+				adj[rtArray[i]] = true;
+				counter++;
+			}
+			else if (rtArray[i] == rtArray[(i + three)%4]) {
+				//not adjacent
+				counter++;
+			}
+
+			//uses the resource type as an index in the array
+			numberofResources[rtArray[i]] += counter;
+
+			/*if (rtArray[i] == WOOD)
+				numberofResources[0]++;
+			if (rtArray[i] == GRAIN)
+				numberofResources[1]++;
+			if (rtArray[i] == SHEEP)
+				numberofResources[2]++;
+			if (rtArray[i] == STONE)
+				numberofResources[3]++;*/
+		}
 	}
 
 	vector<int>* resources = new vector<int>(4);
 	
-
+	vector<Node> visited;
 	resource_type resourceType;
 	Node firstNode;
 	for (int i = 0; i < 4; i++) {
 		int points = 0;
 		queue<Node> queue;
-		vector<Node> visited;
+		//vector<Node> visited;
 		resourceType = rtArray[i];
 		firstNode = nodeArray[i];
 
@@ -146,22 +176,35 @@ vector<int> GBMap::CalculateResources(int x, int y) {
 				}
 			}
 		}
-		if (resourceType == WOOD) {
-			(*resources).at(0) += points;
-			//*RMWood = points;
+
+		//0 = WOOD, 1 = GRAIN, 2= SHEEP, 3 = STONE
+		if(numberofResources[resourceType] == 1 || (adj[resourceType]==false && numberofResources[resourceType] == 2))
+			resources->at(resourceType) += points;
+		if (adj[resourceType] == true) {
+			if (resourceAlreadyCalculated[resourceType] == false) {
+				resources->at(resourceType) = points;
+				resourceAlreadyCalculated[resourceType] = true;
+			}
 		}
-		if (resourceType == STONE) {
-			(*resources).at(3) += points;
-			//*RMStone = points;
-		}
-		if (resourceType == SHEEP) {
-			(*resources).at(2) += points;
-			//*RMSheep = points;
-		}
-		if (resourceType == GRAIN) {
-			(*resources).at(1) += points;
-			//*RMGrain = points;
-		}
+		
+
+		
+		//if (resourceType == WOOD) {
+		//	(*resources).at(0) += points;
+		//	//*RMWood = points;
+		//}
+		//if (resourceType == STONE) {
+		//	(*resources).at(3) += points;
+		//	//*RMStone = points;
+		//}
+		//if (resourceType == SHEEP) {
+		//	(*resources).at(2) += points;
+		//	//*RMSheep = points;
+		//}
+		//if (resourceType == GRAIN) {
+		//	(*resources).at(1) += points;
+		//	//*RMGrain = points;
+		//}
 	}
 	return *resources;
 }
