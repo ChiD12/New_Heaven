@@ -23,7 +23,9 @@ public:
 	vector<BuildingTile*>* building_hand; //The player's hand of buildings.
 	vector<HarvestTile*>* harvest_hand; //The player's hand of harvest tiles.
 	VGMap* player_board; //The player's village board.
-	int* id = new int(0); //TODO add id to constructors/destructors
+	int* id = new int(0); 
+	bool has_shipment;
+	HarvestTile* shipment_tile;
 
 	Player(std::string name, int given_id, HarvestDeck given_hdeck, BuildingDeck given_bdeck);
 	~Player();
