@@ -165,23 +165,35 @@ HarvestTile::~HarvestTile()
 void HarvestTile::RotateTileRight()
 {
 	std::cout << "Rotating Right..." << endl;
-	resource_type temp = *ul_ptr;
+	resource_type* temp = ul_ptr;
 
 	this->ul_ptr = this->bl_ptr;
 	this->bl_ptr = this->br_ptr;
 	this->br_ptr = this->ur_ptr;
-	this->ur_ptr = &temp;
+	this->ur_ptr = temp;
+
+	string* temp_string = this->upper_left_str_ptr;
+	this->upper_left_str_ptr = this->bottom_left_str_ptr;
+	this->bottom_left_str_ptr = this->bottom_right_str_ptr;
+	this->bottom_right_str_ptr = this->upper_right_str_ptr;
+	this->upper_right_str_ptr = temp_string;
 }
 
 void HarvestTile::RotateTileLeft()
 {
 	std::cout << "Rotating Left..." << endl;
-	resource_type temp = *ul_ptr;
+	resource_type* temp = ul_ptr;
 
 	this->ul_ptr = this->ur_ptr;
 	this->ur_ptr = this->br_ptr;
 	this->br_ptr = this->bl_ptr;
-	this->bl_ptr = &temp;
+	this->bl_ptr = temp;
+
+	string* temp_string = this->upper_left_str_ptr;
+	this->upper_left_str_ptr = this->upper_right_str_ptr;
+	this->upper_right_str_ptr = this->bottom_right_str_ptr;
+	this->bottom_right_str_ptr = this->bottom_left_str_ptr;
+	this->bottom_left_str_ptr = temp_string;
 }
 
 void HarvestTile::PrintHarvestTile()
