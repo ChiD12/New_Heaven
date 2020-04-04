@@ -49,10 +49,10 @@ void Player::exchange(GBMap* given_board, int given_x, int given_y)
 	given_board->PrintResources();
 }
 
-bool Player::PlaceHarvestTile(GBMap* given_board, HarvestTile* given_tile, int tl_x, int tl_y, int handIndex)
+bool Player::PlaceHarvestTile(GBMap* given_board, int hand_index, int tl_x, int tl_y)
 {
-	if ((*given_board).PlaceTile(given_tile, tl_x, tl_y)) { //If the tile has been placed successfully.
-		(*harvest_hand).erase((*harvest_hand).begin() + handIndex);
+	if ((*given_board).PlaceTile(harvest_hand->at(hand_index), tl_x, tl_y)) { //If the tile has been placed successfully.
+		harvest_hand->erase(harvest_hand->begin() + hand_index);
 		this->CalculateResources(given_board, tl_x, tl_y); //Calculate the resources we just got.
 		return true;
 	}
@@ -84,9 +84,14 @@ void Player::ResourceTracker()
 
 }
 
-bool Player::BuildVillage(int given_x, int given_y, bool flipped, BuildingTile given_tile)
+bool Player::BuildVillage(int given_x, int given_y, int hand_index, bool flipped)
 {
-	return player_board->placeTile(given_x, given_y, flipped, given_tile);
+	if (player_board->placeTile(given_x, given_y, flipped, *building_hand->at(hand_index))) {
+		// remove tile that was played from hand	
+		building_hand->erase(building_hand->begin()) + (hand_index);
+		return true;
+	}
+	else return false;
 }
 
 void Player::CalculateResources(GBMap* given_board, int tl_x, int tl_y)
@@ -99,21 +104,10 @@ void Player::PrintHarvestHand()
 	cout << "These are the harvest tiles I have: " << endl;
 	int counter = 1;
 	for (HarvestTile* harvest_tile : *harvest_hand) {
-		cout << "   " << counter++ << "   ";
+		cout << "   " << counter++ << "   " << endl;
+		harvest_tile->PrintHarvestTile();
+		cout << endl;
 	}
-	cout << endl;
-	for (HarvestTile* harvest_tile : *harvest_hand){
-		cout << *(harvest_tile->upper_left_str_ptr) << *(harvest_tile->upper_right_str_ptr) << "  ";
-		//harvest_tile->PrintHarvestTile();
-	}
-	cout << endl;
-	for (HarvestTile* harvest_tile : *harvest_hand) {
-		cout << *(harvest_tile->bottom_left_str_ptr) << *(harvest_tile->bottom_right_str_ptr) << "  ";
-		//harvest_tile->PrintHarvestTile();
-	}
-	cout << endl;
-
-
 }
 
 void Player::PrintBuildingHand()

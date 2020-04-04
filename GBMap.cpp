@@ -55,7 +55,7 @@ bool GBMap::PlaceTile(HarvestTile* given_tile, int tlX, int tlY) {
 		return true;
 	}
 	else {
-		cout << "Sorry, you can't do that! A tile must be placed in an even X,Y coordinate that is valid and not occupied!";
+		cout << "Sorry, you can't do that! A tile must be placed in an even X,Y coordinate that is valid and not occupied!" << endl;
 		return false;
 	}
 };
@@ -156,7 +156,7 @@ GBMap::GBMap(int numPlayers) {
 
 
 void GBMap::PrintBoard(){
-	std::cout << " Index\t| GAME BOARD" << endl;
+	std::cout << " Y\t| GAME BOARD" << endl;
 	std::cout << "-------------------------------------" << endl;
 	for (int j = 0; j < pgbA->at(0).size(); j++){
 		std::cout << " " << j << "\t| ";
@@ -167,7 +167,7 @@ void GBMap::PrintBoard(){
 		cout << endl;
 	}
 	std::cout << "-------------------------------------" << endl;
-	std::cout << " Index\t| ";
+	std::cout << " X\t| ";
 	for (int i = 0; i < this->pgbA->size(); i++)
 		if (i < 10)
 			std::cout << " " << i << " ";
