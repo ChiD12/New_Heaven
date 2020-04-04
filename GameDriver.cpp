@@ -98,10 +98,22 @@ void gameStart() {
 	HarvestTile* starter_tile_3 = new HarvestTile(3, 3, 0, 1);
 	HarvestTile* starter_tile_4 = new HarvestTile(2, 3, 2, 1);
 
-	gameBoard->PlaceTile(starter_tile_1, 2, 2);
-	gameBoard->PlaceTile(starter_tile_2, 10, 2);
-	gameBoard->PlaceTile(starter_tile_3, 2, 10);
-	gameBoard->PlaceTile(starter_tile_4, 10, 10);
+	int x_offset = 0;
+	int y_offset = 0;
+
+	if (numOfPlayers < 4) {
+		x_offset = 2;
+	}
+
+	if (numOfPlayers < 3) {
+		x_offset = 2;
+		y_offset = 2;
+	}
+
+	gameBoard->PlaceTile(starter_tile_1, (2 - x_offset), (2 - y_offset));
+	gameBoard->PlaceTile(starter_tile_2, (10 - x_offset), (2 - y_offset));
+	gameBoard->PlaceTile(starter_tile_3, (2 - x_offset), (10 - y_offset));
+	gameBoard->PlaceTile(starter_tile_4, (10 - x_offset), (10 - y_offset));
 
 
 	//Generate the remaining number of tiles before we start.
@@ -253,7 +265,7 @@ void promptHarvestTilePlacement(int turnIndex) {
 	do {
 		// player will answer in format HARVEST_TILE_NUM X,Y
 		// e.g. 2 0 0 to place the 2nd tile in the player's hand onto (0,0).
-		cout << "Which harvest tile would **" << *players[turnIndex]->name << "** like to place and where? (or type H for Help): ";
+		cout << "Which harvest tile would **" << *players[turnIndex]->name << "** like to place and where? or H for Help): ";
 		std::getline(std::cin >> std::ws, input);
 		cout << "You inputted " << input << endl;
 
@@ -276,7 +288,7 @@ void promptHarvestTilePlacement(int turnIndex) {
 		// 1) validate 3 separate inputs (indicated by 2 spaces)
 		if (std::count(input.begin(), input.end(), ' ') == 2) {
 			string harvestTileIndexStr = input.substr(0, input.find(" "));
-			string xStr = input.substr(harvestTileIndexStr.size() + 1, input.substr(harvestTileIndexStr.size()+1).find(" "));
+			string xStr = input.substr(harvestTileIndexStr.size() + 1, input.substr(harvestTileIndexStr.size() + 1).find(" "));
 			string yStr = input.substr(harvestTileIndexStr.size() + xStr.size() + 2);
 
 			// 2) validate first input (harvest tile index) is a digit
