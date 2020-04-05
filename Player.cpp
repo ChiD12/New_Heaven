@@ -5,7 +5,7 @@
 class GBMap;
 
 
-Player::Player(std::string given_name, int given_id,  HarvestDeck given_hdeck, BuildingDeck given_bdeck) {
+Player::Player(std::string given_name, int given_id,  HarvestDeck* given_hdeck, BuildingDeck* given_bdeck) {
 	this->name = new string(given_name);
 	this->id = new int(given_id);
 
@@ -20,7 +20,7 @@ Player::Player(std::string given_name, int given_id,  HarvestDeck given_hdeck, B
 
 	cout << *this->name << " is taking their shipment tile, how mysterious!" << endl;
 
-	this->shipment_tile = given_hdeck.DrawHarvestTile();
+	this->shipment_tile = given_hdeck->DrawHarvestTile();
 
 	this->has_shipment = new bool(true);
 
@@ -84,21 +84,21 @@ bool Player::PlaceShipmentTile(GBMap * given_board, int resource_index, int give
 	else {return false;}
 }
 
-void Player::DrawBuilding(int number_of_cards, BuildingDeck given_deck)
+void Player::DrawBuilding(int number_of_cards, BuildingDeck* given_deck)
 {
 	for (int i = 0; i < number_of_cards; i++) {
 		cout << *this->name << " is drawing a building tile!" << endl;
-		this->building_hand->push_back(given_deck.DrawBuildingTile()); //Draw a building tile from the "deck" and add it to the hand vector. Do this for as many cards are requested.
+		this->building_hand->push_back(given_deck->DrawBuildingTile()); //Draw a building tile from the "deck" and add it to the hand vector. Do this for as many cards are requested.
 		
 	}
 }
 
-void Player::DrawHarvestTile(int number_of_cards, HarvestDeck given_deck)
+void Player::DrawHarvestTile(int number_of_cards, HarvestDeck* given_deck)
 {
 
 	for (int i = 0; i < number_of_cards; i++) {
 		cout << *this->name << " is drawing a harvest tile!" << endl;
-		this->harvest_hand->push_back(given_deck.DrawHarvestTile()); //Draw a building tile from the "deck" and add it to the hand vector. Do this for as many cards are requested.
+		this->harvest_hand->push_back(given_deck->DrawHarvestTile()); //Draw a building tile from the "deck" and add it to the hand vector. Do this for as many cards are requested.
 		
 	}
 	

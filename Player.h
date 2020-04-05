@@ -27,7 +27,7 @@ public:
 	bool* has_shipment;
 	HarvestTile* shipment_tile;
 
-	Player(std::string name, int given_id, HarvestDeck given_hdeck, BuildingDeck given_bdeck);
+	Player(std::string name, int given_id, HarvestDeck* given_hdeck, BuildingDeck* given_bdeck);
 	~Player();
 
 	void exchange(GBMap* given_board, int given_x, int given_y); //Picks a point on the game board, calculates the resources, and then moves the resource markers on the game board.
@@ -36,9 +36,9 @@ public:
 
 	bool PlaceShipmentTile(GBMap* given_board, int resource_type, int given_x, int given_y);
 
-	void DrawBuilding(int number_of_cards, BuildingDeck given_deck); //Draw a building tile from the deck and add it to the hand vector.
+	void DrawBuilding(int number_of_cards, BuildingDeck* given_deck); //Draw a building tile from the deck and add it to the hand vector.
 
-	void DrawHarvestTile(int number_of_cards, HarvestDeck given_deck); //Draw a harvest tile from the deck and add it to the hand vector.
+	void DrawHarvestTile(int number_of_cards, HarvestDeck* given_deck); //Draw a harvest tile from the deck and add it to the hand vector.
 
 	void ResourceTracker(); //Can be called at any time to show which resources the player currently has in their possession.
 

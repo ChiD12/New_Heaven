@@ -138,13 +138,13 @@ void gameStart() {
 		remainingTiles = 1;
 
 
-	harvest_deck = HarvestDeck();
-	cout << "A harvest deck has been created with " << harvest_deck.GetCardCount() << " cards." << endl;
-	building_deck = BuildingDeck();
-	cout << "A building deck has been created with " << building_deck.GetCardCount() << " cards." << endl;
+	harvest_deck = new HarvestDeck();
+	cout << "A harvest deck has been created with " << harvest_deck->GetCardCount() << " cards." << endl;
+	building_deck = new BuildingDeck();
+	cout << "A building deck has been created with " << building_deck->GetCardCount() << " cards." << endl;
 
 	for (int i = 0; i < gameBoard->buildings->size(); i++) {
-		gameBoard->buildings->at(i) = building_deck.DrawBuildingTile();
+		gameBoard->buildings->at(i) = building_deck->DrawBuildingTile();
 	}
 
 	string player_name;
@@ -262,7 +262,7 @@ void drawVillage(int turn) {
 
 	for (int i = 0; i < 6; i++) { //refill any empty building spots on map
 		if (empty[i] == true) {
-			gameBoard->buildings->at(i) = building_deck.DrawBuildingTile();;
+			gameBoard->buildings->at(i) = building_deck->DrawBuildingTile();
 		}
 	}
 	cout << endl;

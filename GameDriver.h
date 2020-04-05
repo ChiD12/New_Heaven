@@ -10,8 +10,8 @@ int numOfPlayers;
 int remainingTiles;
 Player* players[4];
 GBMap* gameBoard;
-HarvestDeck harvest_deck;
-BuildingDeck building_deck;
+HarvestDeck* harvest_deck;
+BuildingDeck* building_deck;
 
 void gameStart();
 int findFirstPlayer();
