@@ -8,12 +8,16 @@ using namespace std;
 
 int main() {
 
+	//call to run Part 1 method
 	gameStart();
 
 	bool gameEnd = false;
 
+	//finds what index the player with the smallest id is
+	//Part 2.1
 	int turnCounter = findFirstPlayer();
 
+	//Gameloop containing part 2.2 and 2.3, plays Harvest Tile, Village Tile and draws cards
 	while (!gameEnd) {
 		int turn = turnCounter % numOfPlayers;
 
@@ -28,6 +32,7 @@ int main() {
 		cout << "You currently are holding these Harvest Tiles: " << endl;
 		players[turn]->PrintHarvestHand();
 
+		// Part 3.1 method,
 		promptHarvestTilePlacement(turn);
 		cout << endl;
 		cout << "***************************************************************" << endl;
@@ -39,6 +44,7 @@ int main() {
 
 		//begin the loop for players to place their village tiles, frst the current turn player gets to place as many tiles as they want
 		//then the rest of the players gets a turn to try to use the remaining resources to play as many village tiles as they wish
+		//Part 3.4 loop
 		for (int i = 0; i < numOfPlayers; i++) {
 			int clockwisePlayers = (turn + i) % numOfPlayers;
 
@@ -56,6 +62,7 @@ int main() {
 			//if current player wishes to build, then promt them for where, and thenreprint the board and ask if they wish to build again
 			//if not then next player gets a turn to build
 			while (response.compare("y") == 0) {
+				//part 3.3
 				promptBuildingTilePlacement(clockwisePlayers);
 
 				players[clockwisePlayers]->player_board->PrintVillageBoard();
@@ -66,6 +73,7 @@ int main() {
 			}
 		}
 
+		//Method for part 3.5
 		drawVillage(turn);
 		players[turn]->DrawHarvestTile(1, harvest_deck);
 
@@ -76,10 +84,12 @@ int main() {
 		*(gameBoard->RMGrain) = 0;
 
 		turnCounter++;
-		if (remainingTiles < 1) {
+		//Game loop ends when there is only 1 tile remaining on board
+		if (remainingTiles < 2) {
 			gameEnd = true;
 		}
 	}
+	//Method for Part 4
 	computeGameScore();
 }
 
@@ -166,6 +176,7 @@ void gameStart() {
 	}
 }
 
+//returns index of player with smallest id
 int findFirstPlayer() {
 	Player* min = players[0];
 	int minIndex = 0;
@@ -178,6 +189,8 @@ int findFirstPlayer() {
 	return minIndex;
 }
 
+//Method for 3.5 which takes the current player index and prompts that player to draw up to 4 new village tiles
+//depending on how many resources have reached 0 for that turn
 void drawVillage(int turn) {
 	cout << endl;
 	cout << "*********************************************************" << endl;
@@ -197,7 +210,9 @@ void drawVillage(int turn) {
 
 	bool empty[6] = { false, false, false, false, false, false };
 	bool invalidResponse = true;
+
 	for (int i = 0; i < drawCounter; i++) {
+		//keeps asking for user input until it is valid 
 		do {
 			invalidResponse = true;
 
@@ -216,7 +231,7 @@ void drawVillage(int turn) {
 			if (response.length() == 1) {
 				if (std::all_of(response.begin(), response.end(), ::isdigit)) {
 					int x = stoi(response);
-					if (x > 0 && x < 7) {
+					if (x > 0 && x < 7) { //if it is a number between 1 and 6
 						if (!empty[x - 1]) { //if that spot on the board is not empty
 							players[turn]->building_hand->push_back(gameBoard->buildings->at(x - 1));
 							gameBoard->buildings->at(x - 1) = NULL;
@@ -231,7 +246,7 @@ void drawVillage(int turn) {
 						cout << "invalid index" << endl;
 					}
 				}
-				else if (response.compare("d") == 0 && i != 0) { //if player chooses to draw from deck if not on first draw
+				else if (response.compare("d") == 0 && i != 0) { //if player chooses to draw from deck, cannot be done on first draw
 					players[turn]->DrawBuilding(1, building_deck);
 					invalidResponse = false;
 				}
@@ -331,6 +346,7 @@ void promptHarvestTilePlacement(int turnIndex) {
 									} while (!done);
 
 									// 9) place the tile
+									//Placing tile also calls exchange to update resources
 									validInput = players[turnIndex]->PlaceHarvestTile(gameBoard, harvestTileIndex, x, y);
 								}
 							}
