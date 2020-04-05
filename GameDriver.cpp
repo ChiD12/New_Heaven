@@ -512,7 +512,7 @@ void promptBuildingTilePlacement(int turnIndex) {
 										//     this must be remembered here, because the tile in hand is erased immediately after placed onto the board.
 										int numResourcesToDeduct;
 										building_type resourceToDeduct = *players[turnIndex]->building_hand->at(buildingTileIndex)->bt_ptr;
-										if (flipped)
+										if (!flipped)
 											numResourcesToDeduct = *players[turnIndex]->building_hand->at(buildingTileIndex)->bv_ptr;
 										else
 											numResourcesToDeduct = (*players[turnIndex]->player_board->height - y);
