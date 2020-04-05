@@ -54,10 +54,19 @@ int main() {
 			players[clockwisePlayers]->player_board->PrintVillageBoard();
 			gameBoard->PrintResources();
 			players[clockwisePlayers]->PrintBuildingHand();
+			
 			cout << endl;
 			cout << "**" << *(players[clockwisePlayers]->name) << "** do you wish to place a village tile with remaining resources? (y or n)";
 			string response;
 			cin >> response;
+
+			//loop until valid response
+			while (response.length() > 1 || (response.compare("y") != 0 && response.compare("n") != 0)) {
+				cout << "invalid response" << endl;
+				cout << endl;
+				cout << "**" << *(players[clockwisePlayers]->name) << "** do you wish to place a village tile with remaining resources? (y or n)";
+				cin >> response;
+			}
 
 			//if current player wishes to build, then promt them for where, and thenreprint the board and ask if they wish to build again
 			//if not then next player gets a turn to build
@@ -70,6 +79,14 @@ int main() {
 				players[clockwisePlayers]->PrintBuildingHand();
 				cout << "**" << *(players[clockwisePlayers]->name) << "** do you wish to place a village tile with remaining resources? (y or n)" << endl;
 				cin >> response;
+
+				//loop until valid response
+				while (response.length() > 1 || (response.compare("y") != 0 && response.compare("n") != 0)) {
+					cout << "invalid response" << endl;
+					cout << endl;
+					cout << "**" << *(players[clockwisePlayers]->name) << "** do you wish to place a village tile with remaining resources? (y or n)";
+					cin >> response;
+				}
 			}
 		}
 
