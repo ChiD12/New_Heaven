@@ -76,6 +76,7 @@ bool Player::PlaceShipmentTile(GBMap * given_board, int resource_index, int give
 	HarvestTile* place_me = new HarvestTile(resource_index, resource_index, resource_index, resource_index);
 
 	if (given_board->PlaceTile(place_me, given_x, given_y) == true) {
+		exchange(given_board, given_x, given_y);
 		delete has_shipment;
 		this->has_shipment = new bool(false);
 		return true;
