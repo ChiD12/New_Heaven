@@ -271,7 +271,26 @@ HarvestDeck::HarvestDeck()
 	
 }
 
-HarvestDeck::~HarvestDeck() {}
+HarvestDeck::HarvestDeck(const HarvestDeck & given_deck)
+{
+	harvest_card_count = new int(*given_deck.harvest_card_count);
+	harvest_deck = new vector<HarvestTile>(*given_deck.harvest_deck);
+}
+
+HarvestDeck & HarvestDeck::operator=(const HarvestDeck & given_deck)
+{
+	harvest_card_count = new int(*given_deck.harvest_card_count);
+	harvest_deck = new vector<HarvestTile>(*given_deck.harvest_deck);
+
+	return *this;
+}
+
+HarvestDeck::~HarvestDeck() {
+	delete harvest_card_count;
+	harvest_card_count = nullptr;
+	harvest_deck->clear();
+	harvest_deck = nullptr;
+}
 
 int HarvestDeck::GetCardCount()
 {
@@ -346,8 +365,27 @@ BuildingDeck::BuildingDeck() //FOREST, WHEATFIELD, MEADOW, QUARRY
 	
 }
 
+BuildingDeck::BuildingDeck(const BuildingDeck & given_deck)
+{
+	building_card_count = new int(*given_deck.building_card_count);
+	building_deck = new vector<BuildingTile>(*given_deck.building_deck);
+}
 
-BuildingDeck::~BuildingDeck(){}
+BuildingDeck & BuildingDeck::operator=(const BuildingDeck & given_deck)
+{
+	building_card_count = new int(*given_deck.building_card_count);
+	building_deck = new vector<BuildingTile>(*given_deck.building_deck);
+
+	return *this;
+}
+
+
+BuildingDeck::~BuildingDeck(){
+	delete building_card_count;
+	building_deck->clear();
+	building_card_count = nullptr;
+	building_deck = nullptr;
+}
 int BuildingDeck::GetCardCount() { return *this->building_card_count; }
 
 BuildingTile::BuildingTile()

@@ -35,7 +35,7 @@ public:
 	HarvestTile();
 	HarvestTile(bool given_bool);
 	HarvestTile(int ul, int ur, int bl, int br);
-	HarvestTile(const HarvestTile&);
+	HarvestTile(const HarvestTile &given_tile);
 	HarvestTile& operator=(const HarvestTile& given_tile);
 	~HarvestTile();
 
@@ -55,6 +55,8 @@ private:
 
 public:
 	HarvestDeck();
+	HarvestDeck(const HarvestDeck &given_deck);
+	HarvestDeck& operator=(const HarvestDeck& given_deck);
 	~HarvestDeck();
 
 	int GetCardCount();
@@ -105,6 +107,8 @@ private:
 
 public:
 	BuildingDeck();
+	BuildingDeck(const BuildingDeck &given_deck);
+	BuildingDeck& operator=(const BuildingDeck& given_deck);
 	~BuildingDeck();
 	int GetCardCount();
 	BuildingTile* DrawBuildingTile(); //Returns a pointer to a BuildingTile and decrements the deck count.

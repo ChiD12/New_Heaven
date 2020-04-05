@@ -38,9 +38,13 @@ Player::~Player()
 	delete id;
 	delete name;
 	delete player_board;
+	delete has_shipment;
+	delete shipment_tile;
 	id = nullptr;
 	name = nullptr;
 	player_board = nullptr;
+	has_shipment = nullptr;
+	shipment_tile = nullptr;
 
 	building_hand->clear();
 	harvest_hand->clear();
@@ -72,6 +76,7 @@ bool Player::PlaceShipmentTile(GBMap * given_board, int resource_index, int give
 	HarvestTile* place_me = new HarvestTile(resource_index, resource_index, resource_index, resource_index);
 
 	if (given_board->PlaceTile(place_me, given_x, given_y) == true) {
+		delete has_shipment;
 		this->has_shipment = new bool(false);
 		return true;
 	}
