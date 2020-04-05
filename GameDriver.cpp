@@ -291,22 +291,22 @@ void promptHarvestTilePlacement(int turnIndex) {
 			string xStr = input.substr(harvestTileIndexStr.size() + 1, input.substr(harvestTileIndexStr.size() + 1).find(" "));
 			string yStr = input.substr(harvestTileIndexStr.size() + xStr.size() + 2);
 
-			// 2) validate first input (harvest tile index) is a digit
-			if (std::all_of(harvestTileIndexStr.begin(), harvestTileIndexStr.end(), ::isdigit)) {
-				harvestTileIndex = std::stoi(harvestTileIndexStr);
-				// 3) validate the number chosen fits in range
-				if (harvestTileIndex > 0 && harvestTileIndex <= players[turnIndex]->harvest_hand->size()) {
-					harvestTileIndex--;
-					// 4) validate the 2nd input (x coordinate) is a digit
-					if (std::all_of(xStr.begin(), xStr.end(), ::isdigit)) {
-						x = std::stoi(xStr);
-						// 5) validate the x coordinate chosen fits in range
-						if (x < gameBoard->pgbA->size()) {
-							// 6) validate the 3rd input (y coordinate) is a digit
-							if (std::all_of(yStr.begin(), yStr.end(), ::isdigit)) {
-								y = std::stoi(yStr);
-								// 7) validate the y coordinate chosen fits in range
-								if (y < gameBoard->pgbA->at(0).size()) {
+			// 2) validate the 2nd input (x coordinate) is a digit
+			if (std::all_of(xStr.begin(), xStr.end(), ::isdigit)) {
+				x = std::stoi(xStr);
+				// 3) validate the x coordinate chosen fits in range
+				if (x < gameBoard->pgbA->size()) {
+					// 4) validate the 3rd input (y coordinate) is a digit
+					if (std::all_of(yStr.begin(), yStr.end(), ::isdigit)) {
+						y = std::stoi(yStr);
+						// 5) validate the y coordinate chosen fits in range
+						if (y < gameBoard->pgbA->at(0).size()) {
+							// 6) validate first input (harvest tile index) is a digit
+							if (std::all_of(harvestTileIndexStr.begin(), harvestTileIndexStr.end(), ::isdigit)) {
+								harvestTileIndex = std::stoi(harvestTileIndexStr);
+								// 7) validate the number chosen fits in range
+								if (harvestTileIndex > 0 && harvestTileIndex <= players[turnIndex]->harvest_hand->size()) {
+									harvestTileIndex--;
 									// ---------------------------------------------------
 									// DONE INPUT CHECK
 									// ---------------------------------------------------
@@ -330,8 +330,44 @@ void promptHarvestTilePlacement(int turnIndex) {
 
 									} while (!done);
 
-									// 9) place the tile
+									// ---------------------------------------------------
+									// PLACE THE TILE
+									// ---------------------------------------------------
 									validInput = players[turnIndex]->PlaceHarvestTile(gameBoard, harvestTileIndex, x, y);
+								}
+								// ---------------------------------------------------
+								// SHIPMENT TILE PROMPT
+								// ---------------------------------------------------
+								else if (harvestTileIndex == players[turnIndex]->harvest_hand->size() + 1) {
+
+									int resourceTypeIndex;
+									string resourceTypeInput;
+									bool validResourceTypeInput = false;
+
+									do {
+										cout << "1) WOOD" << endl;
+										cout << "2) GRAIN" << endl;
+										cout << "3) SHEEP" << endl;
+										cout << "4) STONE" << endl;
+										cout << "Please pick a resource type to fill your shipment tile with [1-4]: ";
+										cin >> resourceTypeInput;
+										cout << endl;
+
+										// validate resource type input is simply 1-4
+										if (resourceTypeInput.size() == 1) {
+											if (std::all_of(resourceTypeInput.begin(), resourceTypeInput.end(), ::isdigit)) {
+												int resourceTypeIndex = std::stoi(resourceTypeInput);
+												if (resourceTypeIndex > 0 && resourceTypeIndex < 5) {
+													validResourceTypeInput = true; 
+													validInput = players[turnIndex]->PlaceShipmentTile(gameBoard, resourceTypeIndex - 1, x, y);
+												}
+											}
+										}
+
+										if (!validResourceTypeInput)
+											cout << "Sorry! I didn't quite get that." << endl;
+
+									} while (!validResourceTypeInput);
 								}
 							}
 						}

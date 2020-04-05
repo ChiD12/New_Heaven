@@ -134,7 +134,7 @@ void Player::PrintHarvestHand()
 	}
 
 	if (*this->has_shipment == true) {
-		cout << "   " << "3" << "   " << endl;
+		cout << "   " << harvest_hand->size()+1 << "   " << endl;
 		cout << "[?]" << "[?]" << endl;
 		cout << "[?]" << "[?]" << endl;
 	}
