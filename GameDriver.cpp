@@ -199,13 +199,13 @@ void drawVillage(int turn) {
 	gameBoard->PrintResources();
 
 	//checks how many resources are at 0 to see how many new village tiles may be drawn
-	if (*(gameBoard->RMWood) == 0)
+	if (*(gameBoard->RMWood) < 1)
 		drawCounter++;
-	if (*(gameBoard->RMStone) == 0)
+	if (*(gameBoard->RMStone) < 1)
 		drawCounter++;
-	if (*(gameBoard->RMSheep) == 0)
+	if (*(gameBoard->RMSheep) < 1)
 		drawCounter++;
-	if (*(gameBoard->RMGrain) == 0)
+	if (*(gameBoard->RMGrain) < 1)
 		drawCounter++;
 
 	bool empty[6] = { false, false, false, false, false, false };
