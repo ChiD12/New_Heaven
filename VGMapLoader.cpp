@@ -41,6 +41,8 @@ void VGMapLoader::loadMap(string filename) {
 			// assign invalid node if token is X
 			else if (token == "X")
 				temp_map.back().push_back(new BuildingTile(x, y, false));
+			else
+				throw "ERROR LOADING vILLAGE MAP: UNRECOGNIZABLE SYMBOL.";
 
 			line.erase(0, i + 1);
 			x++;

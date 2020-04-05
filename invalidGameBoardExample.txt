@@ -1,0 +1,10 @@
+Z,N,N,N,N,N,N,N,N,N
+N,N,N,Z,N,N,N,N,N,N
+N,N,N,N,N,N,N,N,N,N
+N,N,N,N,N,N,N,N,N,N
+N,N,N,N,N,N,N,N,N,N
+N,N,N,N,T,N,N,N,N,N
+N,N,N,N,N,N,N,N,N,N
+N,N,N,N,N,N,N,N,N,N
+N,N,N,N,N,N,D,N,N,N
+N,N,N,N,N,N,x,x,x,x

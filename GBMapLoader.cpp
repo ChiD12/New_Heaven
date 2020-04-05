@@ -55,6 +55,9 @@ void GBMapLoader::loadMap(int numPlayers) {
 			// assign invalid node if token is X
 			else if (token == "X")
 				temp_map.back().push_back(new Node(x, y, false));
+			else
+				throw "ERROR LOADING GAME BOARD MAP: UNRECOGNIZABLE SYMBOL.";
+			
 
 			line.erase(0, i + 1);
 			x++;
