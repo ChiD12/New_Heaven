@@ -616,16 +616,16 @@ void deductResources(building_type bt_ptr, int numResourcesToDeduct) {
 	}
 }
 
-void computeGameScore() {
+void computeGameScore() { //
 	vector<Player*> player_list;
 	for (size_t i = 0; i < numOfPlayers; i++) {
 		player_list.push_back(players[i]);
 	}
 
-	int hiscore = 0; //find player with highest score and store any player with same score in a vector, can probably have this as a method tha return a vector of *Players and accept a vector of *Players to avoid redundancy
+	int hiscore = 0; //find player with highest score and store any player with same score in a vector
 	vector<int> player_scores;
 
-	for (size_t i = 0; i < player_list.size(); i++) {
+	for (size_t i = 0; i < player_list.size(); i++) { //put every player score in a vector and update the hiscore with the biggest value seen
 		int score = (*(player_list)[i]->player_board).calculateScore();
 		player_scores.push_back(score);
 		if (score > hiscore) {
@@ -633,19 +633,19 @@ void computeGameScore() {
 		}
 	}
 
-	vector<Player*> hiscore_player_list;
+	vector<Player*> hiscore_player_list; //put player in a high score player vector if their score is same as the highest score seen
 	for (size_t i = 0; i < player_scores.size(); i++) {
 		if (hiscore == player_scores[i]) {
 			hiscore_player_list.push_back(player_list[i]);
 		}
 	}
 
-	if (hiscore_player_list.size() > 1) {
+	if (hiscore_player_list.size() > 1) {//given that there is more than one highest score player
 
-		int most_filled = 0; //find player with the most filled village and store any player with same placed buildingTile number in a vector
+		int most_filled = 0;
 		vector<int> player_VGtiles;
 
-		for (size_t i = 0; i < hiscore_player_list.size(); i++) {
+		for (size_t i = 0; i < hiscore_player_list.size(); i++) { //put every player's village board's village number in a vector and update most_filled with the highest village number seen
 			int filled_tiles = 0;
 			VGMap& temp_village_board = *(players[i]->player_board);
 			for (size_t j = 0; j < temp_village_board.map->size(); j++) {
@@ -661,19 +661,19 @@ void computeGameScore() {
 			}
 		}
 
-		vector<Player*> most_village_players;
+		vector<Player*> most_village_players; //put players sharing highest score in a highest village number player vector if their village number is the same as the highest village number seen
 		for (size_t i = 0; i < player_VGtiles.size(); i++) {
 			if (player_VGtiles[i] == most_filled) {
 				most_village_players.push_back(hiscore_player_list[i]);
 			}
 		}
 
-		if (most_village_players.size() > 1) {
+		if (most_village_players.size() > 1) { //given there is more than one highest village number player
 
-			int least_VGhand = most_village_players[0]->building_hand->size(); // find player with least buildingTiles on hand, store any player with equal number of buildingTiles in a vector
+			int least_VGhand = most_village_players[0]->building_hand->size(); 
 
 			vector<int> player_VGhand;
-			for (size_t i = 0; i < most_village_players.size(); i++) {
+			for (size_t i = 0; i < most_village_players.size(); i++) { //put every player's hand's building number in a vector and update least_VGhand with the smallest building number seen
 				int VGhand_size = most_village_players[i]->building_hand->size();
 				player_VGhand.push_back(VGhand_size);
 				if (VGhand_size < least_VGhand) {
@@ -681,22 +681,22 @@ void computeGameScore() {
 				}
 			}
 
-			vector<Player*> least_VGhand_players;
+			vector<Player*> least_VGhand_players;//put players sharing the highest village number in a winning player vector if their hand's building number is the same as the smallest building number seen
 			for (size_t i = 0; i < player_VGhand.size(); i++) {
 				if (player_VGhand[i] == least_VGhand) {
 					least_VGhand_players.push_back(most_village_players[i]);
 				}
 			}
 
-			displayWinner(least_VGhand_players);//print winner with least village on hands
+			displayWinner(least_VGhand_players);//if more than one player has the most filled village board print winner with least buildings on hands
 			return;
 		}
 
-		displayWinner(most_village_players);//print winner with most filled village
+		displayWinner(most_village_players);//if more than one player has the highest score print winner with most filled village
 		return;
 	}
 
-	displayWinner(hiscore_player_list);	//prrint winner with highest score
+	displayWinner(hiscore_player_list);	//print winner with highest score
 	return;
 }
 
