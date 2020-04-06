@@ -9,24 +9,24 @@ Player::Player(std::string given_name, int given_id,  HarvestDeck* given_hdeck, 
 	this->name = new string(given_name);
 	this->id = new int(given_id);
 
-	building_hand = new vector<BuildingTile*>();
-	harvest_hand = new vector<HarvestTile*>();
+	building_hand = new vector<BuildingTile*>(); // 9)
+	harvest_hand = new vector<HarvestTile*>(); // 9)
 
-	player_board = new VGMap();
+	player_board = new VGMap(); // 5)
 
 	cout << *this->name << " is going to draw their starting tiles!" << endl;
 
-	this->DrawHarvestTile(2, given_hdeck);
+	this->DrawHarvestTile(2, given_hdeck); // 10)
 
 	cout << *this->name << " is taking their shipment tile, how mysterious!" << endl;
 
-	this->shipment_tile = given_hdeck->DrawHarvestTile();
+	this->shipment_tile = given_hdeck->DrawHarvestTile(); // 11)
 
-	this->has_shipment = new bool(true);
+	this->has_shipment = new bool(true); 
 
 	cout << *this->name << " has drawn their harvest tiles and will now draw their building tiles.." << endl;
 
-	this->DrawBuilding(6, given_bdeck);
+	this->DrawBuilding(6, given_bdeck); // 10)
 
 
 

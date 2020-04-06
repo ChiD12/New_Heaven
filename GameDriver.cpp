@@ -111,15 +111,15 @@ int main() {
 }
 
 
-void gameStart() {
+void gameStart() { //Beginning of part 1
 
 	cout << "Starting game!" << endl;
-	cout << "How many people will be playing today?: ";
+	cout << "How many people will be playing today?: "; // 1) Select the number of players in the game (2-4 players).
 	cin >> numOfPlayers;
 	cout << "Great! You've chosen to play with " << numOfPlayers << " players." << endl;
 
-	gameBoard = new GBMap(numOfPlayers);
-
+	gameBoard = new GBMap(numOfPlayers); // 2) Create the game map. (The constructor for GBMap uses the map loader to load the correct map from the directory).
+	// 3) The GBMap will then set the resourcetracker resource markers to 0 by default.
 	HarvestTile* starter_tile_1 = new HarvestTile(3, 2, 0, 0);
 	HarvestTile* starter_tile_2 = new HarvestTile(1, 2, 1, 0);
 	HarvestTile* starter_tile_3 = new HarvestTile(3, 3, 0, 1);
@@ -155,26 +155,36 @@ void gameStart() {
 		remainingTiles = 1;
 
 
-	harvest_deck = new HarvestDeck();
+	harvest_deck = new HarvestDeck(); // 6) Create a concrete deck of 60 harvest tiles.
 	cout << "A harvest deck has been created with " << harvest_deck->GetCardCount() << " cards." << endl;
-	building_deck = new BuildingDeck();
+	building_deck = new BuildingDeck(); // 7) Create a concrete deck of 144 building tiles.
 	cout << "A building deck has been created with " << building_deck->GetCardCount() << " cards." << endl;
 
 	for (int i = 0; i < gameBoard->buildings->size(); i++) {
-		gameBoard->buildings->at(i) = building_deck->DrawBuildingTile();
+		gameBoard->buildings->at(i) = building_deck->DrawBuildingTile(); // 8) Use DrawBuilding() to draw 5 tiles to form the initial face up pool of the game.
 	}
 
 	string player_name;
 	int player_id;
 	int counter = 0;
 
-	while (counter < numOfPlayers) {
+	while (counter < numOfPlayers) { // 4) Create the player objects.
 		cout << "***********************************************************" << endl;
 		cout << "Enter the name of Player " << (counter + 1) << ": ";
 		cin >> player_name;
 		cout << "Enter the id of Player " << (counter + 1) << ": ";
 		cin >> player_id;
-		players[counter] = new Player(player_name, player_id, harvest_deck, building_deck);
+		players[counter] = new Player(player_name, player_id, harvest_deck, building_deck); 
+
+		/*
+		9)	A player's constructor is called creating an empty hand of cards.
+		10)	A player's constructor then takes 2 decks as parameters and draws their starting hands from the decks.
+		11) A player's constructor then also draws a third harvest tile face down which will act as their shipment tile for later use.
+		
+		You can find these numbers marked in the player constructor to better understand when these actions take place.
+		*/
+
+		//5) The player constructor creates a VGMap and a name will then be assigned to their village board.
 		//Stratford, Guilford, Fairfield, Milford.
 		if (counter == 0) {
 			players[counter]->player_board->setName("Stratford");
