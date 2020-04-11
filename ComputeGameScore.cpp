@@ -1,4 +1,7 @@
-#include "GameDriver.h"
+//This driver is essentially the same as GameDriver except that the current winner is displayed at the end of every player turn.
+//This will show that the computeGameScore() method is behaving according to the instructions given in part 4.
+
+#include "ComputeGameScore.h"
 #include <limits.h>
 #include <iostream>
 #include <string>
@@ -54,7 +57,7 @@ int main() {
 			players[clockwisePlayers]->player_board->PrintVillageBoard();
 			gameBoard->PrintResources();
 			players[clockwisePlayers]->PrintBuildingHand();
-			
+
 			cout << endl;
 			cout << "**" << *(players[clockwisePlayers]->name) << "** do you wish to place a village tile with remaining resources? (y or n)";
 			string response;
@@ -105,8 +108,9 @@ int main() {
 		if (remainingTiles < 2) {
 			gameEnd = true;
 		}
+		//Method for Part 4
+		computeGameScore();
 	}
-	computeGameScore();
 }
 
 
@@ -173,13 +177,13 @@ void gameStart() { //Beginning of part 1
 		cin >> player_name;
 		cout << "Enter the id of Player " << (counter + 1) << ": ";
 		cin >> player_id;
-		players[counter] = new Player(player_name, player_id, harvest_deck, building_deck); 
+		players[counter] = new Player(player_name, player_id, harvest_deck, building_deck);
 
 		/*
 		9)	A player's constructor is called creating an empty hand of cards.
 		10)	A player's constructor then takes 2 decks as parameters and draws their starting hands from the decks.
 		11) A player's constructor then also draws a third harvest tile face down which will act as their shipment tile for later use.
-		
+
 		You can find these numbers marked in the player constructor to better understand when these actions take place.
 		*/
 
@@ -400,7 +404,7 @@ void promptHarvestTilePlacement(int turnIndex) {
 											if (std::all_of(resourceTypeInput.begin(), resourceTypeInput.end(), ::isdigit)) {
 												int resourceTypeIndex = std::stoi(resourceTypeInput);
 												if (resourceTypeIndex > 0 && resourceTypeIndex < 5) {
-													validResourceTypeInput = true; 
+													validResourceTypeInput = true;
 													validInput = players[turnIndex]->PlaceShipmentTile(gameBoard, resourceTypeIndex - 1, x, y);
 												}
 											}
@@ -669,7 +673,7 @@ void computeGameScore() { //
 
 		if (most_village_players.size() > 1) { //given there is more than one highest village number player
 
-			int least_VGhand = most_village_players[0]->building_hand->size(); 
+			int least_VGhand = most_village_players[0]->building_hand->size();
 
 			vector<int> player_VGhand;
 			for (size_t i = 0; i < most_village_players.size(); i++) { //put every player's hand's building number in a vector and update least_VGhand with the smallest building number seen
@@ -700,7 +704,7 @@ void computeGameScore() { //
 }
 
 void displayWinner(vector<Player*> winners) {
-	cout << "\nGame finished:\n";
+	cout << "\nCurrent Winner:\n";
 	for (Player* winner : winners) {
 		cout << "Winner: " << *(winner->name) << " Score: " << (*winner->player_board).calculateScore() << endl;
 	}
