@@ -3,15 +3,18 @@
 #include "GBMap.h"
 #include "VGMap.h"
 #include "Player.h"
+#include "GameState.h"
 #include <vector>
 #include <string>
 
-int numOfPlayers;
-int remainingTiles;
-Player* players[4];
-GBMap* gameBoard;
-HarvestDeck* harvest_deck;
-BuildingDeck* building_deck;
+//int numOfPlayers;
+//int remainingTiles;
+//Player* players[4];
+//GBMap* gameBoard;
+//HarvestDeck* harvest_deck;
+//BuildingDeck* building_deck;
+
+GameState* gameState;
 
 void gameStart();
 int findFirstPlayer();
