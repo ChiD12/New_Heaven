@@ -2,10 +2,10 @@
 #include <vector>
 #include "Resources.h"
 #include "Player.h"
+#include "Subject.h"
 
 
-
-class  GameState {
+class  GameState : public Subject {
 public:
 
 	int* numOfPlayers = new int;
