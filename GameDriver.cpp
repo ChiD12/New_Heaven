@@ -19,7 +19,9 @@ int main() {
 
 	//Gameloop containing part 2.2 and 2.3, plays Harvest Tile, Village Tile and draws cards
 	while (!gameEnd) {
-		int turn = turnCounter % *(gameState->numOfPlayers);
+		*(gameState->currentTurn) = turnCounter % *(gameState->numOfPlayers);
+
+		int& turn = *(gameState->currentTurn);
 
 		cout << endl;
 		cout << "*************************************************************" << endl;

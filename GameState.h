@@ -10,6 +10,7 @@ public:
 
 	int* numOfPlayers = new int;
 	int* remainingTiles = new int;
+	int* currentTurn = new int;
 	Player* players[4];
 	GBMap* gameBoard;
 	HarvestDeck* harvest_deck;
