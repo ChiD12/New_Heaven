@@ -704,6 +704,9 @@ void computeGameScore() { //
 
 void displayWinner(vector<Player*> winners) {
 	cout << "\nGame finished:\n";
+	if (winners.size() > 1) {
+		cout << "\nTied between:\n";
+	}
 	for (Player* winner : winners) {
 		cout << "Winner: " << *(winner->name) << " Score: " << (*winner->player_board).calculateScore() << endl;
 	}
