@@ -1,10 +1,10 @@
-#include "GameState.h"
+//#include "GameState.h"
 
 //Subject::Subject() {
 //	observers = new list<Observer*>;
 //}
 //
-GameState::GameState() {};
+//GameState::GameState() {};
 //
 //Subject::~Subject() {
 //	delete observers;

@@ -126,7 +126,45 @@ void Player::CalculateResources(GBMap* given_board, int tl_x, int tl_y)
  
 void Player::PrintHarvestHand()
 {
-	cout << "These are the harvest tiles I have: " << endl;
+	cout << "------------------------------------------------------------------------------------------------------------------" << endl;
+	cout << "Harvest Tiles: {W:WOOD|G:GRAIN|S:SHEEP|T:STONE}" << endl;
+	int counter = 2;
+	cout << "  1        "; //16 spaces between tiles.
+	for (int i = 0; i < harvest_hand->size() - 1; i++) {
+		cout << counter++ << "       ";
+	}
+
+	if (*this->has_shipment == true) {
+		cout << counter;
+	}
+	cout << endl;
+
+	for (int i = 0; i < harvest_hand->size(); i++) { 
+		
+		harvest_hand->at(i)->PrintUpperTile();
+		cout << " ";
+	}
+	if (*this->has_shipment == true) {
+		cout << "[?]" << "[?]";
+	}
+	
+	
+	cout << endl;
+
+	for (int i = 0; i < harvest_hand->size(); i++) {
+		
+		harvest_hand->at(i)->PrintLowerTile();
+		cout << " ";
+	}
+	if (*this->has_shipment == true) {
+		cout << "[?]" << "[?]";
+	}
+
+	cout << endl;
+	cout << "------------------------------------------------------------------------------------------------------------------" << endl;
+
+
+	/*cout << "These are the harvest tiles I have: " << endl;
 	int counter = 1;
 	for (HarvestTile* harvest_tile : *harvest_hand) {
 		cout << "   " << counter++ << "   " << endl;
@@ -138,16 +176,48 @@ void Player::PrintHarvestHand()
 		cout << "   " << harvest_hand->size()+1 << "   " << endl;
 		cout << "[?]" << "[?]" << endl;
 		cout << "[?]" << "[?]" << endl;
-	}
+	}*/
 }
 
 void Player::PrintBuildingHand()
 {
-	cout << "These are the building tiles I have: " << endl;
+
+	cout << "------------------------------------------------------------------------------------------------------------------" << endl;
+	cout << "Building Tiles: {F:FOREST|W:WHEATFIELD|M:MEADOW|Q:QUARRY}" << endl;
+	cout << "    1           ";
+	for (int i = 0; i < building_hand->size() - 1; i++) {
+		cout << (i + 2) << "           ";
+
+	}
+	cout << endl;
+	for (int i = 0; i < building_hand->size(); i++) {
+		building_hand->at(i)->PrintBuildingTile();
+		cout << "   ";
+	}
+
+	cout << endl;
+	cout << endl;
+
+
+
+
+	cout << "------------------------------------------------------------------------------------------------------------------" << endl;
+
+
+
+	/*cout << "Building Tiles: " << endl;
 	for (int i = 0; i < building_hand->size(); i++) {
 		cout << (i + 1) << ":";
 		building_hand->at(i)->PrintBuildingTile();
 		cout << "  ";
 	}
-	cout << endl;
+	cout << endl;*/
+}
+
+void Player::PrintPlayer()
+{
+	cout << "It is currently" << *this->name << "'s turn!" << endl;
+	cout << *this->name << "'s tiles: " << endl;
+	this->PrintHarvestHand();
+	this->PrintBuildingHand();
 }

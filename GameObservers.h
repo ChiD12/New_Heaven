@@ -12,6 +12,7 @@ public:
 	void Update();
 	//we might need multiple observer because on the slides, this only calls a single display method
 	//could possibly remove the method below, make this a base class, and extend from this with whatever subset of display function needed
+	void DisplayPlayer();
 	void DisplayGameBoard();//part 1
 	void DisplayResourceMarker();//part 1&2
 	void DisplayPlayerBuildingDeck();//part 1

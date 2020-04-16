@@ -49,4 +49,6 @@ public:
 	void PrintHarvestHand();
 
 	void PrintBuildingHand();
+
+	void PrintPlayer();
 };

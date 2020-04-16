@@ -202,6 +202,16 @@ void HarvestTile::PrintHarvestTile()
 	cout << *this->bottom_left_str_ptr << *this->bottom_right_str_ptr << endl;
 }
 
+void HarvestTile::PrintUpperTile()
+{
+	cout << *this->upper_left_str_ptr << *this->upper_right_str_ptr << "\t";
+}
+
+void HarvestTile::PrintLowerTile()
+{
+	cout << *this->bottom_left_str_ptr << *this->bottom_right_str_ptr << "\t";
+}
+
 
 HarvestDeck::HarvestDeck()
 {
@@ -439,16 +449,16 @@ BuildingTile::BuildingTile()
 
 	switch (type) {
 	case FOREST:
-		return "FOREST";
+		return "F";
 		break;
 	case WHEATFIELD:
-		return "WHEATFIELD";
+		return "W";
 		break;
 	case MEADOW:
-		return "MEADOW";
+		return "M";
 		break;
 	case QUARRY:
-		return "QUARRY";
+		return "Q";
 		break;
 
 	case NO_BUILDING:
@@ -549,7 +559,7 @@ BuildingTile& BuildingTile::operator=(const BuildingTile& tile) {
 
 void BuildingTile::PrintBuildingTile()
 {
-	cout << "[" << *this->type_representation << "][" << *bv_ptr << "]";
+	cout << "({" << *this->type_representation << "} {" << *bv_ptr << "})";
 }
 
 
