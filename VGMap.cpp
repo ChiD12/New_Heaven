@@ -323,26 +323,52 @@ void VGMap::PrintVillageBoard() {
 		std::cout << row + 1 << " ";
 		for (column = 0; column < *width; column++) {
 
-			switch (*(*map)[column][row]->bt_ptr) {
-			case FOREST:;
-				std::cout << "[F]";
-				break;
-			case WHEATFIELD:;
-				std::cout << "[W]";
-				break;
-			case MEADOW:
-				std::cout << "[M]";
-				break;
-			case QUARRY:
-				std::cout << "[Q]";
-				break;
-			case NO_BUILDING:
-				std::cout << "[x]";
-				break;
-			default:
-				std::cout << "[E]";
-				break;
+			if (*(*map)[column][row]->flipped == true) {
+				switch (*(*map)[column][row]->bt_ptr) {
+				case FOREST:;
+					std::cout << "[f]";
+					break;
+				case WHEATFIELD:;
+					std::cout << "[w]";
+					break;
+				case MEADOW:
+					std::cout << "[m]";
+					break;
+				case QUARRY:
+					std::cout << "[q]";
+					break;
+				case NO_BUILDING:
+					std::cout << "[x]";
+					break;
+				default:
+					std::cout << "[E]";
+					break;
+				}
 			}
+			else {
+				switch (*(*map)[column][row]->bt_ptr) {
+				case FOREST:;
+					std::cout << "[F]";
+					break;
+				case WHEATFIELD:;
+					std::cout << "[W]";
+					break;
+				case MEADOW:
+					std::cout << "[M]";
+					break;
+				case QUARRY:
+					std::cout << "[Q]";
+					break;
+				case NO_BUILDING:
+					std::cout << "[x]";
+					break;
+				default:
+					std::cout << "[E]";
+					break;
+				}
+			}
+
+			
 		}
 		std::cout << "\n";
 	}

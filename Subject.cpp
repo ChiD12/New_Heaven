@@ -22,7 +22,7 @@ void Subject::notify() {
 	list<Observer*>::iterator i = observers->begin();
 	
 	for (; i != observers->end(); i++) {
-		cout << "notified called" << endl;
+		cout << "Notify Called!" << endl;
 		(*i)->Update();
 	}
 }

@@ -216,8 +216,6 @@ void Player::PrintBuildingHand()
 
 void Player::PrintPlayer()
 {
-	cout << "It is currently" << *this->name << "'s turn!" << endl;
-	cout << *this->name << "'s tiles: " << endl;
-	this->PrintHarvestHand();
-	this->PrintBuildingHand();
+	cout << "It is currently {" << *this->name << "'s} turn!" << endl;
+
 }

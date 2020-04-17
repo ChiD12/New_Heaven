@@ -27,13 +27,12 @@ void TurnObserver::Update() {
 	cout << "---------------------------------------------------------------" << endl;
 	this->DisplayPlayer();
 	this->DisplayGameBoard();
-	this->DisplayPlayerVillage();
 	cout << "---------------------------------------------------------------" << endl;
 
 }
 
 void TurnObserver::DisplayPlayer() {
-	cout << "Active Player: " << "Player " << *observable->currentTurn << "(" << *observable->players[*observable->currentTurn]->name << ") " << endl;
+	cout << "Active Player: " << "Player " << (*observable->currentTurn + 1) << "{" << *observable->players[*observable->currentTurn]->name << "} " << endl;
 	observable->players[*observable->currentTurn]->PrintPlayer();
 
 };
