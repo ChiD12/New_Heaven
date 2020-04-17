@@ -1,17 +1,37 @@
-#include "GameDriver.h"
-#include <limits.h>
-#include <iostream>
+#pragma once
+#include "Resources.h"
+#include "GBMap.h"
+#include "VGMap.h"
+#include "Player.h"
+#include "GameState.h"
+#include "GameObservers.h"
+#include <vector>
 #include <string>
 #include <algorithm>
+#include <limits.h>
+#include <iostream>
 
 using namespace std;
+
+GameState* gameState;
+TurnObserver* turnObserver;
+
+void gameStart();
+int findFirstPlayer();
+void drawVillage(int turn);
+void deductResources(building_type bt_ptr, int numResourcesToDeduct);
+void computeGameScore();
+void displayWinner(vector<Player*>);
+bool validateSufficentResources(int x, int y, int turnIndex, int buildingTileIndex, bool flipped);
+void promptBuildingTilePlacement(int turnIndex);
+void promptHarvestTilePlacement(int turnIndex);
 
 int main() {
 
 	//call to run Part 1 method
 	gameStart();
 
-	
+	*(gameState->currentGameSection) = PLACEHARVESTTILE;
 
 	bool gameEnd = false;
 
@@ -40,6 +60,8 @@ int main() {
 
 		// Part 3.1 method,
 		promptHarvestTilePlacement(turn);
+		*(gameState->currentGameSection) = PLACEVILLAGETILE;
+
 		cout << endl;
 		cout << "***************************************************************" << endl;
 		gameState->gameBoard->PrintBoard();
@@ -94,7 +116,9 @@ int main() {
 					cin >> response;
 				}
 			}
+			*(gameState->currentGameSection) = SHARETHEWEALTH;
 		}
+		*(gameState->currentGameSection) = DRAWVILLAGETILE;
 
 		//Method for part 3.5
 		drawVillage(turn);
