@@ -11,6 +11,8 @@ int main() {
 	//call to run Part 1 method
 	gameStart();
 
+	
+
 	bool gameEnd = false;
 
 	//finds what index the player with the smallest id is
@@ -22,6 +24,8 @@ int main() {
 		*(gameState->currentTurn) = turnCounter % *(gameState->numOfPlayers);
 
 		int& turn = *(gameState->currentTurn);
+
+		gameState->notify();
 
 		cout << endl;
 		cout << "*************************************************************" << endl;
@@ -115,6 +119,9 @@ int main() {
 void gameStart() { //Beginning of part 1
 
 	gameState = new GameState();
+
+
+
 	int temp;
 	cout << "Starting game!" << endl;
 	cout << "How many people will be playing today?: "; // 1) Select the number of players in the game (2-4 players).
@@ -205,6 +212,9 @@ void gameStart() { //Beginning of part 1
 
 		counter++;
 	}
+
+	turnObserver = new TurnObserver(gameState);
+
 }
 
 //returns index of player with smallest id

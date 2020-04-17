@@ -1,8 +1,9 @@
 #pragma once
 #include <vector>
+#include "Subject.h"
 #include "Resources.h"
 #include "Player.h"
-#include "Subject.h"
+
 
 
 class  GameState : public Subject {
@@ -17,7 +18,7 @@ public:
 	BuildingDeck* building_deck;
 
 
-	GameState();
+	//GameState();
 
 
 };
