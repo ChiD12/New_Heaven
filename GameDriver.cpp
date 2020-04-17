@@ -42,11 +42,10 @@ int main() {
 	//Gameloop containing part 2.2 and 2.3, plays Harvest Tile, Village Tile and draws cards
 	while (!gameEnd) {
 		*(gameState->currentTurn) = turnCounter % *(gameState->numOfPlayers);
-
 		int& turn = *(gameState->currentTurn);
-
 		gameState->notify();
 
+		/*
 		cout << endl;
 		cout << "*************************************************************" << endl;
 		cout << "It is **" << *(gameState->players[turn]->name) << "'s** turn" << endl;
@@ -57,32 +56,37 @@ int main() {
 		cout << endl;
 		cout << "You currently are holding these Harvest Tiles: " << endl;
 		gameState->players[turn]->PrintHarvestHand();
+		*/
 
 		// Part 3.1 method,
 		promptHarvestTilePlacement(turn);
+		gameState->notify();
 		*(gameState->currentGameSection) = PLACEVILLAGETILE;
 
+		/*
 		cout << endl;
 		cout << "***************************************************************" << endl;
 		gameState->gameBoard->PrintBoard();
+		*/
 
 		(*(gameState->remainingTiles))--;
-		cout << endl;
-
 
 		//begin the loop for players to place their village tiles, frst the current turn player gets to place as many tiles as they want
 		//then the rest of the players gets a turn to try to use the remaining resources to play as many village tiles as they wish
 		//Part 3.4 loop
 		for (int i = 0; i < *(gameState->numOfPlayers); i++) {
 			int clockwisePlayers = (turn + i) % *(gameState->numOfPlayers);
+			gameState->notify();
 
 			//Printouts for information about current game state
+			/*
 			cout << "**************************************************************" << endl;
 			cout << "and **" << *(gameState->players[clockwisePlayers]->name) << "'s** village board is: " << endl;
 			gameState->players[clockwisePlayers]->player_board->PrintVillageBoard();
 			gameState->gameBoard->PrintResources();
+			*/
+
 			gameState->players[clockwisePlayers]->PrintBuildingHand();
-			
 			cout << endl;
 			cout << "**" << *(gameState->players[clockwisePlayers]->name) << "** do you wish to place a village tile with remaining resources? (y or n)";
 			string response;
@@ -101,10 +105,14 @@ int main() {
 			while (response.compare("y") == 0) {
 				//part 3.3
 				promptBuildingTilePlacement(clockwisePlayers);
+				gameState->notify();
 
+				/*
 				gameState->players[clockwisePlayers]->player_board->PrintVillageBoard();
 				gameState->gameBoard->PrintResources();
 				gameState->players[clockwisePlayers]->PrintBuildingHand();
+				*/
+
 				cout << "**" << *(gameState->players[clockwisePlayers]->name) << "** do you wish to place a village tile with remaining resources? (y or n)" << endl;
 				cin >> response;
 
@@ -131,6 +139,7 @@ int main() {
 		*(gameState->gameBoard->RMGrain) = 0;
 
 		turnCounter++;
+		gameState->notify();
 		//Game loop ends when there is only 1 tile remaining on board
 		if (*(gameState->remainingTiles) < 2) {
 			gameEnd = true;
