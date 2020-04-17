@@ -31,7 +31,7 @@ int main() {
 	//call to run Part 1 method
 	gameStart();
 
-	*(gameState->currentGameSection) = PLACEHARVESTTILE;
+	
 
 	bool gameEnd = false;
 
@@ -41,6 +41,7 @@ int main() {
 
 	//Gameloop containing part 2.2 and 2.3, plays Harvest Tile, Village Tile and draws cards
 	while (!gameEnd) {
+		*(gameState->currentGameSection) = PLACEHARVESTTILE;
 		*(gameState->currentTurn) = turnCounter % *(gameState->numOfPlayers);
 		int& turn = *(gameState->currentTurn);
 		gameState->notify();
