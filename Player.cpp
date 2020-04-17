@@ -79,6 +79,9 @@ bool Player::PlaceShipmentTile(GBMap * given_board, int resource_index, int give
 		exchange(given_board, given_x, given_y);
 		delete has_shipment;
 		this->has_shipment = new bool(false);
+		given_board->PlaceTile(shipment_tile, given_x, given_y,true);
+		delete shipment_tile;
+		shipment_tile = NULL;
 		return true;
 	}
 	else {return false;}

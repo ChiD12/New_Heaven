@@ -46,18 +46,18 @@ int main() {
 		int& turn = *(gameState->currentTurn);
 		gameState->notify();
 
-		/*
-		cout << endl;
-		cout << "*************************************************************" << endl;
-		cout << "It is **" << *(gameState->players[turn]->name) << "'s** turn" << endl;
+		
+		//cout << endl;
+		//cout << "*************************************************************" << endl;
+		//cout << "It is **" << *(gameState->players[turn]->name) << "'s** turn" << endl;
 
-		//print outs to place harvest tile
-		cout << "The current Board State is: " << endl;
-		gameState->gameBoard->PrintBoard();
-		cout << endl;
+		////print outs to place harvest tile
+		//cout << "The current Board State is: " << endl;
+		//gameState->gameBoard->PrintBoard();
+		//cout << endl;
 		cout << "You currently are holding these Harvest Tiles: " << endl;
 		gameState->players[turn]->PrintHarvestHand();
-		*/
+		
 
 		// Part 3.1 method,
 		promptHarvestTilePlacement(turn);
