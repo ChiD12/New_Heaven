@@ -43,8 +43,6 @@ public:
 	void RotateTileLeft();
 
 	void PrintHarvestTile();
-	void PrintUpperTile();
-	void PrintLowerTile();
 	
 
 };

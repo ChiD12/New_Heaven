@@ -1,76 +1,31 @@
 #include "GameObservers.h"
 #include "GameState.h"
-#include <iostream>
 
-//game turns
-using namespace std;
-
-TurnObserver::TurnObserver() {
+GameObservers::GameObservers() {
 	this->observable = NULL;
 }
-TurnObserver::TurnObserver(GameState* observable) {
+GameObservers::GameObservers(GameState* observable) {
 	this->observable = observable;
 	this->observable->attach(this);
 }
-TurnObserver::TurnObserver(const TurnObserver& other_observer) {
+GameObservers::GameObservers(const GameObservers& other_observer) {
 	this->observable = other_observer.observable;
 	this->observable->attach(this);
 
 }
-TurnObserver::~TurnObserver() {
+GameObservers::~GameObservers() {
 	this->observable->detach(this);
 }
 
-void TurnObserver::Update() {
+void GameObservers::Update() {
 	//we might need multiple observer because on the slides, this only calls a single display function
 	//we could possibly remove the method below, make this a base class, and extend from this with whatever subset of display function needed
-	cout << "---------------------------------------------------------------" << endl;
-	this->DisplayPlayer();
-	this->DisplayGameBoard();
-	this->DisplayPlayerVillage();
-	cout << "---------------------------------------------------------------" << endl;
-
 }
 
-void TurnObserver::DisplayPlayer() {
-	cout << "Active Player: " << "Player " << *observable->currentTurn << "(" << *observable->players[*observable->currentTurn]->name << ") " << endl;
-	observable->players[*observable->currentTurn]->PrintPlayer();
-
-};
-
-void TurnObserver::DisplayGameBoard() {
-	observable->gameBoard->PrintBoard();
-}
-
-void TurnObserver::DisplayPlayerBuildingDeck() {}//part 1
-void TurnObserver::DisplayPlayerVillage() {
-	observable->players[*observable->currentTurn]->player_board->PrintVillageBoard();
-}
-
-//game statistics
-
-GameStatisticsObserver::GameStatisticsObserver() {
-	this->observable = NULL;
-}
-GameStatisticsObserver::GameStatisticsObserver(GameState* observable) {
-	this->observable = observable;
-	this->observable->attach(this);
-}
-GameStatisticsObserver::GameStatisticsObserver(const GameStatisticsObserver& other_observer) {
-	this->observable = other_observer.observable;
-	this->observable->attach(this);
-
-}
-GameStatisticsObserver::~GameStatisticsObserver() {
-	this->observable->detach(this);
-}
-
-void GameStatisticsObserver::GameStatisticsObserver::Update() {}
-
-void GameStatisticsObserver::DisplayResourceMarker() {
-	observable->gameBoard->PrintResources();
-}
-void GameStatisticsObserver::DisplayPlayerScore() {} //part 2
-void GameStatisticsObserver::DisplayPlayerNumber() {
-	
-} //part 2
+void GameObservers::DisplayGameBoard() {}//part 1
+void GameObservers::DisplayResourceMarker() {}//part 1&2
+void GameObservers::DisplayPlayerHarvestDeck() {}//part 1
+void GameObservers::DisplayPlayerBuildingDeck() {}//part 1
+void GameObservers::DisplayPlayerVillage() {}//part 1
+void GameObservers::DisplayPlayerScore() {} //part 2
+void GameObservers::DisplayPlayerNumber() {} //part 2

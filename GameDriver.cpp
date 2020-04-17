@@ -19,9 +19,7 @@ int main() {
 
 	//Gameloop containing part 2.2 and 2.3, plays Harvest Tile, Village Tile and draws cards
 	while (!gameEnd) {
-		*(gameState->currentTurn) = turnCounter % *(gameState->numOfPlayers);
-
-		int& turn = *(gameState->currentTurn);
+		int turn = turnCounter % *(gameState->numOfPlayers);
 
 		cout << endl;
 		cout << "*************************************************************" << endl;
@@ -36,6 +34,7 @@ int main() {
 
 		// Part 3.1 method,
 		promptHarvestTilePlacement(turn);
+		gameState->notify();
 		cout << endl;
 		cout << "***************************************************************" << endl;
 		gameState->gameBoard->PrintBoard();
@@ -76,6 +75,7 @@ int main() {
 				//part 3.3
 				promptBuildingTilePlacement(clockwisePlayers);
 
+				gameState->notify();
 				gameState->players[clockwisePlayers]->player_board->PrintVillageBoard();
 				gameState->gameBoard->PrintResources();
 				gameState->players[clockwisePlayers]->PrintBuildingHand();
@@ -101,6 +101,7 @@ int main() {
 		*(gameState->gameBoard->RMStone) = 0;
 		*(gameState->gameBoard->RMSheep) = 0;
 		*(gameState->gameBoard->RMGrain) = 0;
+		gameState->notify();
 
 		turnCounter++;
 		//Game loop ends when there is only 1 tile remaining on board
@@ -706,9 +707,6 @@ void computeGameScore() { //
 
 void displayWinner(vector<Player*> winners) {
 	cout << "\nGame finished:\n";
-	if (winners.size() > 1) {
-		cout << "\nTied between:\n";
-	}
 	for (Player* winner : winners) {
 		cout << "Winner: " << *(winner->name) << " Score: " << (*winner->player_board).calculateScore() << endl;
 	}

@@ -225,7 +225,7 @@ GBMap::GBMap(int numPlayers) {
 	RMSheep = new int(0);
 	RMGrain = new int(0);
 	cout << "Game Board created for " << numPlayers << " players." << endl;
-	buildings = new vector<BuildingTile*>(5);
+	buildings = new vector<BuildingTile*>(6);
 
 	
 	//update_edge_all();
@@ -233,66 +233,17 @@ GBMap::GBMap(int numPlayers) {
 
 
 void GBMap::PrintBoard(){
-	int index_or_tile = 0;
-	int counter = 0;
-	std::cout << " Y\t| GAME BOARD \t\t\t\t  ";
-	if (pgbA->size() > 10) {
-		cout << "\t  ";
-	}
-	cout << "BOARD TILES \t\t";
-		if (pgbA->size() > 10) {
-			cout << "";
-		} 
-	cout << "  RESOURCE MARKERS" << endl;
-	std::cout << "----------------------------------------------------" << endl;
+	std::cout << " Y\t| GAME BOARD" << endl;
+	std::cout << "-------------------------------------" << endl;
 	for (int j = 0; j < pgbA->at(0).size(); j++){
 		std::cout << " " << j << "\t| ";
 		for (int i = 0; i < pgbA->size(); i++){
 			if (*(*this->pgbA)[i][j]->valid) { cout << *(*this->pgbA)[i][j]->resource_rep; }
 			else cout << "[x]";
 		}
-		if (index_or_tile == 0 && counter < buildings->size()) {
-			cout << "\t       " << (counter + 1) << "\t       ";
-			if (counter == 0)
-				cout << "  \tWOOD";
-			if (counter == 1)
-				cout << " \tGRAIN";
-			if (counter == 2)
-				cout << " \tSHEEP";
-			if (counter == 3)
-				cout << " \tSTONE";
-			
-		}
-		if (index_or_tile == 1 && counter < buildings->size()) {
-			cout << "\t   ";
-			if (buildings->at(counter) != NULL)
-				buildings->at(counter)->PrintBuildingTile();
-			else
-				cout << "({EMPTY})";
-
-			cout << "\t       ";
-			
-			if (counter == 0)
-				cout << " \t{" << *RMWood << "}";
-			if (counter == 1)
-				cout << " \t{" << *RMGrain << "}";
-			if (counter == 2)
-				cout << " \t{" << *RMSheep << "}";
-			if (counter == 3)
-				cout << " \t{" << *RMStone << "}";
-			counter++;
-			
-		}
-
-		if (index_or_tile == 1) {
-			index_or_tile--;
-		}
-		else {
-			index_or_tile++;
-		}
 		cout << endl;
 	}
-	std::cout << "----------------------------------------------------" << endl;
+	std::cout << "-------------------------------------" << endl;
 	std::cout << " X\t| ";
 	for (int i = 0; i < this->pgbA->size(); i++)
 		if (i < 10)
@@ -300,8 +251,8 @@ void GBMap::PrintBoard(){
 		else
 			std::cout << " " << i;
 	std::cout << "" << endl;
-//	PrintResources();
-//	printVillageTiles();
+	PrintResources();
+	printVillageTiles();
 }
 
 void GBMap::printVillageTiles() {
