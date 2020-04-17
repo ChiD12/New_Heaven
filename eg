@@ -1,0 +1,499 @@
+[33mcommit 4652efa620c873c830d22adf9ec48cd3ac47d17e[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Fri Apr 17 01:47:22 2020 -0400
+
+    added notifies to GameDriver
+
+[33mcommit 5cc423e08d365637b601a9482b5f08586836f83b[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Fri Apr 17 01:17:58 2020 -0400
+
+    some changes
+
+[33mcommit 1fb2397a94b7e14e689048ab5d9c7182216960b8[m[33m ([m[1;31morigin/new_nate[m[33m)[m
+Author: Nathan <nathanjcrozier@gmail.com>
+Date:   Thu Apr 16 15:35:05 2020 -0400
+
+    Worked on printouts, and filled out observer part 1
+
+[33mcommit 203556e659d6990918821449f75a23d70d4fdb11[m
+Merge: f299c3f d318269
+Author: Daniel Rosenfeld <daniel.chid@gmail.com>
+Date:   Tue Apr 14 16:08:03 2020 -0400
+
+    Merge branch 'master' of https://github.com/ChiD12/New_Heaven
+
+[33mcommit f299c3ff0edd39b6ed2ce0b39504a59d304cf14e[m
+Author: Daniel Rosenfeld <daniel.chid@gmail.com>
+Date:   Tue Apr 14 16:07:46 2020 -0400
+
+    added turn to gameState
+
+[33mcommit d318269247cd95c843fb68676f16fb8b51272a4f[m[33m ([m[1;31morigin/zili_branch_3[m[33m)[m
+Merge: c8dc0d4 26b7b54
+Author: zil-w <55297004+zil-w@users.noreply.github.com>
+Date:   Tue Apr 14 15:20:49 2020 -0400
+
+    Merge pull request #4 from ChiD12/zili_branch_3
+    
+    separating GameObserver into TurnObserver and GameStatisticsObserver
+
+[33mcommit 26b7b54689796bf31979081022b8eb211bbb45c7[m
+Author: zil_w <zili_wang@hotmail.com>
+Date:   Tue Apr 14 15:09:46 2020 -0400
+
+    separating GameObserver into TurnObserver and GameStatisticsObserver
+
+[33mcommit c8dc0d404db1f346de9476a3a840ea36d6cf00ad[m
+Merge: a34e40c 6b5c0f8
+Author: zil-w <55297004+zil-w@users.noreply.github.com>
+Date:   Sat Apr 11 18:22:46 2020 -0400
+
+    Merge pull request #2 from ChiD12/zili_branch_3
+    
+    Zili branch 3
+
+[33mcommit 6b5c0f8a8b37084569504c1ec91d5eb724de3ae4[m
+Author: zil_w <zili_wang@hotmail.com>
+Date:   Sat Apr 11 18:16:34 2020 -0400
+
+    added GameObservers, their basic constructors and destructors and their needed display functions
+
+[33mcommit 71ceaa71c8cce0ca0a18f9f602ed73fb1989c165[m
+Merge: 8877173 a34e40c
+Author: zil_w <zili_wang@hotmail.com>
+Date:   Sat Apr 11 16:54:27 2020 -0400
+
+    merging master
+
+[33mcommit 88771731b1bea1df70ac1e2840c2c7b7f2add732[m
+Author: zil_w <zili_wang@hotmail.com>
+Date:   Sat Apr 11 16:44:49 2020 -0400
+
+    Reverting back to GameDriver
+
+[33mcommit a34e40cd4b91a9b4169d7756a416767af40459f3[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Sat Apr 11 14:43:38 2020 -0400
+
+    subject added
+
+[33mcommit c0fffb97f8088c2ce1e15b61967a60b320830d02[m
+Author: Daniel Rosenfeld <daniel.chid@gmail.com>
+Date:   Fri Apr 10 16:04:03 2020 -0400
+
+    refactored to use gameState
+
+[33mcommit 55d124c1e954be2d15bb658110d7ccce36cc7e41[m
+Author: zil_w <zili_wang@hotmail.com>
+Date:   Sun Apr 5 21:25:37 2020 -0400
+
+    up to date with master and commentary
+
+[33mcommit 27f615e1a1e9d4472bc06f3fed1952c670fc3350[m
+Author: Nathan <nathanjcrozier@gmail.com>
+Date:   Sun Apr 5 21:14:56 2020 -0400
+
+    Added comments to explain part 1
+
+[33mcommit 856b3b0a1f858836fdc95eb07452c9bc2e6bc92d[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Sun Apr 5 19:17:20 2020 -0400
+
+    added invalid maps and minor checks for invalid maps
+
+[33mcommit bb7245746fa6ad95f6c2bc443303c176b0180000[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Sun Apr 5 19:09:52 2020 -0400
+
+    fixed silly error
+
+[33mcommit a35cd49b36caebbe8d3b17c9bfa88754410f89b7[m
+Author: Daniel Rosenfeld <daniel.chid@gmail.com>
+Date:   Sun Apr 5 18:48:31 2020 -0400
+
+    bug fix
+
+[33mcommit c271ff6b491e62ac26cc3697126426ec7c71238c[m
+Author: Nathan <nathanjcrozier@gmail.com>
+Date:   Sun Apr 5 18:14:55 2020 -0400
+
+    Made the draw methods take a pointer to avoid deep copy issues
+
+[33mcommit baeadc6610a6b1168d60ce89c704c6e84c5ad1be[m
+Author: Daniel Rosenfeld <daniel.chid@gmail.com>
+Date:   Sun Apr 5 18:08:06 2020 -0400
+
+    bug fix
+
+[33mcommit cf9d0f243ef2a2cd1774d63b69220698b3c0ccbc[m
+Author: Daniel Rosenfeld <daniel.chid@gmail.com>
+Date:   Sun Apr 5 14:50:17 2020 -0400
+
+    fixed shipment
+
+[33mcommit 2b141952655b2dd0f2b65956a53a2294549fbcec[m
+Merge: 79d9f9a dd5048a
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Sun Apr 5 14:35:54 2020 -0400
+
+    merge conflicts fixed
+
+[33mcommit 79d9f9a95ccee9fdc66e0fe28671d4b66c419ef3[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Sun Apr 5 14:33:19 2020 -0400
+
+    implemented shipment tile prompt
+
+[33mcommit dd5048a5e7ccac93ce3c4af40f753adaf7d0a24a[m
+Author: Daniel Rosenfeld <daniel.chid@gmail.com>
+Date:   Sun Apr 5 14:08:07 2020 -0400
+
+    added comments
+
+[33mcommit c037dc6a1dd54a97594df085648214fce89ad3c2[m
+Author: Nathan <nathanjcrozier@gmail.com>
+Date:   Sun Apr 5 13:38:06 2020 -0400
+
+    Fixed Player and Deck destructors
+
+[33mcommit 8ecbcf00086558ad92845bff3df9d4ae0de4a63c[m
+Author: Nathan <nathanjcrozier@gmail.com>
+Date:   Sat Apr 4 19:24:23 2020 -0400
+
+    Added PlaceShipmentTile() method. has_shipment is now a pointer
+
+[33mcommit dea307ec73faf254254bc620c9a98dbfa0db9445[m
+Merge: 214d895 31db4a1
+Author: Daniel Rosenfeld <daniel.chid@gmail.com>
+Date:   Sat Apr 4 17:20:17 2020 -0400
+
+    Merge branch 'master' of https://github.com/ChiD12/New_Heaven
+
+[33mcommit 214d8959769da74a8a0e076e83416297a7e6a211[m
+Author: Daniel Rosenfeld <daniel.chid@gmail.com>
+Date:   Sat Apr 4 17:20:01 2020 -0400
+
+    fixes to calculate resource and force replace harvest tile
+
+[33mcommit 31db4a10dac362a0c86d353872d28ac1aa45e29a[m
+Author: Nathan <nathanjcrozier@gmail.com>
+Date:   Sat Apr 4 16:42:40 2020 -0400
+
+    Added shipment tile functionality to player class
+
+[33mcommit 6ef777756dceeeae2b37babe28b8295bccfaccca[m
+Author: Daniel Rosenfeld <daniel.chid@gmail.com>
+Date:   Sat Apr 4 16:16:57 2020 -0400
+
+    fixed removal bug and uses exchange method
+
+[33mcommit 5cef321caad472695c1e1dbfa29beb780c007de2[m
+Merge: 18447d9 da6ad0c
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Sat Apr 4 02:32:11 2020 -0400
+
+    conflicts fixed
+
+[33mcommit 18447d963e6e3b211c3de6bf2c4907f2e6d949da[m[33m ([m[1;31morigin/matt[m[33m)[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Sat Apr 4 02:27:33 2020 -0400
+
+    fixed another small issue
+
+[33mcommit ecfc7936fc978b16229918add00c92d6fa4f710b[m[33m ([m[1;31morigin/maser[m[33m)[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Sat Apr 4 02:25:50 2020 -0400
+
+    fixed issue of submitting to x,y of double digit
+
+[33mcommit da6ad0cf962e35618c840be0c51443472cba1650[m
+Author: Daniel Rosenfeld <daniel.chid@gmail.com>
+Date:   Fri Apr 3 22:03:08 2020 -0400
+
+    changes
+
+[33mcommit 6136f8001442ff8e58152c4c91c8d6a747b1dd17[m
+Merge: bf91038 6fafabc
+Author: ChiD12 <daniel.chid@gmail.com>
+Date:   Fri Apr 3 21:19:02 2020 -0400
+
+    Merge branch 'master' of https://github.com/ChiD12/New_Heaven
+
+[33mcommit 6fafabc286d695002d47f1f93ca861a99ccf5122[m
+Author: Nathan <nathanjcrozier@gmail.com>
+Date:   Fri Apr 3 21:11:23 2020 -0400
+
+    Fixed rotate method, and starter tiles for smaller boards
+
+[33mcommit bf91038cfcfc19cd596026d79416a45e958f5b50[m
+Merge: 3df3673 0a04812
+Author: Daniel Rosenfeld <daniel.chid@gmail.com>
+Date:   Fri Apr 3 21:00:15 2020 -0400
+
+    Merge branch 'master' of https://github.com/ChiD12/New_Heaven
+
+[33mcommit 3df3673a752ce62685c37dac18c4f36cfbb1ba10[m
+Author: Daniel Rosenfeld <daniel.chid@gmail.com>
+Date:   Fri Apr 3 20:57:47 2020 -0400
+
+    changes
+
+[33mcommit 0a0481269fd8884816386d9343af306b8d8b5311[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Fri Apr 3 20:20:42 2020 -0400
+
+    many print changes, some valid input updates, code cleanup, and now the game asks the user if he would like to rotate the tile. THE ROTATE TILE FUNCTIONS DO NOT WORK YET! Nathan needs to fix this.
+
+[33mcommit 40e51dbc779fb90fba3126add002a40e161bbda9[m
+Author: Nathan <nathanjcrozier@gmail.com>
+Date:   Fri Apr 3 12:10:36 2020 -0400
+
+    Added name to VGMap, wrapping up gameStart()
+
+[33mcommit d20d0fe92f846a6198838a03d28c373620562950[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Tue Mar 31 15:33:26 2020 -0400
+
+    Fixed Village Tile Placement and tweaked Prints
+
+[33mcommit 03bc4a559d08754b19e82607deece16876776d6b[m
+Author: ChiD12 <daniel.chid@gmail.com>
+Date:   Tue Mar 31 13:00:59 2020 -0400
+
+    added drawing to end of turn and destructor changes
+
+[33mcommit 6356c86d85d0098b2c970346a09a8fca85a4ffd6[m
+Merge: 99024d3 73662d8
+Author: ChiD12 <38994163+ChiD12@users.noreply.github.com>
+Date:   Mon Mar 30 19:06:38 2020 -0400
+
+    Merge pull request #1 from ChiD12/zili_branch_3
+    
+    Zili branch 3
+
+[33mcommit 73662d838d3922d9922f2c455fe93f46ca21cafe[m[33m ([m[1;32mzili_branch_3[m[33m)[m
+Author: zil_w <zili_wang@hotmail.com>
+Date:   Sat Mar 28 23:01:01 2020 -0400
+
+    .
+
+[33mcommit bc68fd7da89acf65f291d622b3b87b688071ed7e[m
+Merge: 673f8b0 99024d3
+Author: zil_w <zili_wang@hotmail.com>
+Date:   Sat Mar 28 22:39:16 2020 -0400
+
+    .
+
+[33mcommit 673f8b09803a6e3093ec57da77a537466758492b[m
+Author: zil_w <zili_wang@hotmail.com>
+Date:   Sat Mar 28 20:01:08 2020 -0400
+
+    .
+
+[33mcommit 99024d338d2bd1244de18748d9c6149459f213d0[m
+Author: ChiD12 <daniel.chid@gmail.com>
+Date:   Sat Mar 28 14:36:08 2020 -0400
+
+    added some comments
+
+[33mcommit 15f5439b2f2691a81a0371359307689edeabc556[m
+Merge: 504363c e22bda2
+Author: ChiD12 <daniel.chid@gmail.com>
+Date:   Sat Mar 28 14:17:30 2020 -0400
+
+    Merge branch 'master' of https://github.com/ChiD12/New_Heaven
+
+[33mcommit 504363ca730f3870c429b81378ebffb65b90bf03[m
+Author: ChiD12 <daniel.chid@gmail.com>
+Date:   Sat Mar 28 14:17:27 2020 -0400
+
+    clarified printouts
+
+[33mcommit e22bda266dedb4655368f8056addd36e1437502a[m
+Author: Nathan <nathanjcrozier@gmail.com>
+Date:   Sat Mar 28 13:19:52 2020 -0400
+
+    The harvest deck is now concrete, and the print statements have been cleaned up
+
+[33mcommit 69382f6c47d06449539a76ac33f7eb3b538b916b[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Sat Mar 28 04:15:23 2020 -0400
+
+    added quit option so that player does not get stuck in a loop to build village when he doesn't have enough resources to build anything. also made some minor if statement fixes. Zi's placeTile appears to not be working properly.
+
+[33mcommit 385e4c8114796e2604edd0b69b300dbff561cb41[m
+Author: ChiD12 <daniel.chid@gmail.com>
+Date:   Fri Mar 27 22:09:05 2020 -0400
+
+    added prompts for other players to play buildings and drawing
+
+[33mcommit 219ba5215f0af52c9df31f3794ea1e40acf05969[m
+Author: ChiD12 <daniel.chid@gmail.com>
+Date:   Wed Mar 25 22:56:35 2020 -0400
+
+    changed print outs
+
+[33mcommit 97778ed5c9feacb532cfcbc5e7b743ece1977c8f[m
+Merge: dcbfd5a 35d4b62
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Wed Mar 25 18:45:40 2020 -0400
+
+    fixed merging errors
+
+[33mcommit dcbfd5a51ea234738f5db7a2b5e61e6d0e2df042[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Wed Mar 25 18:21:48 2020 -0400
+
+    fixing path issues
+
+[33mcommit e2e1ce495926dacc9d72a6dbae790129022c5ad4[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Wed Mar 25 18:19:32 2020 -0400
+
+    nothing changed
+
+[33mcommit 4b8699d89e0673554c91f1d4f697a2145cdec7ea[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Wed Mar 25 17:57:40 2020 -0400
+
+    added prompt methods for placeBuildingTile and placeHarvestTile. Building Tile checks for sufficient resources but does not actually update the resources after using them, which needs to be implemented.
+
+[33mcommit 35d4b623056e89c288b3a1a8b306912ab90011d9[m
+Author: ChiD12 <daniel.chid@gmail.com>
+Date:   Mon Mar 23 18:58:44 2020 -0400
+
+    minor changes
+
+[33mcommit 9cc88b4442ce642907578e8ddd873a6ad462cf4f[m
+Author: Nathan <nathanjcrozier@gmail.com>
+Date:   Mon Mar 23 12:55:01 2020 -0400
+
+    Changes to exchange() and gameStart()
+
+[33mcommit e7d3c6b1b59604d3f56aca748f79d9fa6ef23ce1[m
+Merge: cca640e adf5d48
+Author: Nathan <nathanjcrozier@gmail.com>
+Date:   Sat Mar 21 14:50:48 2020 -0400
+
+    Added a concrete deck of building tiles
+
+[33mcommit adf5d487f2dbf671bfbb6a76f11a257918a2887f[m
+Author: Nathan <nathanjcrozier@gmail.com>
+Date:   Sat Mar 21 14:38:05 2020 -0400
+
+    Added a concrete deck of building tiles
+
+[33mcommit cca640e10ad18c833f34eb418d1e8573c95d24aa[m
+Author: ChiD12 <daniel.chid@gmail.com>
+Date:   Thu Mar 19 20:51:35 2020 -0400
+
+    work on driver
+
+[33mcommit 6d477b89b9ba594b4e9547db7ba7028f34b6a268[m
+Author: Nathan <nathanjcrozier@gmail.com>
+Date:   Thu Mar 19 18:50:14 2020 -0400
+
+    Removed resources from players, and added a tile counter
+
+[33mcommit e459db935d4c630f16910aca43eb6088a4565e54[m[33m ([m[1;32mpart2[m[33m)[m
+Author: ChiD12 <daniel.chid@gmail.com>
+Date:   Thu Mar 19 17:32:07 2020 -0400
+
+    changes
+
+[33mcommit 47dd1e0e2cf4324c1d2598214e529b60ee86b3e7[m
+Author: ChiD12 <daniel.chid@gmail.com>
+Date:   Thu Mar 19 13:41:03 2020 -0400
+
+    added GameDriver
+
+[33mcommit 043bbea13b57e1318eb77ba1ffd4bc91e710e8ab[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Fri Mar 13 15:37:03 2020 -0400
+
+    fixed more changes
+
+[33mcommit 405f00858b257fc0b3805d2e3a15cc4327dc9e85[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Fri Mar 13 14:16:37 2020 -0400
+
+    fixed issues and merged all parts
+
+[33mcommit 90b282db1680bbdd772d69ee9cafe773fbbebfd6[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Wed Mar 11 15:29:49 2020 -0400
+
+    vs code removed?
+
+[33mcommit 120c22ac91cc64c0634e12e33c2aca7fd59e825d[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Wed Mar 11 15:27:16 2020 -0400
+
+    get rid of vs
+
+[33mcommit e99cf7344705cc1b27923628285aecdf9b0a51b9[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Wed Mar 11 15:26:50 2020 -0400
+
+    vs
+
+[33mcommit 5c6526fe8fd0d8e0ad85ab7706b2a9ed1a596741[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Wed Mar 11 15:23:55 2020 -0400
+
+    remove .vs
+
+[33mcommit 6d1055be9b6a7d39894e7e755c97ee99bc09ecea[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Wed Mar 11 15:23:33 2020 -0400
+
+    remove .vs
+
+[33mcommit 9b01863f03241816bbec65c675ace497ca0679a4[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Wed Mar 11 15:20:40 2020 -0400
+
+    merged Resources and got rid of .vs code
+
+[33mcommit 013c3ca4183fb1d9dce620e6d81cd8c7bc6fe2bd[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Wed Mar 11 15:19:58 2020 -0400
+
+    changed some pointers and merged Resources
+
+[33mcommit 620678558887a35f39ece3495189ebdb4df181c7[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Sun Mar 1 16:49:34 2020 -0500
+
+    documentation added
+
+[33mcommit 650dc5d2ace3445f81295590a833f47b210c2f24[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Fri Feb 28 18:51:51 2020 -0500
+
+    fixed bugs
+
+[33mcommit 6da4d939a14dc38bda459ab35e20a5f6f499ff72[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Fri Feb 28 18:09:20 2020 -0500
+
+    broken but daniel will test
+
+[33mcommit 01315a0699fb4c1ee30dcf68defcc49ef00c537f[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Fri Feb 21 20:50:04 2020 -0500
+
+    touch ups
+
+[33mcommit ecfcf48b32157ea619c56c6d485d6432e2381b8c[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Fri Feb 21 20:39:21 2020 -0500
+
+    finished driver. everything appears to be working
+
+[33mcommit 24e8f7cdf82abfe9c277f5d09b324a03853bff17[m
+Author: Matthew Mileto <mileto.matthew@gmail.com>
+Date:   Fri Feb 21 20:17:06 2020 -0500
+
+    ok
