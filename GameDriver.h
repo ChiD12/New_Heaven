@@ -4,6 +4,7 @@
 #include "VGMap.h"
 #include "Player.h"
 #include "GameState.h"
+#include "GameObservers.h"
 #include <vector>
 #include <string>
 
@@ -15,6 +16,7 @@
 //BuildingDeck* building_deck;
 
 GameState* gameState;
+TurnObserver* turnObserver;
 
 void gameStart();
 int findFirstPlayer();

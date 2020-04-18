@@ -1,15 +1,37 @@
-#include "GameDriver.h"
-#include <limits.h>
-#include <iostream>
+#pragma once
+#include "Resources.h"
+#include "GBMap.h"
+#include "VGMap.h"
+#include "Player.h"
+#include "GameState.h"
+#include "GameObservers.h"
+#include <vector>
 #include <string>
 #include <algorithm>
+#include <limits.h>
+#include <iostream>
 
 using namespace std;
+
+GameState* gameState;
+TurnObserver* turnObserver;
+
+void gameStart();
+int findFirstPlayer();
+void drawVillage(int turn);
+void deductResources(building_type bt_ptr, int numResourcesToDeduct);
+void computeGameScore();
+void displayWinner(vector<Player*>);
+bool validateSufficentResources(int x, int y, int turnIndex, int buildingTileIndex, bool flipped);
+void promptBuildingTilePlacement(int turnIndex);
+void promptHarvestTilePlacement(int turnIndex);
 
 int main() {
 
 	//call to run Part 1 method
 	gameStart();
+
+	
 
 	bool gameEnd = false;
 
@@ -19,42 +41,53 @@ int main() {
 
 	//Gameloop containing part 2.2 and 2.3, plays Harvest Tile, Village Tile and draws cards
 	while (!gameEnd) {
-		int turn = turnCounter % *(gameState->numOfPlayers);
+		*(gameState->currentGameSection) = PLACEHARVESTTILE;
+		*(gameState->currentTurn) = turnCounter % *(gameState->numOfPlayers);
+		int& turn = *(gameState->currentTurn);
+		gameState->notify();
 
-		cout << endl;
-		cout << "*************************************************************" << endl;
-		cout << "It is **" << *(gameState->players[turn]->name) << "'s** turn" << endl;
+		
+		//cout << endl;
+		//cout << "*************************************************************" << endl;
+		//cout << "It is **" << *(gameState->players[turn]->name) << "'s** turn" << endl;
 
-		//print outs to place harvest tile
-		cout << "The current Board State is: " << endl;
-		gameState->gameBoard->PrintBoard();
-		cout << endl;
+		////print outs to place harvest tile
+		//cout << "The current Board State is: " << endl;
+		//gameState->gameBoard->PrintBoard();
+		//cout << endl;
 		cout << "You currently are holding these Harvest Tiles: " << endl;
 		gameState->players[turn]->PrintHarvestHand();
+		
 
 		// Part 3.1 method,
 		promptHarvestTilePlacement(turn);
+		gameState->notify();
+		*(gameState->currentGameSection) = PLACEVILLAGETILE;
+
+		/*
 		cout << endl;
 		cout << "***************************************************************" << endl;
 		gameState->gameBoard->PrintBoard();
+		*/
 
 		(*(gameState->remainingTiles))--;
-		cout << endl;
-
 
 		//begin the loop for players to place their village tiles, frst the current turn player gets to place as many tiles as they want
 		//then the rest of the players gets a turn to try to use the remaining resources to play as many village tiles as they wish
 		//Part 3.4 loop
 		for (int i = 0; i < *(gameState->numOfPlayers); i++) {
 			int clockwisePlayers = (turn + i) % *(gameState->numOfPlayers);
+			gameState->notify();
 
 			//Printouts for information about current game state
+			/*
 			cout << "**************************************************************" << endl;
 			cout << "and **" << *(gameState->players[clockwisePlayers]->name) << "'s** village board is: " << endl;
 			gameState->players[clockwisePlayers]->player_board->PrintVillageBoard();
 			gameState->gameBoard->PrintResources();
+			*/
+
 			gameState->players[clockwisePlayers]->PrintBuildingHand();
-			
 			cout << endl;
 			cout << "**" << *(gameState->players[clockwisePlayers]->name) << "** do you wish to place a village tile with remaining resources? (y or n)";
 			string response;
@@ -73,10 +106,14 @@ int main() {
 			while (response.compare("y") == 0) {
 				//part 3.3
 				promptBuildingTilePlacement(clockwisePlayers);
+				gameState->notify();
 
+				/*
 				gameState->players[clockwisePlayers]->player_board->PrintVillageBoard();
 				gameState->gameBoard->PrintResources();
 				gameState->players[clockwisePlayers]->PrintBuildingHand();
+				*/
+
 				cout << "**" << *(gameState->players[clockwisePlayers]->name) << "** do you wish to place a village tile with remaining resources? (y or n)" << endl;
 				cin >> response;
 
@@ -88,7 +125,9 @@ int main() {
 					cin >> response;
 				}
 			}
+			*(gameState->currentGameSection) = SHARETHEWEALTH;
 		}
+		*(gameState->currentGameSection) = DRAWVILLAGETILE;
 
 		//Method for part 3.5
 		drawVillage(turn);
@@ -101,6 +140,7 @@ int main() {
 		*(gameState->gameBoard->RMGrain) = 0;
 
 		turnCounter++;
+		gameState->notify();
 		//Game loop ends when there is only 1 tile remaining on board
 		if (*(gameState->remainingTiles) < 2) {
 			gameEnd = true;
@@ -113,6 +153,9 @@ int main() {
 void gameStart() { //Beginning of part 1
 
 	gameState = new GameState();
+
+
+
 	int temp;
 	cout << "Starting game!" << endl;
 	cout << "How many people will be playing today?: "; // 1) Select the number of players in the game (2-4 players).
@@ -203,6 +246,9 @@ void gameStart() { //Beginning of part 1
 
 		counter++;
 	}
+
+	turnObserver = new TurnObserver(gameState);
+
 }
 
 //returns index of player with smallest id
