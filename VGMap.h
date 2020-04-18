@@ -5,7 +5,7 @@
 
 class VGMap {
     int* score;
-
+    int* village_number;
 	string* village_name; //Added by Nathan
 
     bool* forest_placed;
@@ -22,6 +22,7 @@ public:
 	void setName(string given_name);
     int calculateScore();
     int getScore() const;
+    int getVillageNum() const;
     void PrintVillageBoard();
 	void PrintNumRow(int num);
     std::vector<vector<BuildingTile*>> *map;

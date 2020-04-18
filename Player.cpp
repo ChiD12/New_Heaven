@@ -226,3 +226,7 @@ void Player::PrintPlayer()
 int Player::getScore() const{
 	return player_board->getScore();
 }
+
+int Player::getVillageNum() const{
+	return player_board->getVillageNum();
+}

@@ -677,7 +677,7 @@ void computeGameScore() { //
 	vector<int> player_scores;
 
 	for (size_t i = 0; i < player_list.size(); i++) { //put every player score in a vector and update the hiscore with the biggest value seen
-		int score = (*(player_list)[i]->player_board).calculateScore();
+		int score = player_list[i]->getScore();
 		player_scores.push_back(score);
 		if (score > hiscore) {
 			hiscore = score;
@@ -697,7 +697,12 @@ void computeGameScore() { //
 		vector<int> player_VGtiles;
 
 		for (size_t i = 0; i < hiscore_player_list.size(); i++) { //put every player's village board's village number in a vector and update most_filled with the highest village number seen
-			int filled_tiles = 0;
+			int filled_tiles = hiscore_player_list[i]->getVillageNum();
+			player_VGtiles.push_back(filled_tiles);
+			if (filled_tiles > most_filled) {
+				most_filled = filled_tiles;
+			}
+			/*int filled_tiles = 0;
 			VGMap& temp_village_board = *(gameState->players[i]->player_board);
 			for (size_t j = 0; j < temp_village_board.map->size(); j++) {
 				for (size_t k = 0; k < (*temp_village_board.map)[0].size(); k++) {
@@ -710,6 +715,7 @@ void computeGameScore() { //
 			if (filled_tiles > most_filled) {
 				most_filled = filled_tiles;
 			}
+			*/
 		}
 
 		vector<Player*> most_village_players; //put players sharing highest score in a highest village number player vector if their village number is the same as the highest village number seen

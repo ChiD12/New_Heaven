@@ -26,6 +26,7 @@ VGMap::VGMap() { //independent constructor
 	this->height = new int(map->at(0).size());
 	this->width = new int(map->size());
 	this->score = new int(0);
+	this->village_number = new int(0);
 
 	forest_placed = new bool(false);
 	wheatfield__placed = new bool(false);
@@ -124,7 +125,7 @@ VGMap::VGMap(vector<vector<BuildingTile*>> map) { //constructor working with VGM
 */
 
 VGMap::~VGMap() { //destructor
-	delete(height, width, score, forest_placed, wheatfield__placed, meadow_placed, quarry_placed, village_name);
+	delete(height, width, score, village_number, forest_placed, wheatfield__placed, meadow_placed, quarry_placed, village_name);
 
 	for(size_t i = 0; i < map->size(); i++)
 		map->at(i).clear();
@@ -177,6 +178,7 @@ bool VGMap::placeTile(int x, int y1, bool flipped, BuildingTile new_tile) { //me
 					*(*map)[x][y]->flipped = flipped;
 				std:cout << "\ntile placement successful\n";
 					*score = calculateScore();
+					*village_number += 1;
 					return true;
 				}
 			}
@@ -205,6 +207,7 @@ bool VGMap::placeTile(int x, int y1, bool flipped, BuildingTile new_tile) { //me
 			}
 
 			*score = calculateScore();
+			*village_number += 1;
 			return true;
 		}
 	}
@@ -316,6 +319,10 @@ int VGMap::calculateScore() {
 
 int VGMap::getScore() const {
 	return *score;
+}
+
+int VGMap::getVillageNum() const {
+	return *village_number;
 }
 
 void VGMap::PrintVillageBoard() {
