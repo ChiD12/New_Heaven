@@ -21,6 +21,7 @@ public:
     bool placeTile(int, int, bool, BuildingTile);
 	void setName(string given_name);
     int calculateScore();
+    int getScore() const;
     void PrintVillageBoard();
     std::vector<vector<BuildingTile*>> *map;
 

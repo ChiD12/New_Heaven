@@ -50,5 +50,3 @@ void deductResources(building_type bt_ptr, int numResourcesToDeduct);
 void computeGameScore();
 
 void displayWinner(vector<Player*>);
-
-int returnPlayerScore(int);

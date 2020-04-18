@@ -176,6 +176,7 @@ bool VGMap::placeTile(int x, int y1, bool flipped, BuildingTile new_tile) { //me
 					*(*map)[x][y]->bt_ptr = type;
 					*(*map)[x][y]->flipped = flipped;
 				std:cout << "\ntile placement successful\n";
+					*score = calculateScore();
 					return true;
 				}
 			}
@@ -203,6 +204,7 @@ bool VGMap::placeTile(int x, int y1, bool flipped, BuildingTile new_tile) { //me
 			default:;
 			}
 
+			*score = calculateScore();
 			return true;
 		}
 	}
@@ -310,6 +312,10 @@ int VGMap::calculateScore() {
 
 	}
 	return score;
+}
+
+int VGMap::getScore() const {
+	return *score;
 }
 
 void VGMap::PrintVillageBoard() {

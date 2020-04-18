@@ -222,3 +222,7 @@ void Player::PrintPlayer()
 	cout << "It is currently {" << *this->name << "'s} turn!" << endl;
 
 }
+
+int Player::getScore() const{
+	return player_board->getScore();
+}

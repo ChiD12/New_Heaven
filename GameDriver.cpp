@@ -754,17 +754,7 @@ void displayWinner(vector<Player*> winners) {
 		cout << "\nTied between:\n";
 	}
 	for (Player* winner : winners) {
-		cout << "Winner: " << *(winner->name) << " Score: " << (*winner->player_board).calculateScore() << endl;
+		cout << "\nWinner: " << *(winner->name) << " Score: " << winner->getScore() << "\n";
 	}
 	return;
-}
-
-int returnPlayerScore(int playerID) {
-	for (size_t i = 0; i < *(gameState->numOfPlayers); i++) {
-		if (*(gameState->players[i]->id) == playerID) {
-		  return gameState->players[i]->player_board->calculateScore();
-		}
-	}
-	std::cout << "\nWrong ID\n";
-	return -1;
 }
