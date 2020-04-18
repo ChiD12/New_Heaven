@@ -108,6 +108,7 @@ void GameStatisticsObserver::DisplayPlayerStats() {
 
 	for (Player* player : observable->players)
 	{
+		if (player != nullptr)
 		cout << "{" << *player->name << " [" << *player->id << "] Score: "<< player->getScore() << "}" << endl;
 	}
 	
