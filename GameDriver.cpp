@@ -712,3 +712,13 @@ void displayWinner(vector<Player*> winners) {
 	}
 	return;
 }
+
+int returnPlayerScore(int playerID) {
+	for (size_t i = 0; i < *(gameState->numOfPlayers); i++) {
+		if (*(gameState->players[i]->id) == playerID) {
+		  return gameState->players[i]->player_board->calculateScore();
+		}
+	}
+	std::cout << "\nWrong ID\n";
+	return -1;
+}
