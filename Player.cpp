@@ -220,6 +220,7 @@ void Player::PrintBuildingHand()
 void Player::PrintPlayer()
 {
 	cout << "It is currently {" << *this->name << "'s} turn!" << endl;
+	cout << *this->name << "'s Total Buildings: " << this->getVillageNum() << endl;
 
 }
 
