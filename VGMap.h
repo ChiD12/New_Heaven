@@ -23,6 +23,7 @@ public:
     int calculateScore();
     int getScore() const;
     void PrintVillageBoard();
+	void PrintNumRow(int num);
     std::vector<vector<BuildingTile*>> *map;
 
 };

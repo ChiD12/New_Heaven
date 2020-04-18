@@ -15,6 +15,7 @@ using namespace std;
 
 GameState* gameState;
 TurnObserver* turnObserver;
+GameStatisticsObserver* gameStatisticsObserver;
 
 void gameStart();
 int findFirstPlayer();
@@ -247,6 +248,8 @@ void gameStart() { //Beginning of part 1
 		counter++;
 	}
 
+	
+	gameStatisticsObserver = new GameStatisticsObserver(gameState);
 	turnObserver = new TurnObserver(gameState);
 
 }

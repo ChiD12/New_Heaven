@@ -24,10 +24,16 @@ TurnObserver::~TurnObserver() {
 void TurnObserver::Update() {
 	//we might need multiple observer because on the slides, this only calls a single display function
 	//we could possibly remove the method below, make this a base class, and extend from this with whatever subset of display function needed
+	
+	cout << "---------------------------------------------------------------" << endl;
+	cout << "Turn Observer:" << endl;
 	cout << "---------------------------------------------------------------" << endl;
 	this->DisplayPlayer();
+	this->DisplayCurrentAction();
 	this->DisplayGameBoard();
 	cout << "---------------------------------------------------------------" << endl;
+	if (*observable->currentGameSection == PLACEVILLAGETILE)
+	observable->players[*observable->currentTurn]->player_board->PrintVillageBoard();
 
 }
 
@@ -41,10 +47,29 @@ void TurnObserver::DisplayGameBoard() {
 	observable->gameBoard->PrintBoard();
 }
 
-void TurnObserver::DisplayPlayerBuildingDeck() {}//part 1
-void TurnObserver::DisplayPlayerVillage() {
-	observable->players[*observable->currentTurn]->player_board->PrintVillageBoard();
+void TurnObserver::DisplayCurrentAction()
+{
+	cout << "Player is currently: ";
+
+	switch (*observable->currentGameSection) {
+	case PLACEHARVESTTILE:;
+		cout << "Playing a harvest tile...";
+		break;
+	case PLACEVILLAGETILE:;
+		cout << "Playing a village tile...";
+		break;
+	case SHARETHEWEALTH:
+		cout << "Sharing the wealth...";
+		break;
+	case DRAWVILLAGETILE:;
+		cout << "Drawing a village tile...";
+		break;
+	default:;
+		cout << "Help! I don't know what they're doing!";
+	}
+	cout << endl;
 }
+
 
 //game statistics
 
@@ -64,12 +89,42 @@ GameStatisticsObserver::~GameStatisticsObserver() {
 	this->observable->detach(this);
 }
 
-void GameStatisticsObserver::GameStatisticsObserver::Update() {}
+void GameStatisticsObserver::GameStatisticsObserver::Update() {
+	this->DisplayPlayerVillage();
+}
 
 void GameStatisticsObserver::DisplayResourceMarker() {
 	observable->gameBoard->PrintResources();
 }
-void GameStatisticsObserver::DisplayPlayerScore() {} //part 2
+void GameStatisticsObserver::DisplayPlayerScore() {
+	for(Player* player: observable->players)
+	{
+		cout << "{" << *player->name << "} has a score of: " << player->getScore() << endl;
+	}
+} //part 2
 void GameStatisticsObserver::DisplayPlayerNumber() {
 	
-} //part 2
+} 
+void GameStatisticsObserver::DisplayPlayerVillage() {
+
+	cout << "Village Boards: " << endl;
+	cout << "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" << endl;
+
+	cout << "    " << *observable->players[0]->name << "          ";
+
+	for (int k = 1; k < *observable->numOfPlayers; k++) {
+		cout << *observable->players[k]->name << "            ";
+	}
+
+	cout << endl;
+	
+	for (int i = 0; i < 6; i++) {
+
+		for (int j = 0; j < *observable->numOfPlayers; j++) {
+			observable->players[j]->player_board->PrintNumRow(i);
+		}
+		cout << endl;
+	}
+
+	cout << "\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" << endl;
+}

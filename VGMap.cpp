@@ -395,6 +395,61 @@ void VGMap::PrintVillageBoard() {
 	}*/
 }
 
+void VGMap::PrintNumRow(int num)
+{
+	int row = 5 - num;
+	int column = 0;
+	for (column = 0; column < *width; column++) {
+
+		if (*(*map)[column][row]->flipped == true) {
+			switch (*(*map)[column][row]->bt_ptr) {
+			case FOREST:;
+				std::cout << "[f]";
+				break;
+			case WHEATFIELD:;
+				std::cout << "[w]";
+				break;
+			case MEADOW:
+				std::cout << "[m]";
+				break;
+			case QUARRY:
+				std::cout << "[q]";
+				break;
+			case NO_BUILDING:
+				std::cout << "[x]";
+				break;
+			default:
+				std::cout << "[E]";
+				break;
+			}
+		}
+		else {
+			switch (*(*map)[column][row]->bt_ptr) {
+			case FOREST:;
+				std::cout << "[F]";
+				break;
+			case WHEATFIELD:;
+				std::cout << "[W]";
+				break;
+			case MEADOW:
+				std::cout << "[M]";
+				break;
+			case QUARRY:
+				std::cout << "[Q]";
+				break;
+			case NO_BUILDING:
+				std::cout << "[x]";
+				break;
+			default:
+				std::cout << "[E]";
+				break;
+			}
+		}
+	}
+
+	cout << "\t";
+}
+
 
 //debugging
 //std::cout << "\nsize is " << map.size() << " x " << (*map)[0].size()<<"\n";
