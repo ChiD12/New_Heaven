@@ -53,4 +53,6 @@ public:
 	void PrintPlayer();
 
 	int getScore() const;
+
+	int getVillageNum() const;
 };
