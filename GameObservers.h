@@ -30,7 +30,6 @@ public:
 
 	void DisplayResourceMarker();//part 1&2
 	void DisplayPlayerVillage();
-	void DisplayPlayerScore(); 
-	void DisplayPlayerNumber(); 
+	void DisplayPlayerStats(); 
 
 };

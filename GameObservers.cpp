@@ -38,7 +38,7 @@ void TurnObserver::Update() {
 }
 
 void TurnObserver::DisplayPlayer() {
-	cout << "Active Player: " << "Player " << (*observable->currentTurn + 1) << "{" << *observable->players[*observable->currentTurn]->name << "} " << endl;
+	cout << "Active Player: " << "Player " << (*observable->currentTurn + 1) << " {" << *observable->players[*observable->currentTurn]->name << "} " << endl;
 	observable->players[*observable->currentTurn]->PrintPlayer();
 
 };
@@ -90,19 +90,26 @@ GameStatisticsObserver::~GameStatisticsObserver() {
 }
 
 void GameStatisticsObserver::GameStatisticsObserver::Update() {
+	cout << "---------------------------------------------------------------" << endl;
+	cout << "GameStats Observer:" << endl;
+	cout << "---------------------------------------------------------------" << endl;
+	this->DisplayPlayerStats();
 	this->DisplayPlayerVillage();
+	this->DisplayResourceMarker();
+	cout << "---------------------------------------------------------------" << endl;
 }
 
 void GameStatisticsObserver::DisplayResourceMarker() {
 	observable->gameBoard->PrintResources();
 }
-void GameStatisticsObserver::DisplayPlayerScore() {
-	for(Player* player: observable->players)
+
+void GameStatisticsObserver::DisplayPlayerStats() {
+	cout << "Player stats: {name:#:score}" << endl;
+
+	for (Player* player : observable->players)
 	{
-		cout << "{" << *player->name << "} has a score of: " << player->getScore() << endl;
+		cout << "{" << *player->name << " [" << *player->id << "] Score: "<< player->getScore() << "}" << endl;
 	}
-} //part 2
-void GameStatisticsObserver::DisplayPlayerNumber() {
 	
 } 
 void GameStatisticsObserver::DisplayPlayerVillage() {
