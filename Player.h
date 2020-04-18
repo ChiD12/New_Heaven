@@ -51,4 +51,6 @@ public:
 	void PrintBuildingHand();
 
 	void PrintPlayer();
+
+	int getScore() const;
 };

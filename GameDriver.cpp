@@ -754,7 +754,7 @@ void displayWinner(vector<Player*> winners) {
 		cout << "\nTied between:\n";
 	}
 	for (Player* winner : winners) {
-		cout << "Winner: " << *(winner->name) << " Score: " << (*winner->player_board).calculateScore() << endl;
+		cout << "\nWinner: " << *(winner->name) << " Score: " << winner->getScore() << "\n";
 	}
 	return;
 }
