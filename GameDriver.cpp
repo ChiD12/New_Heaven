@@ -78,15 +78,15 @@ int main() {
 		//Part 3.4 loop
 		for (int i = 0; i < *(gameState->numOfPlayers); i++) {
 			int clockwisePlayers = (turn + i) % *(gameState->numOfPlayers);
-			gameState->notify();
+			//gameState->notify();
 
 			//Printouts for information about current game state
-			/*
-			cout << "**************************************************************" << endl;
+			
+			//cout << "**************************************************************" << endl;
 			cout << "and **" << *(gameState->players[clockwisePlayers]->name) << "'s** village board is: " << endl;
 			gameState->players[clockwisePlayers]->player_board->PrintVillageBoard();
 			gameState->gameBoard->PrintResources();
-			*/
+			
 
 			gameState->players[clockwisePlayers]->PrintBuildingHand();
 			cout << endl;
