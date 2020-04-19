@@ -109,11 +109,11 @@ int main() {
 				promptBuildingTilePlacement(clockwisePlayers);
 				gameState->notify();
 
-				/*
-				gameState->players[clockwisePlayers]->player_board->PrintVillageBoard();
-				gameState->gameBoard->PrintResources();
+				
+				//gameState->players[clockwisePlayers]->player_board->PrintVillageBoard();
+				//gameState->gameBoard->PrintResources();
 				gameState->players[clockwisePlayers]->PrintBuildingHand();
-				*/
+				
 
 				cout << "**" << *(gameState->players[clockwisePlayers]->name) << "** do you wish to place a village tile with remaining resources? (y or n)" << endl;
 				cin >> response;
@@ -148,6 +148,7 @@ int main() {
 		}
 	}
 	computeGameScore();
+	delete gameState;
 }
 
 

@@ -23,7 +23,7 @@ public:
 	
 
 
-	//GameState();
+	~GameState();
 
 
 };
