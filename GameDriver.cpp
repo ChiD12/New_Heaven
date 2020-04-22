@@ -62,8 +62,8 @@ int main() {
 
 		// Part 3.1 method,
 		promptHarvestTilePlacement(turn);
-		gameState->notify();
 		*(gameState->currentGameSection) = PLACEVILLAGETILE;
+		gameState->notify();
 
 		/*
 		cout << endl;
@@ -83,9 +83,14 @@ int main() {
 			//Printouts for information about current game state
 			
 			//cout << "**************************************************************" << endl;
-			cout << "and **" << *(gameState->players[clockwisePlayers]->name) << "'s** village board is: " << endl;
-			gameState->players[clockwisePlayers]->player_board->PrintVillageBoard();
-			gameState->gameBoard->PrintResources();
+			//cout << "and **" << *(gameState->players[clockwisePlayers]->name) << "'s** village board is: " << endl;
+
+			if (*gameState->currentGameSection == SHARETHEWEALTH) { 
+				cout << *gameState->players[clockwisePlayers]->name << "'s Village Board: " << endl;
+				gameState->players[clockwisePlayers]->player_board->PrintVillageBoard(); 
+			}
+			
+			//gameState->gameBoard->PrintResources();
 			
 
 			gameState->players[clockwisePlayers]->PrintBuildingHand();
@@ -102,7 +107,7 @@ int main() {
 				cin >> response;
 			}
 
-			//if current player wishes to build, then promt them for where, and thenreprint the board and ask if they wish to build again
+			//if current player wishes to build, then promt them for where, and then reprint the board and ask if they wish to build again
 			//if not then next player gets a turn to build
 			while (response.compare("y") == 0) {
 				//part 3.3
@@ -159,6 +164,7 @@ void gameStart() { //Beginning of part 1
 
 
 	int temp;
+	cout << "Welcome to New Haven! Please set the window to full screen for the best experience. Have fun!" << endl;
 	cout << "Starting game!" << endl;
 	cout << "How many people will be playing today?: "; // 1) Select the number of players in the game (2-4 players).
 	cin >> temp;

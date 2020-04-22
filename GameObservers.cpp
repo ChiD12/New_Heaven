@@ -22,8 +22,7 @@ TurnObserver::~TurnObserver() {
 }
 
 void TurnObserver::Update() {
-	//we might need multiple observer because on the slides, this only calls a single display function
-	//we could possibly remove the method below, make this a base class, and extend from this with whatever subset of display function needed
+	
 	
 	cout << "---------------------------------------------------------------" << endl;
 	cout << "Turn Observer:" << endl;
@@ -32,9 +31,10 @@ void TurnObserver::Update() {
 	this->DisplayCurrentAction();
 	this->DisplayGameBoard();
 	cout << "---------------------------------------------------------------" << endl;
-	if (*observable->currentGameSection == PLACEVILLAGETILE)
-	observable->players[*observable->currentTurn]->player_board->PrintVillageBoard();
-
+	if (*observable->currentGameSection == PLACEVILLAGETILE) {
+		cout << *observable->players[*observable->currentTurn]->name << "'s Village Board: " << endl;
+		observable->players[*observable->currentTurn]->player_board->PrintVillageBoard();
+	}
 }
 
 void TurnObserver::DisplayPlayer() {

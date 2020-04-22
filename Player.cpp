@@ -130,7 +130,7 @@ void Player::CalculateResources(GBMap* given_board, int tl_x, int tl_y)
 void Player::PrintHarvestHand()
 {
 	cout << "------------------------------------------------------------------------------------------------------------------" << endl;
-	cout << "Harvest Tiles: {W:WOOD|G:GRAIN|S:SHEEP|T:STONE}" << endl;
+	cout << *this->name << "'s Harvest Tiles: {W:WOOD|G:GRAIN|S:SHEEP|T:STONE}" << endl;
 	int counter = 2;
 	cout << "  1        "; //16 spaces between tiles.
 	for (int i = 0; i < harvest_hand->size() - 1; i++) {
@@ -186,7 +186,7 @@ void Player::PrintBuildingHand()
 {
 
 	cout << "------------------------------------------------------------------------------------------------------------------" << endl;
-	cout << "Building Tiles: {F:FOREST|W:WHEATFIELD|M:MEADOW|Q:QUARRY}" << endl;
+	cout << *this->name << "'s Building Tiles: {F:FOREST|W:WHEATFIELD|M:MEADOW|Q:QUARRY}" << endl;
 	cout << "    1           ";
 	for (int i = 0; i < building_hand->size() - 1; i++) {
 		cout << (i + 2) << "           ";
